@@ -9,39 +9,6 @@ const { json } = require('sequelize');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
-let validateUser = async (req, res, next) => {
-    let spot = await Spot.findByPk(req.params.spotId)
-
-    if (req.user.id !== spot.ownerId) {
-        res.status(403);
-        return res.json({
-            "message": "Forbidden"
-        });
-    }
-    next()
-}
-
-router.post("/:spotId/images", requireAuth, validateUser, async (req, res) => {
-    let spot = await Spot.findByPk(req.params.spotId);
-
-    if (!spot) {
-        res.status(404);
-        return res.json({
-            "message": "Spot couldn't be found"
-          })
-    }
-
-    let {url, preview} = req.body;
-
-    let newImage = await SpotImage.create({spotId: spot.id, url, preview})
-
-    let imageResult = await SpotImage.findByPk(newImage.id, {
-        attributes: ['id', 'url', 'preview']
-    });
-
-    res.json(imageResult)
-})
-
 const checkInput = [
     check('address')
     .exists({ checkFalsy: true })
@@ -92,6 +59,63 @@ const checkInput = [
     .withMessage("Price per day is required"),
     handleValidationErrors
 ]
+
+let validateUser = async (req, res, next) => {
+    let spot = await Spot.findByPk(req.params.spotId)
+
+    if (req.user.id !== spot.ownerId) {
+        res.status(403);
+        return res.json({
+            "message": "Forbidden"
+        });
+    }
+    next()
+}
+
+let checkSpotExists = async (req, res, next) => {
+    let spot = await Spot.findByPk(req.params.spotId);
+
+    if (!spot) {
+        res.status(404);
+        return res.json({
+            "message": "Spot couldn't be found"
+          })
+    }
+
+    next()
+}
+
+router.put("/:spotId", requireAuth, checkSpotExists, validateUser, checkInput, async (req, res) => {
+    let spot = await Spot.findByPk(req.params.spotId);
+
+    let {address, city, state, country, lat, lng, name, description, price} = req.body;
+
+    spot.address = address;
+    spot.city = city;
+    spot.state = state;
+    spot.country = country;
+    spot.lat = lat;
+    spot.lng = lng;
+    spot.name = name;
+    spot.description = description;
+    spot.price = price;
+
+    await spot.save();
+
+    res.json(spot);
+})
+
+router.post("/:spotId/images", requireAuth, validateUser, checkSpotExists, async (req, res) => {
+    let {url, preview} = req.body;
+
+    let newImage = await SpotImage.create({spotId: spot.id, url, preview})
+
+    let imageResult = await SpotImage.findByPk(newImage.id, {
+        attributes: ['id', 'url', 'preview']
+    });
+
+    res.json(imageResult)
+})
 
 router.post("/", requireAuth, checkInput, async(req, res) => {
 
