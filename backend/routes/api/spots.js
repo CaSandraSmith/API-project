@@ -85,6 +85,16 @@ let checkSpotExists = async (req, res, next) => {
     next()
 }
 
+router.delete("/:spotId", requireAuth, checkSpotExists, validateUser, async (req, res) => {
+    let spot = await Spot.findByPk(req.params.spotId);
+
+    await spot.destroy()
+
+    res.json({
+        "message": "Successfully deleted"
+    });
+})
+
 router.put("/:spotId", requireAuth, checkSpotExists, validateUser, checkInput, async (req, res) => {
     let spot = await Spot.findByPk(req.params.spotId);
 
