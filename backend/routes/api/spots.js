@@ -9,7 +9,19 @@ const { json } = require('sequelize');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
-router.post("/:spotId/images", requireAuth, async (req, res) => {
+let validateUser = async (req, res, next) => {
+    let spot = await Spot.findByPk(req.params.spotId)
+
+    if (req.user.id !== spot.ownerId) {
+        res.status(403);
+        return res.json({
+            "message": "Forbidden"
+        });
+    }
+    next()
+}
+
+router.post("/:spotId/images", requireAuth, validateUser, async (req, res) => {
     let spot = await Spot.findByPk(req.params.spotId);
 
     if (!spot) {
