@@ -6,7 +6,74 @@ const { Review } = require('../../db/models');
 const { SpotImage } = require('../../db/models');
 const { requireAuth } = require('../../utils/auth');
 const { json } = require('sequelize');
+const { check } = require('express-validator');
+const { handleValidationErrors } = require('../../utils/validation');
 
+
+const checkInput = [
+    check('address')
+    .exists({ checkFalsy: true })
+    .notEmpty()
+    .withMessage("Street address is required"),
+
+    check('city')
+    .exists({ checkFalsy: true })
+    .notEmpty()
+    .withMessage("City is required"),
+
+    check('state')
+    .exists({ checkFalsy: true })
+    .notEmpty()
+    .withMessage("State is required"),
+
+    check('country')
+    .exists({ checkFalsy: true })
+    .notEmpty()
+    .withMessage("Country is required"),
+
+    check('lat')
+    .exists({ checkFalsy: true })
+    .isFloat({max: 90, min: -90})
+    .notEmpty()
+    .withMessage("Latitude is not valid"),
+
+    check('lng')
+    .exists({ checkFalsy: true })
+    .isFloat({max: 180, min: -180})
+    .notEmpty()
+    .withMessage("Longitude is not valid"),
+
+    check('name')
+    .exists({ checkFalsy: true })
+    .notEmpty()
+    .isLength({min: 1, max: 50})
+    .withMessage("Name must be less than 50 characters"),
+
+    check('description')
+    .exists({ checkFalsy: true })
+    .notEmpty()
+    .withMessage("Description is required"),
+
+    check('price')
+    .exists({ checkFalsy: true })
+    .notEmpty()
+    .withMessage("Price per day is required"),
+    handleValidationErrors
+]
+
+router.post("/", requireAuth, checkInput, async(req, res) => {
+
+    let {address, city, state, country, lat, lng, name, description, price} = req.body
+
+    let newSpot = Spot.build({ ownerId: req.user.id,
+        address, city, state, country, lat, lng, name, description, price
+    });
+
+    await newSpot.save()
+
+    res.status(201)
+    res.json(newSpot)
+});
 
 let formatSpots = function (spots) {
     let spotsCopy = []
@@ -23,7 +90,11 @@ let formatSpots = function (spots) {
         
         spot = spot.toJSON();
         spot.avgRating = avgRating;
-        spot.previewImage = spot.SpotImages[0].url
+
+        //i had to add this conditional because when building the spots I got an error because I don't post to spot Images at the same time that I build a new spot
+        if (spot.SpotImages.length) {
+            spot.previewImage = spot.SpotImages[0].url
+        }
 
         delete spot.Reviews
         delete spot.SpotImages
