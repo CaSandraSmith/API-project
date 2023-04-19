@@ -10,7 +10,7 @@ const { json } = require('sequelize');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
-router.get('/:spotId/reviews', async (req, res) => {
+let checkSpotExists = async (req, res, next) => {
     let spot = await Spot.findByPk(req.params.spotId);
 
     if (!spot) {
@@ -18,24 +18,10 @@ router.get('/:spotId/reviews', async (req, res) => {
         return res.json({
             "message": "Spot couldn't be found"
           })
-    };
+    }
 
-    let reviews = await Review.findAll({
-        where: {spotId: req.params.spotId},
-        include: [
-            {
-                model: User,
-                attributes: ['id', 'firstName', 'lastName']
-            },
-            {
-                model: ReviewImage,
-                attributes: ['id', 'url']
-            }
-        ]
-    });
-
-    res.json({Reviews: reviews})
-})
+    next()
+}
 
 const checkInput = [
     check('address')
@@ -100,19 +86,6 @@ let validateUser = async (req, res, next) => {
     next()
 }
 
-let checkSpotExists = async (req, res, next) => {
-    let spot = await Spot.findByPk(req.params.spotId);
-
-    if (!spot) {
-        res.status(404);
-        return res.json({
-            "message": "Spot couldn't be found"
-          })
-    }
-
-    next()
-}
-
 router.delete("/:spotId", requireAuth, checkSpotExists, validateUser, async (req, res) => {
     let spot = await Spot.findByPk(req.params.spotId);
 
@@ -141,6 +114,51 @@ router.put("/:spotId", requireAuth, checkSpotExists, validateUser, checkInput, a
     await spot.save();
 
     res.json(spot);
+})
+
+const checkReviewInput = [
+    check('review')
+    .exists({ checkFalsy: true })
+    .notEmpty()
+    .withMessage("Review text is required"),
+
+    check('stars')
+    .exists({ checkFalsy: true })
+    .notEmpty()
+    .isInt({min: 1, max: 5})
+    .withMessage("Stars must be an integer from 1 to 5"),
+    handleValidationErrors
+]
+
+router.post("/:spotId/reviews", requireAuth, checkSpotExists, checkReviewInput, async (req, res) => {
+    let spotId = req.params.spotId;
+    let userId = req.user.id
+    let userReviews = await Review.findAll({
+        where: {
+            spotId,
+            userId
+        }
+    })
+
+    console.log("userReviews", userReviews)
+    if (userReviews.length) {
+        res.status(500);
+        return res.json({
+            "message": "User already has a review for this spot"
+          })
+    }
+
+    let {review, stars} = req.body;
+
+    let newReview = await Review.create({
+        userId,
+        spotId,
+        review,
+        stars
+    });
+
+    res.status(201);
+    res.json(newReview);
 })
 
 router.post("/:spotId/images", requireAuth, checkSpotExists, validateUser, async (req, res) => {
@@ -198,6 +216,24 @@ let formatSpots = function (spots) {
 
     return spotsCopy
 }
+
+router.get('/:spotId/reviews', checkSpotExists, async (req, res) => {
+    let reviews = await Review.findAll({
+        where: {spotId: req.params.spotId},
+        include: [
+            {
+                model: User,
+                attributes: ['id', 'firstName', 'lastName']
+            },
+            {
+                model: ReviewImage,
+                attributes: ['id', 'url']
+            }
+        ]
+    });
+
+    res.json({Reviews: reviews})
+})
 
 router.get('/current', requireAuth, async (req, res) => {
     let currentUserSpots = await Spot.findAll({

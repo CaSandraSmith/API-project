@@ -8,33 +8,6 @@ const { ReviewImage } = require('../../db/models');
 const { requireAuth } = require('../../utils/auth');
 const { json } = require('sequelize');
 
-router.get('/:spotId/reviews', async (req, res) => {
-    let spot = await Spot.findByPk(req.params.spotId);
-
-    if (!spot) {
-        res.status(404);
-        return res.json({
-            "message": "Spot couldn't be found"
-          })
-    };
-
-    let reviews = await Review.findAll({
-        where: {spotId: req.params.spotId},
-        include: [
-            {
-                model: User,
-                attributes: ['id', 'firstName', 'lastName']
-            },
-            {
-                model: ReviewImage,
-                attributes: ['id', 'url']
-            }
-        ]
-    });
-
-    res.json({Reviews: reviews})
-})
-
 router.get("/current", requireAuth, async (req, res) => {
     console.log("req.user.id", req.user.id)
     let reviews = await Review.findAll({
