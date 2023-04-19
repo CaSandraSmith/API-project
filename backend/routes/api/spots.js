@@ -118,7 +118,7 @@ router.put("/:spotId", requireAuth, checkSpotExists, validateUser, checkInput, a
 router.post("/:spotId/images", requireAuth, validateUser, checkSpotExists, async (req, res) => {
     let {url, preview} = req.body;
 
-    let newImage = await SpotImage.create({spotId: spot.id, url, preview})
+    let newImage = await SpotImage.create({spotId: req.params.spotId, url, preview})
 
     let imageResult = await SpotImage.findByPk(newImage.id, {
         attributes: ['id', 'url', 'preview']
