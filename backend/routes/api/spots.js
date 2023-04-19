@@ -9,6 +9,26 @@ const { json } = require('sequelize');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
+router.post("/:spotId/images", requireAuth, async (req, res) => {
+    let spot = await Spot.findByPk(req.params.spotId);
+
+    if (!spot) {
+        res.status(404);
+        return res.json({
+            "message": "Spot couldn't be found"
+          })
+    }
+
+    let {url, preview} = req.body;
+
+    let newImage = await SpotImage.create({spotId: spot.id, url, preview})
+
+    let imageResult = await SpotImage.findByPk(newImage.id, {
+        attributes: ['id', 'url', 'preview']
+    });
+
+    res.json(imageResult)
+})
 
 const checkInput = [
     check('address')
