@@ -7,6 +7,8 @@ const { SpotImage } = require('../../db/models');
 const { ReviewImage } = require('../../db/models');
 const { requireAuth } = require('../../utils/auth');
 const { json } = require('sequelize');
+const { check } = require('express-validator');
+const { handleValidationErrors } = require('../../utils/validation');
 
 let checkReviewOwner = async (req, res, next) => {
     let review = await Review.findByPk(req.params.reviewId);
@@ -30,7 +32,44 @@ let checkReviewId = async (req, res, next) => {
           })
     }
     next()
-}
+};
+
+const checkReviewInput = [
+    check('review')
+    .exists({ checkFalsy: true })
+    .notEmpty()
+    .withMessage("Review text is required"),
+
+    check('stars')
+    .exists({ checkFalsy: true })
+    .notEmpty()
+    .isInt({min: 1, max: 5})
+    .withMessage("Stars must be an integer from 1 to 5"),
+    handleValidationErrors
+];
+
+router.delete("/:reviewId", requireAuth, checkReviewId, checkReviewOwner, async (req, res) => {
+    let review = await Review.findByPk(req.params.reviewId);
+
+    await review.destroy()
+
+    res.json({
+        "message": "Successfully deleted"
+      })
+});
+
+router.put("/:reviewId", requireAuth, checkReviewId, checkReviewOwner, checkReviewInput, async (req, res) => {
+    let reviewId = req.params.reviewId;
+    let currentReview = await Review.findByPk(reviewId);
+    let {review, stars} = req.body;
+
+    currentReview.review = review;
+    currentReview.stars = stars;
+
+    await currentReview.save();
+
+    res.json(currentReview)
+})
 
 router.post("/:reviewId/images", requireAuth, checkReviewId,  checkReviewOwner,  async (req, res) => {
     let reviewId = req.params.reviewId;
@@ -58,7 +97,7 @@ router.post("/:reviewId/images", requireAuth, checkReviewId,  checkReviewOwner, 
     })
 
     res.json(image)
-})
+});
 
 router.get("/current", requireAuth, async (req, res) => {
     console.log("req.user.id", req.user.id)
@@ -105,6 +144,6 @@ router.get("/current", requireAuth, async (req, res) => {
     }
 
     res.json({Reviews: formatedReviews})
-})
+});
 
 module.exports = router;
