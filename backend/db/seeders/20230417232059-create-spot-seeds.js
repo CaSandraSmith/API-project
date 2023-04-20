@@ -25,12 +25,13 @@ module.exports = {
       },
       {
         ownerId: 2,
-        address: '12 Grimmauld Place',
-        city: 'London',
-        country: 'England',
+        address: '1800 Mountain View',
+        city: 'Lexington',
+        state: 'KY',
+        country: 'USA',
         lat: 24.6782,
         lng: 30.2148,
-        name: 'Grimmauld Place',
+        name: 'Mocking Jay Nest',
         description: 'Located in the heart of London.',
         price: 160
       },
