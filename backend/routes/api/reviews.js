@@ -8,6 +8,58 @@ const { ReviewImage } = require('../../db/models');
 const { requireAuth } = require('../../utils/auth');
 const { json } = require('sequelize');
 
+let checkReviewOwner = async (req, res, next) => {
+    let review = await Review.findByPk(req.params.reviewId);
+
+    if (req.user.id !== review.userId) {
+        res.status(403);
+        return res.json({
+            "message": "Forbidden"
+        })
+    }
+    next()
+};
+
+let checkReviewId = async (req, res, next) => {
+    let review = await Review.findByPk(req.params.reviewId);
+
+    if (!review) {
+        res.status(404);
+        return res.json({
+            "message": "Review couldn't be found"
+          })
+    }
+    next()
+}
+
+router.post("/:reviewId/images", requireAuth, checkReviewId,  checkReviewOwner,  async (req, res) => {
+    let reviewId = req.params.reviewId;
+
+    let reviewImages = await ReviewImage.findAll({
+        where: {reviewId}
+    });
+
+    if (reviewImages.length >= 10) {
+        res.status(403);
+        return res.json(    {
+            "message": "Maximum number of images for this resource was reached"
+          })
+    }
+
+    let {url} = req.body;
+
+    let newImage = await ReviewImage.create({
+        reviewId,
+        url
+    })
+
+    let image = await ReviewImage.findByPk(newImage.id, {
+        attributes: ['id', 'url']
+    })
+
+    res.json(image)
+})
+
 router.get("/current", requireAuth, async (req, res) => {
     console.log("req.user.id", req.user.id)
     let reviews = await Review.findAll({
@@ -43,7 +95,12 @@ router.get("/current", requireAuth, async (req, res) => {
             attributes: ['url']
         });
         review = review.toJSON()
-        review.Spot.previewImage = previewImageUrl.url
+        if (previewImageUrl) {
+            review.Spot.previewImage = previewImageUrl.url
+        } else {
+            review.Spot.previewImage = null
+        }
+
         formatedReviews.push(review)
     }
 
