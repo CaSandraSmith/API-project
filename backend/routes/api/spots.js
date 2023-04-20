@@ -391,16 +391,87 @@ router.get("/:spotId", async (req, res) => {
 })
 
 router.get("/", async (req, res) => {
+    let pagination = {}
+    let {page, size, maxLat, minLat, maxLng, minLng, minPrice, maxPrice} = req.query;
+
+    if (!page || page < 1 || page > 10 || !Number.isInteger(page)) page = 1;
+    if (!size || size < 1 || size > 20 || !Number.isInteger(page)) size = 20;
+
+    pagination.offset = size * (page - 1) 
+    pagination.limit = size;
+
+    let errorResponses = {}
+    errorResponses.message = "Bad Request";
+
+    let errors = {}
+    let where = {}
+    if (maxLat) {
+        if (isNaN(maxLat)){
+            errors.maxLat = "Maximum latitude is invalid"
+        } else {
+            where.lat = {[Op.lte]: maxLat}
+        }
+    };
+    if (minLat) {
+        if (isNaN(minLat)){
+            errors.minLat = "Minimum latitude is invalid"
+        } else {
+            where.lat = {[Op.gte]: minLat}
+        }
+    };
+
+    if (minLng) {
+        if (isNaN(minLng)){
+            errors.minLng = "Minimum longitude is invalid"
+        } else {
+            where.lng = {[Op.gte]: minLng}
+        }
+    };
+    if (maxLng){
+        if (isNaN(maxLng)){
+            errors.maxLng = "Maximum longitude is invalid"
+        } else {
+            where.lng = {[Op.lte]: maxLng}
+        }
+    }
+
+    if (minPrice) {
+        if (isNaN(minPrice) || minPrice < 0){
+            errors.minPrice = "Minimum price must be greater than or equal to 0"
+        } else {
+            where.price = {[Op.gte]: minPrice}
+        }
+    }
+    if (maxPrice) {
+        if (isNaN(maxPrice) || maxPrice < 0){
+            errors.minPrice = "Maximum price must be greater than or equal to 0"
+        } else {
+            where.price = {[Op.lte]: maxPrice}
+        }
+    }
+
+    if (Object.keys(errors).length) {
+        errorResponses.errors = errors
+        res.status(400);
+        return res.json(errorResponses)
+    }
+
     let spots = await Spot.findAll({
         include: [
             {model: Review},
             {model: SpotImage}
-        ]
+        ],
+        where,
+        ...pagination
     });
 
     let spotsCopy = await formatSpots(spots)
-    
-    res.json({Spots: spotsCopy})
+
+    res.json({
+        Spots: spotsCopy,
+        page,
+        size
+    })
 });
 
 module.exports = router;
