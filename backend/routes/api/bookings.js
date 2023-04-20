@@ -24,8 +24,30 @@ router.get("/current", requireAuth, async (req, res) => {
             }
         });
 
+    let formatedBookings = []
+
+    for (let booking of bookings) {
+        let previewImageUrl = await SpotImage.findOne({
+            where: {
+                spotId: booking.Spot.id,
+                preview: true
+            },
+            attributes: ['url']
+        });
+
+        booking = booking.toJSON()
+        
+        if (previewImageUrl) {
+            booking.Spot.previewImage = previewImageUrl.url
+        } else {
+            booking.Spot.previewImage = null
+        }
+
+        formatedBookings.push(booking)
+    }
+
     // console.log(bookings)
-    res.json({Bookings: bookings})
+    res.json({Bookings: formatedBookings})
 })
 
 module.exports = router;
