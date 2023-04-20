@@ -154,12 +154,12 @@ router.post('/:spotId/bookings', requireAuth, checkSpotExists, async (req, res) 
     })
 
     //this gives me a day earlier than it should
-    let start = new Date (newBooking.startDate.toDateString());
-    let end = new Date (newBooking.endDate.toDateString());
+    let start = new Date (newBooking.startDate.toDateString()).getTime();
+    let end = new Date (newBooking.endDate.toDateString()).getTime();
 
     // console.log(start);
 
-    if (start.getTime() >= end.getTime()) {
+    if (start >= end) {
         res.status(400);
         return res.json({
             "message": "Bad Request",
@@ -201,7 +201,7 @@ router.post('/:spotId/bookings', requireAuth, checkSpotExists, async (req, res) 
 
     await newBooking.save()
 
-    res.json(allBookings)
+    res.json(newBooking)
 });
 
 router.post("/:spotId/reviews", requireAuth, checkSpotExists, checkReviewInput, async (req, res) => {
