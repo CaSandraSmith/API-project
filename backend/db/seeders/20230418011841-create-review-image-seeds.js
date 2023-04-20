@@ -16,12 +16,35 @@ module.exports = {
         url: 'https://www.travelandleisure.com/thmb/oudFUI0CRxlBNyL7pPXlbYlFftc=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Empire-State-Building-observatory-1-ESBVIEWS1019-58c97df9db014ce59356f8f3bd9a627b.jpg'
       },
       {
+        reviewId: 1,
+        url: 'image url'
+      },
+      {
         reviewId: 2,
-        url: 'https://i.pinimg.com/originals/6a/75/d8/6a75d8efd3e63103695a32ccc7a45858.jpg'
+        url: 'image url'
       },
       {
         reviewId: 3,
-        url: 'https://i.pinimg.com/originals/79/dc/c5/79dcc5fe6c0154248877cabd75cf4e3e.jpg'
+        url: 'image url'
+      },
+      {
+        reviewId: 3,
+        url: 'image url'
+      },      {
+        reviewId: 3,
+        url: 'image url'
+      },
+      {
+        reviewId: 4,
+        url: 'image url'
+      },
+      {
+        reviewId: 5,
+        url: 'image url'
+      },
+      {
+        reviewId: 6,
+        url: 'image url'
       }
     ])
   },
