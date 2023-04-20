@@ -24,6 +24,37 @@ let checkBookingExists = async (req, res, next) => {
     next()
 }
 
+router.delete('/:bookingId', checkBookingExists, async (req, res)=> {
+    let currentUSer = req.user.id
+    let booking = await Booking.findByPk(req.params.bookingId);
+    let spot = await Spot.findByPk(booking.spotId)
+
+    console.log(currentUSer !== booking.userId)
+    console.log(currentUSer !== spot.ownerId)
+    if (currentUSer !== booking.userId && currentUSer !== spot.ownerId) {
+        res.status(403);
+        return res.json({
+            "message": "Forbidden"
+        })
+    };
+
+    let start = new Date(booking.startDate.toDateString()).getTime()
+    let today = new Date(new Date().toDateString()).getTime()
+
+    if (start < today) {
+        res.status(403);
+        return res.json({
+            "message": "Bookings that have been started can't be deleted"
+        })
+    };
+
+    await booking.destroy();
+
+    res.json({
+        "message": "Successfully deleted"
+    })
+})
+
 router.put("/:bookingId", requireAuth, checkBookingExists, async (req, res) => {
     let booking = await Booking.findByPk(req.params.bookingId);
 
