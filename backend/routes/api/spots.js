@@ -3,6 +3,7 @@ const router = express.Router();
 const { Spot } = require('../../db/models');
 const { User } = require('../../db/models');
 const { Review } = require('../../db/models');
+const { Booking } = require('../../db/models');
 const { SpotImage } = require('../../db/models');
 const { ReviewImage } = require('../../db/models');
 const { requireAuth } = require('../../utils/auth');
@@ -216,6 +217,30 @@ let formatSpots = function (spots) {
 
     return spotsCopy
 }
+
+
+router.get("/:spotId/bookings", requireAuth, checkSpotExists , async (req, res) => {
+    let spotId = req.params.spotId
+    let spot = await Spot.findByPk(spotId);
+    let bookings
+
+    if (spot.ownerId === req.user.id) {
+        bookings = await Booking.findAll({
+            where: {spotId},
+            include: {
+                model: User,
+                attributes: ['id', 'firstName', 'lastName']
+            }
+        })
+    } else {
+        bookings = await Booking.findAll({
+            where: {spotId},
+            attributes: ['spotId', 'startDate', 'endDate']
+        })
+    }
+
+    res.json({Bookings: bookings})
+})
 
 router.get('/:spotId/reviews', checkSpotExists, async (req, res) => {
     let reviews = await Review.findAll({
