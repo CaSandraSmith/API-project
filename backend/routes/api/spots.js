@@ -7,6 +7,7 @@ const { Booking } = require('../../db/models');
 const { SpotImage } = require('../../db/models');
 const { ReviewImage } = require('../../db/models');
 const { requireAuth } = require('../../utils/auth');
+const { Op } = require('sequelize');
 const { json } = require('sequelize');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
@@ -130,6 +131,78 @@ const checkReviewInput = [
     .withMessage("Stars must be an integer from 1 to 5"),
     handleValidationErrors
 ]
+
+router.post('/:spotId/bookings', requireAuth, checkSpotExists, async (req, res) => {
+    let spotId = req.params.spotId;
+    let userId = req.user.id
+    let spot = await Spot.findByPk(spotId);
+
+    if (spot.ownerId === userId) {
+        res.status(403);
+        return res.json({
+            "message": "Forbidden"
+        });
+    }
+
+    let {startDate, endDate} = req.body;
+
+    let newBooking = await Booking.build({
+        spotId,
+        userId,
+        startDate,
+        endDate
+    })
+
+    //this gives me a day earlier than it should
+    let start = new Date (newBooking.startDate.toDateString());
+    let end = new Date (newBooking.endDate.toDateString());
+
+    // console.log(start);
+
+    if (start.getTime() >= end.getTime()) {
+        res.status(400);
+        return res.json({
+            "message": "Bad Request",
+            "errors": {
+              "endDate": "endDate cannot be on or before startDate"
+            }
+        })
+    };
+
+    let allBookings = await Booking.findAll({
+        where: {
+            spotId,
+            endDate: {
+                [Op.gte]: startDate
+            }
+        }
+    });
+
+    let errors = {}
+    errors.message = "Sorry, this spot is already booked for the specified dates"
+    errors.errors = []
+    for (let booking of allBookings) {
+        let firstDay = new Date(booking.startDate.toDateString()).getTime();
+        let lastDay = new Date(booking.endDate.toDateString()).getTime();
+
+        if (start >= firstDay && start <= lastDay) {
+            errors.errors.push("Start date conflicts with an existing booking")
+        }
+
+        if (end >= firstDay && end <= lastDay) {
+            errors.errors.push("End date conflicts with an existing booking")
+        }
+    }
+
+    if (errors.errors.length) {
+        res.status(403);
+        return res.json(errors)
+    }
+
+    await newBooking.save()
+
+    res.json(allBookings)
+});
 
 router.post("/:spotId/reviews", requireAuth, checkSpotExists, checkReviewInput, async (req, res) => {
     let spotId = req.params.spotId;
