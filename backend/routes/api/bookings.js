@@ -123,12 +123,13 @@ router.put("/:bookingId", requireAuth, checkBookingExists, async (req, res) => {
             errors.errors.push("Start date conflicts with an existing booking")
             errors.errors.push("End date conflicts with an existing booking")
         }
+        
+        if (errors.errors.length) {
+            res.status(403);
+            return res.json(errors)
+        };
     };
 
-    if (errors.errors.length) {
-        res.status(403);
-        return res.json(errors)
-    };
 
     booking.startDate = startDate;
     booking.endDate = endDate;
