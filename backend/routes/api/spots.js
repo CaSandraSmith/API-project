@@ -393,6 +393,9 @@ router.get("/:spotId", async (req, res) => {
 router.get("/", async (req, res) => {
     let pagination = {}
     let {page, size, maxLat, minLat, maxLng, minLng, minPrice, maxPrice} = req.query;
+    
+    page = parseInt(page)
+    size = parseInt(size)
 
     if (!page || page < 1 || page > 10 || !Number.isInteger(page)) page = 1;
     if (!size || size < 1 || size > 20 || !Number.isInteger(page)) size = 20;
