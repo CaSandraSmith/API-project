@@ -118,6 +118,11 @@ router.put("/:bookingId", requireAuth, checkBookingExists, async (req, res) => {
         if (formatEnd >= firstDay && formatEnd <= lastDay) {
             errors.errors.push("End date conflicts with an existing booking")
         }
+
+        if (formatStart <= firstDay && lastDay <= formatEnd) {
+            errors.errors.push("Start date conflicts with an existing booking")
+            errors.errors.push("End date conflicts with an existing booking")
+        }
     };
 
     if (errors.errors.length) {
