@@ -192,6 +192,10 @@ router.post('/:spotId/bookings', requireAuth, checkSpotExists, async (req, res) 
         if (end >= firstDay && end <= lastDay) {
             errors.errors.push("End date conflicts with an existing booking")
         }
+        if (start <= firstDay && lastDay <= end) {
+            errors.errors.push("Start date conflicts with an existing booking")
+            errors.errors.push("End date conflicts with an existing booking")
+        }
     }
 
     if (errors.errors.length) {
@@ -199,9 +203,9 @@ router.post('/:spotId/bookings', requireAuth, checkSpotExists, async (req, res) 
         return res.json(errors)
     }
 
-    await newBooking.save()
+    // await newBooking.save()
 
-    res.json(newBooking)
+    // res.json(newBooking)
 });
 
 router.post("/:spotId/reviews", requireAuth, checkSpotExists, checkReviewInput, async (req, res) => {
