@@ -203,9 +203,9 @@ router.post('/:spotId/bookings', requireAuth, checkSpotExists, async (req, res) 
         return res.json(errors)
     }
 
-    // await newBooking.save()
+    await newBooking.save()
 
-    // res.json(newBooking)
+    res.json(newBooking)
 });
 
 router.post("/:spotId/reviews", requireAuth, checkSpotExists, checkReviewInput, async (req, res) => {
