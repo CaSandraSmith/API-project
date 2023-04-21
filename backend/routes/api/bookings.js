@@ -98,6 +98,9 @@ router.put("/:bookingId", requireAuth, checkBookingExists, async (req, res) => {
             spotId: booking.spotId,
             endDate: {
                 [Op.gte]: startDate
+            },
+            id: {
+                [Op.not]: booking.id
             }
         }
     });
