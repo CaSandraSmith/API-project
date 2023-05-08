@@ -16,7 +16,7 @@ export const loadSpots = () => async (dispatch) => {
 }
 
 
-const initialState = {};
+const initialState = { allSpots: {} };
 
 const spotReducer = (state = initialState, action) => {
   let newState;
