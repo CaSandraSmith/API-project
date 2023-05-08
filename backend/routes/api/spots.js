@@ -219,7 +219,7 @@ router.post("/:spotId/reviews", requireAuth, checkSpotExists, checkReviewInput, 
         }
     })
 
-    console.log("userReviews", userReviews)
+    // console.log("userReviews", userReviews)
     if (userReviews.length) {
         res.status(500);
         return res.json({

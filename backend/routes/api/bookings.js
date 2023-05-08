@@ -29,8 +29,8 @@ router.delete('/:bookingId', checkBookingExists, async (req, res)=> {
     let booking = await Booking.findByPk(req.params.bookingId);
     let spot = await Spot.findByPk(booking.spotId)
 
-    console.log(currentUSer !== booking.userId)
-    console.log(currentUSer !== spot.ownerId)
+    // console.log(currentUSer !== booking.userId)
+    // console.log(currentUSer !== spot.ownerId)
     if (currentUSer !== booking.userId && currentUSer !== spot.ownerId) {
         res.status(403);
         return res.json({
