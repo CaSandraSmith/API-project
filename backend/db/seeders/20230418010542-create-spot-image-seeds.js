@@ -18,7 +18,7 @@ module.exports = {
       },
       {
         spotId: 1,
-        url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Empire_State_Building_%28aerial_view%29.jpg/800px-Empire_State_Building_%28aerial_view%29.jpg',
+        url: "https://res.cloudinary.com/hello-tickets/image/upload/c_limit,f_auto,q_auto,w_1300/v1635350926/vo3dmtkwizvc7df9ltgr.jpg",
         preview: false
       },
       {
@@ -33,7 +33,7 @@ module.exports = {
       },
       {
         spotId: 2,
-        url: 'https://static.wikia.nocookie.net/harrypotter/images/f/fc/GrimmauldPlace_WB_F5_FrontOfGrimmualdPlace_Image_100615_Land.jpg/revision/latest?cb=20161017204708',
+        url: 'https://i.pinimg.com/736x/07/dc/a1/07dca13586677ac5a36936dc6c9c2dc4.jpg',
         preview: false
       },
       {
