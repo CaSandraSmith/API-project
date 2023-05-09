@@ -34,8 +34,8 @@ export const findOneSpot = (spotId) => async (dispatch) => {
 }
 
 export const createSpot = (spot, images) => async (dispatch) => {
-    if (!spot.lat) spot.lat = 0
-    if (!spot.lng) spot.lng = 0
+    if (!spot.lat) spot.lat = 1
+    if (!spot.lng) spot.lng = 1
     const res = await csrfFetch('/api/spots', {
         method: 'POST',
         body: JSON.stringify(spot)
