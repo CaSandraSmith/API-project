@@ -10,7 +10,7 @@ export default function IndividualSpotListItem({spot}) {
                 ${spot.price} per night
             </p>
             <p>
-            <i class="fa-solid fa-star"></i>{spot.avgRating}
+            <i className="fa-solid fa-star"></i>{spot.avgRating}
             </p>
         </div>
     )
