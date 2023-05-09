@@ -2,9 +2,7 @@ export default function IndividualSpotListItem({spot}) {
 
     return (
         <div>
-            {spot.previewImage ? <img src={spot.previewImage} alt={spot.name}/> : <p>No preview Image</p>}
-                {spot.previewImage}
-            
+            {spot.previewImage ? <img src={spot.previewImage} alt={spot.name}/> : <p>No preview Image</p>}            
             <p>
                 {spot.city}, {spot.state}
             </p>
