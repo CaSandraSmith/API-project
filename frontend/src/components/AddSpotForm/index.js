@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from "react-router-dom";
 import { createSpot } from '../../store/spots';
 
 export default function AddSpotForm() {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const history = useHistory();
     const [country, setCountry] = useState("");
     const [address, setAddress] = useState("");
     const [city, setCity] = useState("");
@@ -31,7 +33,7 @@ export default function AddSpotForm() {
         if(spotImage4) images.push({preview: false, url: spotImage4});
 
         let newSpot = await dispatch(createSpot(spot, images))
-        console.log(newSpot)
+        history.push(`/spots/${newSpot.id}`)
     }
 
     return (

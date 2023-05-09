@@ -16,7 +16,7 @@ const findSpot = (spot) => ({
 })
 
 const makeNewSpot = (spot) => ({
-    type: GET_SPOT,
+    type: CREATE_SPOT,
     spot
 })
 
@@ -42,14 +42,13 @@ export const createSpot = (spot, images) => async (dispatch) => {
     })
     if (res.ok) {
         let newSpot = await res.json()
-        console.log(newSpot)
 
-        // images.forEach(async(pic) => {
-        //     await fetch(`/api/${newSpot.id}/images`, {
-        //         method: 'POST',
-        //         body: JSON.stringify(pic)
-        //     })
-        // })
+        images.forEach(async(pic) => {
+            await csrfFetch(`/api/spots/${newSpot.id}/images`, {
+                method: 'POST',
+                body: JSON.stringify(pic)
+            })
+        })
 
         dispatch(makeNewSpot(newSpot))
         return newSpot
@@ -63,11 +62,13 @@ export const createSpot = (spot, images) => async (dispatch) => {
 const initialState = { allSpots: {}, singleSpot: {} };
 
 const spotReducer = (state = initialState, action) => {
+    let newState
   switch (action.type) {
     case CREATE_SPOT:
-        return {...state, allSpots: {...state.allSpots, [action.spot.id]: action.spot}}
+        newState = {...state, allSpots: {...state.allSpots, [action.spot.id]: action.spot}}
+        return newState
     case GET_SPOTS:
-        let newState = {}
+        newState = {}
         action.spots.forEach(spot => {
             newState[spot.id] = spot
         });

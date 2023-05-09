@@ -1,4 +1,4 @@
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
+import { useHistory } from "react-router-dom"
 
 export default function IndividualSpotListItem({spot}) {
     const history = useHistory()
