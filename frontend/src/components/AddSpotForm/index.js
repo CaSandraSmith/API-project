@@ -1,23 +1,37 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { createSpot } from '../../store/spots';
 
 export default function AddSpotForm() {
+    const dispatch = useDispatch()
     const [country, setCountry] = useState("");
     const [address, setAddress] = useState("");
     const [city, setCity] = useState("");
     const [state, setState] = useState("");
     const [description, setDescription] = useState("");
     const [name, setName] = useState("");
+    const [price, setPrice] = useState("");
     const [previewImage, setPreviewImage] = useState("");
     const [spotImage1, setSpotImage1] = useState("");
     const [spotImage2, setSpotImage2] = useState("");
     const [spotImage3, setSpotImage3] = useState("");
     const [spotImage4, setSpotImage4] = useState("");
-    const [latitude, setLatitude] = useState("");
-    const [longitude, setLongitude] = useState("");
-    const [errors, setErrors] = useState({})
+    const [lat, setLatitude] = useState("");
+    const [lng, setLongitude] = useState("");
+    // const [errors, setErrors] = useState({})
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        let spot = {address, city, state, country, lat, lng, name, description, price};
+        let images = []
+        if(previewImage) images.push({preview: true, url: previewImage})
+        if(spotImage1) images.push({preview: false, url: spotImage1});
+        if(spotImage2) images.push({preview: false, url: spotImage2});
+        if(spotImage3) images.push({preview: false, url: spotImage3});
+        if(spotImage4) images.push({preview: false, url: spotImage4});
+
+        let newSpot = await dispatch(createSpot(spot, images))
+        console.log(newSpot)
     }
 
     return (
@@ -66,7 +80,7 @@ export default function AddSpotForm() {
                     Latitude
                     <input 
                         type="text"
-                        value={latitude}
+                        value={lat}
                         onChange={(e) => setLatitude(e.target.value)}
                         placeholder='Latitude'
                     />
@@ -75,7 +89,7 @@ export default function AddSpotForm() {
                     Longitude
                     <input 
                         type="text"
-                        value={longitude}
+                        value={lng}
                         onChange={(e) => setLongitude(e.target.value)}
                         placeholder='Longitude'
                     />
@@ -92,18 +106,28 @@ export default function AddSpotForm() {
                 <h2>Create a title for your spot</h2>
                 <h3>Catch guests' attention with a spot title that highlights what makes your place special.</h3>
                 <label>
-                    $<input 
+                    <input 
                         type="text"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         placeholder='Name of your spot'
                     />
                 </label>
+                <h2>Set a base price for your spot</h2>
+                <h3>Catch guests' attention with a spot title that highlights what makes your place special.</h3>
+                <label>
+                    <input 
+                        type='number'
+                        value={price}
+                        onChange={(e) => setPrice(e.target.value)}
+                        placeholder='Price per night (USD)'
+                    />
+                </label>
                 <h2>Liven up your spot with photos</h2>
                 <h3>Submit a link to at least one photo to publish your spot.</h3>
                     <label>
                         <input 
-                            type='url'
+                            type='text'
                             value={previewImage}
                             onChange={(e) => setPreviewImage(e.target.value)}
                             placeholder='Preview Image URL'
