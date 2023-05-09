@@ -13,7 +13,7 @@ export default function GetOneSpot() {
         dispatch(findOneSpot(id))
     }, [dispatch])
     
-    if (!Object.values(spot).length) return <h1>Loading ...</h1>
+    if (!Object.values(spot).length) return null
 
     return (
         <div>
