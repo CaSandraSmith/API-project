@@ -127,7 +127,7 @@ export default function AddSpotForm() {
                 <h3>Submit a link to at least one photo to publish your spot.</h3>
                     <label>
                         <input 
-                            type='text'
+                            type='url'
                             value={previewImage}
                             onChange={(e) => setPreviewImage(e.target.value)}
                             placeholder='Preview Image URL'

@@ -1,3 +1,4 @@
+import { csrfFetch } from "./csrf";
 //set type in constant variable to avoid typing errors
 const GET_SPOTS = "spots/getAllSpots";
 const GET_SPOT = "spot/getOneSpot"
@@ -21,13 +22,13 @@ const makeNewSpot = (spot) => ({
 
 //thunk action creators
 export const loadSpots = () => async (dispatch) => {
-    const response = await fetch('/api/spots')
+    const response = await csrfFetch('/api/spots')
     const spots = await response.json()
     return dispatch(loadAllSpots(spots))
 }
 
 export const findOneSpot = (spotId) => async (dispatch) => {
-    const res = await fetch(`/api/spots/${spotId}`)
+    const res = await csrfFetch(`/api/spots/${spotId}`)
     const spot = await res.json();
     dispatch(findSpot(spot))
 }
@@ -35,13 +36,13 @@ export const findOneSpot = (spotId) => async (dispatch) => {
 export const createSpot = (spot, images) => async (dispatch) => {
     if (!spot.lat) spot.lat = 0
     if (!spot.lng) spot.lng = 0
-    const res = await fetch('/api/spots', {
+    const res = await csrfFetch('/api/spots', {
         method: 'POST',
         body: JSON.stringify(spot)
     })
-
     if (res.ok) {
         let newSpot = await res.json()
+        console.log(newSpot)
 
         // images.forEach(async(pic) => {
         //     await fetch(`/api/${newSpot.id}/images`, {
