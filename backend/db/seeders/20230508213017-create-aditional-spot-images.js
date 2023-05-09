@@ -92,53 +92,53 @@ module.exports = {
         preview: false
       },
       {
-        spotId: ,
-        url: '',
+        spotId: 6,
+        url: 'https://miro.medium.com/v2/resize:fit:640/1*0ZajHBkV09OjIYLsvr81lQ.jpeg',
         preview: true
       },
       {
-        spotId: ,
-        url: '',
+        spotId: 6,
+        url: 'https://3.bp.blogspot.com/-Z0CjcJWgi9k/WYnOf2H721I/AAAAAAABN-c/djuk8klOw-4Dg-AlUSi_J7ySK_2c5q51ACLcBGAs/s1600/20663719_10155768901403933_4509925688079686348_n.jpg',
         preview: false
       },
       {
-        spotId: ,
-        url: '',
+        spotId: 6,
+        url: 'https://gothamtrending.files.wordpress.com/2011/09/wayne-manor-entrance-interiors-osterly-park-the-dark-knight-rises.jpg',
         preview: false
       },
       {
-        spotId: ,
-        url: '',
+        spotId: 6,
+        url: 'https://cloudfront-us-east-1.images.arcpublishing.com/advancelocal/C6SCVCJFM5FINHB4KEIEX6CYNA.jpg',
         preview: false
       },
       {
-        spotId: ,
-        url: '',
+        spotId: 6,
+        url: 'https://i.pinimg.com/736x/d2/b9/51/d2b9510deef3d6573e9bfa5345465996.jpg',
         preview: false
       },
       {
-        spotId: ,
-        url: '',
+        spotId: 7,
+        url: 'https://cdn.home-designing.com/wp-content/uploads/2020/07/round-skylight.jpg',
         preview: true
       },
       {
-        spotId: ,
-        url: '',
+        spotId: 7,
+        url: 'https://i.pinimg.com/474x/f6/e5/53/f6e5536cd6fe7c5378103c8d014a8c3c.jpg',
         preview: false
       },
       {
-        spotId: ,
-        url: '',
+        spotId: 7,
+        url: 'https://cdn.home-designing.com/wp-content/uploads/2016/06/dark-home-theater-inspiration.jpg',
         preview: false
       },
       {
-        spotId: ,
-        url: '',
+        spotId: 7,
+        url: 'https://elitehts.com/wp-content/uploads/2018/12/batcave_home_theater_2-1024x563.jpg',
         preview: false
       },
       {
-        spotId: ,
-        url: '',
+        spotId: 7,
+        url: 'https://www.thepinnaclelist.com/wp-content/uploads/2020/06/19-Cascading-Courts-Luxury-House-Faber-Drive-Singapore.jpg',
         preview: false
       },
       {
