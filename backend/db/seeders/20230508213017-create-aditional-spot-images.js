@@ -142,28 +142,28 @@ module.exports = {
         preview: false
       },
       {
-        spotId: ,
-        url: '',
+        spotId: 8,
+        url: 'https://i.pinimg.com/750x/12/23/cf/1223cfd25ca3047f33d28366a24ddb04.jpg',
         preview: true
       },
       {
-        spotId: ,
-        url: '',
+        spotId: 8,
+        url: 'https://upload.wikimedia.org/wikipedia/commons/d/d9/Tardis_BBC_Television_Center.jpg',
         preview: false
       },
       {
-        spotId: ,
-        url: '',
+        spotId: 8,
+        url: 'https://i.pinimg.com/564x/81/b9/f7/81b9f7af1edc2537ee82fef0ec89007d.jpg',
         preview: false
       },
       {
-        spotId: ,
-        url: '',
+        spotId: 8,
+        url: 'https://secure.img1-cg.wfcdn.com/im/14587818/resize-h350%5Ecompr-r85/3740/37405929/Boler+78.8%27%27+Dining+Table.jpg',
         preview: false
       },
       {
-        spotId: ,
-        url: '',
+        spotId: 8,
+        url: 'https://i.pinimg.com/736x/bd/2e/ca/bd2ecaa4de735d0839e830669090a985.jpg',
         preview: false
       },
       {
