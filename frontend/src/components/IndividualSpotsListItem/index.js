@@ -1,7 +1,13 @@
-export default function IndividualSpotListItem({spot}) {
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 
+export default function IndividualSpotListItem({spot}) {
+    const history = useHistory()
+
+    function movePage () {
+        history.push(`/spots/${spot.id}`)
+    }
     return (
-        <div>
+        <div onClick={movePage}>
             {spot.previewImage ? <img src={spot.previewImage} alt={spot.name}/> : <p>No preview Image</p>}            
             <p>
                 {spot.city}, {spot.state}
