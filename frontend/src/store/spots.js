@@ -40,6 +40,7 @@ export const createSpot = (spot, images) => async (dispatch) => {
         method: 'POST',
         body: JSON.stringify(spot)
     })
+    console.log(res)
     if (res.ok) {
         let newSpot = await res.json()
 

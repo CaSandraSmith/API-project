@@ -33,7 +33,11 @@ export default function AddSpotForm() {
         if(spotImage4) images.push({preview: false, url: spotImage4});
 
         let newSpot = await dispatch(createSpot(spot, images))
-        history.push(`/spots/${newSpot.id}`)
+        if (newSpot.errors) {
+            console.log(newSpot)
+        } else {
+            history.push(`/spots/${newSpot.id}`)
+        }
     }
 
     return (
