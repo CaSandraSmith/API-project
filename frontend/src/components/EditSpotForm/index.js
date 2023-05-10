@@ -10,14 +10,16 @@ export default function EditSpotForm() {
     const history = useHistory();
     const {id} = useParams();
     const foundSpot = useSelector(state => state.spots.singleSpot);
-    const [country, setCountry] = useState(foundSpot?.country);
-    const [address, setAddress] = useState(foundSpot?.country);
-    const [city, setCity] = useState(foundSpot?.country);
-    const [state, setState] = useState(foundSpot?.country);
-    const [description, setDescription] = useState(foundSpot?.country);
-    const [name, setName] = useState(foundSpot?.country);
-    const [price, setPrice] = useState(foundSpot?.country);
-    const [previewImage, setPreviewImage] = useState(foundSpot?.country);
+    console.log("foundSpot", foundSpot);
+
+    const [country, setCountry] = useState(foundSpot.country);
+    const [address, setAddress] = useState(foundSpot.address);
+    const [city, setCity] = useState(foundSpot.city);
+    const [state, setState] = useState(foundSpot.state);
+    const [description, setDescription] = useState(foundSpot.description);
+    const [name, setName] = useState(foundSpot.name);
+    const [price, setPrice] = useState(foundSpot.price);
+    const [previewImage, setPreviewImage] = useState(foundSpot.previewImage);
     const [spotImage1, setSpotImage1] = useState("");
     const [spotImage2, setSpotImage2] = useState("");
     const [spotImage3, setSpotImage3] = useState("");
@@ -28,22 +30,15 @@ export default function EditSpotForm() {
     const [submit, setSubmit] = useState(false);
     const [loaded, setLoaded] = useState(false);
 
-    if (loaded) {
-        // console.log(foundSpot.country)
-        // setCountry(foundSpot.country);
-        // setAddress(foundSpot.address);
-        // setCity(foundSpot.city);
-        // setState(foundSpot.state);
-        // setDescription(foundSpot.description);
-        // setName(foundSpot.name);
-        // setPrice(foundSpot.price);
-        // setPreviewImage(foundSpot.previewImage);
-    }
+    console.log(loaded)
 
     useEffect(() => {
-        dispatch(findOneSpot(id))
-        setLoaded(true)
+        dispatch(findOneSpot(id)).then(() => setLoaded(true))
     }, [dispatch])
+
+    if (!loaded) {
+        return <p>Loading...</p>
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -92,7 +87,7 @@ export default function EditSpotForm() {
     return (
         <div>
             <h1>Create a new Spot</h1>
-            <form onSubmit={handleSubmit}>
+            {loaded && <form onSubmit={handleSubmit}>
                 <h2>Where's your place located?</h2>
                 <h3>Guests will only get your exact address once they booked a reservation.</h3>
                 <label>
@@ -100,7 +95,7 @@ export default function EditSpotForm() {
                     {submit && Object.values(errors).length && errors.country ? <p>{errors.country}</p> : null}
                     <input
                         type="text"
-                        value={foundSpot.country}
+                        value={country}
                         onChange={(e) => setCountry(e.target.value)}
                         placeholder='Country'
                     />
@@ -239,7 +234,7 @@ export default function EditSpotForm() {
                     {submit && Object.values(errors).length && errors.image3 ? <p>{errors.image3}</p> : null}
                 </label>
                 <button>Create Spot</button>
-            </form>
+            </form>}
         </div>
     )
 }
