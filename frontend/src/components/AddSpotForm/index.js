@@ -121,6 +121,8 @@ export default function AddSpotForm() {
                         value={lat}
                         onChange={(e) => setLatitude(e.target.value)}
                         placeholder='Latitude'
+                        max={90}
+                        min={-90}
                     />
                 </label>
                 <label>
@@ -130,6 +132,8 @@ export default function AddSpotForm() {
                         value={lng}
                         onChange={(e) => setLongitude(e.target.value)}
                         placeholder='Longitude'
+                        max={180}
+                        min={-180}
                     />
                 </label>
                 <h2>Describe your place to guests</h2>
@@ -161,6 +165,7 @@ export default function AddSpotForm() {
                         value={price}
                         onChange={(e) => setPrice(e.target.value)}
                         placeholder='Price per night (USD)'
+                        min={0}
                     />
                     {submit && Object.values(errors).length && errors.price ? <p>{errors.price}</p> : null}
                 </label>
