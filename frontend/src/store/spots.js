@@ -27,10 +27,10 @@ const findUsersSpots = (spots) => ({
     spots: spots.Spots
 })
 
-const deleteSpot = (spot) => {
+const deleteSpot = (spot) => ({
     type: DELETE_SPOT,
     spot
-}
+})
 
 //thunk action creators
 export const loadSpots = () => async (dispatch) => {

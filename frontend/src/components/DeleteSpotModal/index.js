@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
-import "./LoginForm.css";
+import { deleteASpot } from "../../store/spots";
 
 export default function DeleteSpotModal() {
   const dispatch = useDispatch();
-  const { closeModal } = useModal();
+  const { setModalContent, setOnModalClose, closeModal } = useModal();
+
 
   const confirmDelete = (e) => {
     e.preventDefault();
-    return dispatch()
-      .then(closeModal)
+    // return dispatch()
+    //   .then(closeModal)
   };
 
   return (
