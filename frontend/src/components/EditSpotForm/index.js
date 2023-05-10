@@ -1,21 +1,23 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from "react-router-dom";
 import { createSpot } from '../../store/spots';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { findOneSpot } from '../../store/spots';
 
 export default function EditSpotForm() {
     const dispatch = useDispatch();
     const history = useHistory();
     const {id} = useParams();
-    const [country, setCountry] = useState("");
-    const [address, setAddress] = useState("");
-    const [city, setCity] = useState("");
-    const [state, setState] = useState("");
-    const [description, setDescription] = useState("");
-    const [name, setName] = useState("");
-    const [price, setPrice] = useState("");
-    const [previewImage, setPreviewImage] = useState("");
+    const foundSpot = useSelector(state => state.spots.singleSpot);
+    const [country, setCountry] = useState(foundSpot?.country);
+    const [address, setAddress] = useState(foundSpot?.country);
+    const [city, setCity] = useState(foundSpot?.country);
+    const [state, setState] = useState(foundSpot?.country);
+    const [description, setDescription] = useState(foundSpot?.country);
+    const [name, setName] = useState(foundSpot?.country);
+    const [price, setPrice] = useState(foundSpot?.country);
+    const [previewImage, setPreviewImage] = useState(foundSpot?.country);
     const [spotImage1, setSpotImage1] = useState("");
     const [spotImage2, setSpotImage2] = useState("");
     const [spotImage3, setSpotImage3] = useState("");
@@ -23,7 +25,25 @@ export default function EditSpotForm() {
     const [lat, setLatitude] = useState("");
     const [lng, setLongitude] = useState("");
     const [errors, setErrors] = useState({});
-    const [submit, setSubmit] = useState(false)
+    const [submit, setSubmit] = useState(false);
+    const [loaded, setLoaded] = useState(false);
+
+    if (loaded) {
+        // console.log(foundSpot.country)
+        // setCountry(foundSpot.country);
+        // setAddress(foundSpot.address);
+        // setCity(foundSpot.city);
+        // setState(foundSpot.state);
+        // setDescription(foundSpot.description);
+        // setName(foundSpot.name);
+        // setPrice(foundSpot.price);
+        // setPreviewImage(foundSpot.previewImage);
+    }
+
+    useEffect(() => {
+        dispatch(findOneSpot(id))
+        setLoaded(true)
+    }, [dispatch])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -80,7 +100,7 @@ export default function EditSpotForm() {
                     {submit && Object.values(errors).length && errors.country ? <p>{errors.country}</p> : null}
                     <input
                         type="text"
-                        value={country}
+                        value={foundSpot.country}
                         onChange={(e) => setCountry(e.target.value)}
                         placeholder='Country'
                     />
