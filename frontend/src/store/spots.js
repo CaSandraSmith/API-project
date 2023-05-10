@@ -42,7 +42,6 @@ export const createSpot = (spot, images) => async (dispatch) => {
         body: JSON.stringify(spot)
     }).catch(async (error) => {
         const err = await error.json();
-        console.log("err", err)
         return err
     })
 
@@ -58,8 +57,9 @@ export const createSpot = (spot, images) => async (dispatch) => {
 
         dispatch(makeNewSpot(newSpot))
         return newSpot
+    }else {
+        return res
     }
-
 
 }
 
