@@ -1,21 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from "react-router-dom";
-import { createSpot } from '../../store/spots';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { updateASpot } from '../../store/spots';
 
 export default function EditSpotForm() {
     const dispatch = useDispatch();
     const history = useHistory();
     const {id} = useParams();
     const foundSpot = useSelector(state => state.spots.currentUserSpots[id]);
-    const [country, setCountry] = useState(foundSpot.country);
-    const [address, setAddress] = useState(foundSpot.address);
-    const [city, setCity] = useState(foundSpot.city);
-    const [state, setState] = useState(foundSpot.state);
-    const [description, setDescription] = useState(foundSpot.description);
-    const [name, setName] = useState(foundSpot.name);
-    const [price, setPrice] = useState(foundSpot.price);
+    const [country, setCountry] = useState(foundSpot?.country);
+    const [address, setAddress] = useState(foundSpot?.address);
+    const [city, setCity] = useState(foundSpot?.city);
+    const [state, setState] = useState(foundSpot?.state);
+    const [description, setDescription] = useState(foundSpot?.description);
+    const [name, setName] = useState(foundSpot?.name);
+    const [price, setPrice] = useState(foundSpot?.price);
     const [errors, setErrors] = useState({});
     const [submit, setSubmit] = useState(false);
 
@@ -25,18 +25,18 @@ export default function EditSpotForm() {
         setSubmit(true)
         setErrors({})
 
-        let spot = { address, city, state, country, name, description, price };
+        let spot = { id, address, city, state, country, name, description, price };
 
         let validationErrors = {}
         if (description.length < 30) validationErrors.description = "Description needs a minimum of 30 characters"
         if (!name) validationErrors.name = "Name is required"
 
-        let newSpot = await dispatch(createSpot(spot, validationErrors))
+        let updatedSpot = await dispatch(updateASpot(spot, validationErrors))
 
-        if (newSpot.errors) {
-            return setErrors(newSpot.errors)
+        if (updatedSpot.errors) {
+            return setErrors(updatedSpot.errors)
         } else {
-            history.push(`/spots/${newSpot.id}`)
+            history.push(`/spots/${updatedSpot.id}`)
         }
     }
 
