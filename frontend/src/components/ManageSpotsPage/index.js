@@ -9,10 +9,11 @@ export default function ManageSpots() {
     const dispatch = useDispatch();
     let usersSpots = useSelector(state => state.spots.currentUserSpots)
     let spots = Object.values(usersSpots)
-    console.log("spots", spots)
+
     useEffect(() => {
         dispatch(getUsersSpots())
     }, [dispatch])
+    
     return (
         <div>
             <h1>Manage Your Spots</h1>

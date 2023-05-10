@@ -7,6 +7,7 @@ import GetAllSpots from "./components/GetAllSpots";
 import GetOneSpot from "./components/GetOneSpot";
 import AddSpotForm from "./components/AddSpotForm";
 import ManageSpots from "./components/ManageSpotsPage";
+import EditSpotForm from "./components/EditSpotForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -20,6 +21,9 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded &&
         <Switch>
+          <Route path="/spots/:id/edit">
+            <EditSpotForm />
+          </Route>
           <Route path="/spots/current">
             <ManageSpots />
           </Route>
