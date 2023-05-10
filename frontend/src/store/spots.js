@@ -3,6 +3,7 @@ import { csrfFetch } from "./csrf";
 const GET_SPOTS = "spots/getAllSpots";
 const GET_SPOT = "spot/getOneSpot"
 const CREATE_SPOT = "spot/postSpot"
+const USERS_SPOTS = "spots/currentUser"
 
 //action creators
 const loadAllSpots = (spots) => ({
@@ -18,6 +19,11 @@ const findSpot = (spot) => ({
 const makeNewSpot = (spot) => ({
     type: CREATE_SPOT,
     spot
+})
+
+const findUsersSpots = (spots) => ({
+    type: USERS_SPOTS,
+    spots: spots.Spots
 })
 
 //thunk action creators
@@ -58,16 +64,25 @@ export const createSpot = (spot, images) => async (dispatch) => {
         dispatch(makeNewSpot(newSpot))
         return newSpot
     }
-
-
+}
+export const getUsersSpots = () => async(dispatch) => {
+    const res = await csrfFetch('/api/spots/current')
+    const spots = await res.json()
+    dispatch(findUsersSpots(spots))
 }
 
 
-const initialState = { allSpots: {}, singleSpot: {} };
+const initialState = { allSpots: {}, singleSpot: {}, currentUserSpots: {} };
 
 const spotReducer = (state = initialState, action) => {
     let newState
     switch (action.type) {
+        case USERS_SPOTS:
+            newState = {}
+            action.spots.forEach(spot => {
+                newState[spot.id] = spot
+            });
+            return {...state, currentUserSpots:{...newState}}
         case CREATE_SPOT:
             newState = { ...state, allSpots: { ...state.allSpots, [action.spot.id]: action.spot } }
             return newState
