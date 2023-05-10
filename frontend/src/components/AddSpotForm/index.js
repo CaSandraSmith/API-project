@@ -26,6 +26,7 @@ export default function AddSpotForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setSubmit(true)
+        setErrors({})
 
         let spot = { address, city, state, country, lat, lng, name, description, price };
         let images = [];
@@ -38,15 +39,19 @@ export default function AddSpotForm() {
         let validationErrors = {}
         if (description.length < 30) validationErrors.description = "Description needs a minimum of 30 characters"
 
+        if (!previewImage) validationErrors.previewImage = "Preview image is required."
+
         for (let i = 0; i < images.length; i++) {
             let pics = images[i]
-            if (!pics.url.endsWith(".png") || !pics.url.endsWith(".jpg") || !pics.url.endsWith(".jpeg")) {
+            if (!pics.url.endsWith(".png") && !pics.url.endsWith(".jpg") && !pics.url.endsWith(".jpeg") && pics.img !== 0) {
                 validationErrors[`image${pics.img}`] = `Image URL
+                needs to end in png or jpg (or jpeg)`
+            } else if (!pics.url.endsWith(".png") && !pics.url.endsWith(".jpg") && !pics.url.endsWith(".jpeg") && pics.img === 0 && !validationErrors.previewImage) {
+                validationErrors.previewImage = `Image URL
                 needs to end in png or jpg (or jpeg)`
             }
         }
 
-        if (!previewImage) validationErrors.previewImage = "Preview image is required."
         if (Object.values(validationErrors).length) {
             setErrors(validationErrors)
         }
