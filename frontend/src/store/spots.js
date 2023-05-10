@@ -4,6 +4,7 @@ const GET_SPOTS = "spots/getAllSpots";
 const GET_SPOT = "spot/getOneSpot"
 const CREATE_SPOT = "spot/postSpot"
 const USERS_SPOTS = "spots/currentUser"
+const DELETE_SPOT = "spot/delete"
 
 //action creators
 const loadAllSpots = (spots) => ({
@@ -25,6 +26,11 @@ const findUsersSpots = (spots) => ({
     type: USERS_SPOTS,
     spots: spots.Spots
 })
+
+const deleteSpot = (spot) => {
+    type: DELETE_SPOT,
+    spot
+}
 
 //thunk action creators
 export const loadSpots = () => async (dispatch) => {
@@ -71,12 +77,25 @@ export const getUsersSpots = () => async(dispatch) => {
     dispatch(findUsersSpots(spots))
 }
 
+export const deleteASpot = (spotId) => async(dispatch) => {
+    const res = await csrfFetch(`/api/spots/${spotId}`, {
+        method: 'DELETE'
+    })
+    if (res.ok) {
+        dispatch(deleteSpot)
+    }
+}
+
 
 const initialState = { allSpots: {}, singleSpot: {}, currentUserSpots: {} };
 
 const spotReducer = (state = initialState, action) => {
     let newState
     switch (action.type) {
+        case DELETE_SPOT:
+            newState = {...state}
+            delete newState[action.spot.id]
+            return newState;
         case USERS_SPOTS:
             newState = {}
             action.spots.forEach(spot => {
