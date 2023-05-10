@@ -42,6 +42,7 @@ export const loadSpots = () => async (dispatch) => {
 export const findOneSpot = (spotId) => async (dispatch) => {
     const res = await csrfFetch(`/api/spots/${spotId}`)
     const spot = await res.json();
+    console.log("spot", spot)
     dispatch(findSpot(spot))
 }
 
@@ -93,27 +94,26 @@ export const deleteASpot = (spotId) => async(dispatch) => {
 const initialState = { allSpots: {}, singleSpot: {}, currentUserSpots: {} };
 
 const spotReducer = (state = initialState, action) => {
-    let newState
     switch (action.type) {
         case DELETE_SPOT:
-            newState = {...state}
+            let newState = {...state}
             delete newState[action.spot.id]
             return newState;
         case USERS_SPOTS:
-            newState = {}
+            let newState1 = {}
             action.spots.forEach(spot => {
-                newState[spot.id] = spot
+                newState1[spot.id] = spot
             });
-            return {...state, currentUserSpots:{...newState}}
+            return {...state, currentUserSpots:{...newState1}}
         case CREATE_SPOT:
-            newState = { ...state, allSpots: { ...state.allSpots, [action.spot.id]: action.spot } }
-            return newState
+            let newState3 = { ...state, allSpots: { ...state.allSpots, [action.spot.id]: action.spot } }
+            return newState3
         case GET_SPOTS:
-            newState = {}
+            let newState4 = {}
             action.spots.forEach(spot => {
-                newState[spot.id] = spot
+                newState4[spot.id] = spot
             });
-            return { ...state, allSpots: { ...newState } };
+            return { ...state, allSpots: { ...newState4 } };
         case GET_SPOT:
             return { ...state, singleSpot: { ...action.spot } }
         default:

@@ -10,8 +10,6 @@ export default function EditSpotForm() {
     const history = useHistory();
     const {id} = useParams();
     const foundSpot = useSelector(state => state.spots.singleSpot);
-    console.log("foundSpot", foundSpot);
-
     const [country, setCountry] = useState(foundSpot.country);
     const [address, setAddress] = useState(foundSpot.address);
     const [city, setCity] = useState(foundSpot.city);
@@ -55,8 +53,8 @@ export default function EditSpotForm() {
 
         let validationErrors = {}
         if (description.length < 30) validationErrors.description = "Description needs a minimum of 30 characters"
-
         if (!previewImage) validationErrors.previewImage = "Preview image is required."
+        if (!name) validationErrors.name = "Name is required"
 
         for (let i = 0; i < images.length; i++) {
             let pics = images[i]
@@ -69,24 +67,18 @@ export default function EditSpotForm() {
             }
         }
 
-        if (Object.values(validationErrors).length) {
-            setErrors(validationErrors)
-        }
-        let newSpot
-        newSpot = await dispatch(createSpot(spot, images))
+        let newSpot = await dispatch(createSpot(spot, images, validationErrors))
 
-        //BUG: this doesn't work for new spots that have errors
-        console.log("newSpot", newSpot)
-        // if (newSpot.errors) {
-        //     return
-        // } else {
-        //     history.push(`/spots/${newSpot.id}`)
-        // }
+        if (newSpot.errors) {
+            return setErrors(newSpot.errors)
+        } else {
+            history.push(`/spots/${newSpot.id}`)
+        }
     }
 
     return (
         <div>
-            <h1>Create a new Spot</h1>
+            <h1>Update your Spot</h1>
             {loaded && <form onSubmit={handleSubmit}>
                 <h2>Where's your place located?</h2>
                 <h3>Guests will only get your exact address once they booked a reservation.</h3>
@@ -99,7 +91,6 @@ export default function EditSpotForm() {
                         onChange={(e) => setCountry(e.target.value)}
                         placeholder='Country'
                     />
-
                 </label>
                 <label>
                     Street Address
