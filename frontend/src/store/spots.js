@@ -39,30 +39,33 @@ export const findOneSpot = (spotId) => async (dispatch) => {
     dispatch(findSpot(spot))
 }
 
-export const createSpot = (spot, images) => async (dispatch) => {
+export const createSpot = (spot, images, errors) => async (dispatch) => {
     if (!spot.lat) spot.lat = 1
     if (!spot.lng) spot.lng = 1
 
     const res = await csrfFetch('/api/spots', {
         method: 'POST',
         body: JSON.stringify(spot)
-    }).catch(async (error) => {
-        const err = await error.json();
-        return await err
+    }).catch(async (errs) => {
+        const err = await errs.json();
+        return err
     })
 
-    if (res.ok) {
+    if (res.ok && !Object.values(errors).length) {
         let newSpot = await res.json()
 
-        images.forEach(async (pic) => {
+        for (let i =  0; i < images.length; i++) {
+            let pic = images[i]
             await csrfFetch(`/api/spots/${newSpot.id}/images`, {
                 method: 'POST',
                 body: JSON.stringify(pic)
             })
-        })
+        }
 
         dispatch(makeNewSpot(newSpot))
         return newSpot
+    }else {
+        return {errors:{...res.errors, ...errors}}
     }
 }
 export const getUsersSpots = () => async(dispatch) => {

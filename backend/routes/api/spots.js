@@ -29,7 +29,7 @@ const checkInput = [
     check('address')
     .exists({ checkFalsy: true })
     .notEmpty()
-    .withMessage("Street address is required"),
+    .withMessage("Address is required"),
 
     check('city')
     .exists({ checkFalsy: true })
@@ -72,7 +72,7 @@ const checkInput = [
     check('price')
     .exists({ checkFalsy: true })
     .notEmpty()
-    .withMessage("Price per day is required"),
+    .withMessage("Price is required"),
     handleValidationErrors
 ]
 
