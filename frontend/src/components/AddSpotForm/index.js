@@ -20,20 +20,39 @@ export default function AddSpotForm() {
     const [spotImage4, setSpotImage4] = useState("");
     const [lat, setLatitude] = useState("");
     const [lng, setLongitude] = useState("");
-    // const [errors, setErrors] = useState({})
+    const [errors, setErrors] = useState({});
+    const [submit, setSubmit] = useState(false)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        let spot = {address, city, state, country, lat, lng, name, description, price};
-        let images = []
-        if(previewImage) images.push({preview: true, url: previewImage})
-        if(spotImage1) images.push({preview: false, url: spotImage1});
-        if(spotImage2) images.push({preview: false, url: spotImage2});
-        if(spotImage3) images.push({preview: false, url: spotImage3});
-        if(spotImage4) images.push({preview: false, url: spotImage4});
+        setSubmit(true)
 
-        const newSpot = await dispatch(createSpot(spot, images))
-        
+        let spot = { address, city, state, country, lat, lng, name, description, price };
+        let images = [];
+        if (previewImage) images.push({ img: 0, preview: true, url: previewImage })
+        if (spotImage1) images.push({ img: 1, preview: false, url: spotImage1 });
+        if (spotImage2) images.push({ img: 2, preview: false, url: spotImage2 });
+        if (spotImage3) images.push({ img: 3, preview: false, url: spotImage3 });
+        if (spotImage4) images.push({ img: 4, preview: false, url: spotImage4 });
+
+        let validationErrors = {}
+        if (description.length < 30) validationErrors.description = "Description needs a minimum of 30 characters"
+
+        for (let i = 0; i < images.length; i++) {
+            let pics = images[i]
+            if (!pics.url.endsWith(".png") || !pics.url.endsWith(".jpg") || !pics.url.endsWith(".jpeg")) {
+                validationErrors[`image${pics.img}`] = `Image URL
+                needs to end in png or jpg (or jpeg)`
+            }
+        }
+
+        if (!previewImage) validationErrors.previewImage = "Preview image is required."
+        if (Object.values(validationErrors).length) {
+            setErrors(validationErrors)
+        }
+        let newSpot
+        newSpot = await dispatch(createSpot(spot, images))
+
         //BUG: this doesn't work for new spots that have errors
         console.log("newSpot", newSpot)
         // if (newSpot.errors) {
@@ -51,16 +70,19 @@ export default function AddSpotForm() {
                 <h3>Guests will only get your exact address once they booked a reservation.</h3>
                 <label>
                     Country
-                    <input 
+                    {submit && Object.values(errors).length && errors.country ? <p>{errors.country}</p> : null}
+                    <input
                         type="text"
                         value={country}
                         onChange={(e) => setCountry(e.target.value)}
                         placeholder='Country'
                     />
+
                 </label>
                 <label>
                     Street Address
-                    <input 
+                    {submit && Object.values(errors).length && errors.address ? <p>{errors.address}</p> : null}
+                    <input
                         type="text"
                         value={address}
                         onChange={(e) => setAddress(e.target.value)}
@@ -69,7 +91,8 @@ export default function AddSpotForm() {
                 </label>
                 <label>
                     City
-                    <input 
+                    {submit && Object.values(errors).length && errors.city ? <p>{errors.city}</p> : null}
+                    <input
                         type="text"
                         value={city}
                         onChange={(e) => setCity(e.target.value)}
@@ -78,7 +101,8 @@ export default function AddSpotForm() {
                 </label>
                 <label>
                     State
-                    <input 
+                    {submit && Object.values(errors).length && errors.state ? <p>{errors.state}</p> : null}
+                    <input
                         type="text"
                         value={state}
                         onChange={(e) => setState(e.target.value)}
@@ -87,7 +111,7 @@ export default function AddSpotForm() {
                 </label>
                 <label>
                     Latitude
-                    <input 
+                    <input
                         type="text"
                         value={lat}
                         onChange={(e) => setLatitude(e.target.value)}
@@ -96,7 +120,7 @@ export default function AddSpotForm() {
                 </label>
                 <label>
                     Longitude
-                    <input 
+                    <input
                         type="text"
                         value={lng}
                         onChange={(e) => setLongitude(e.target.value)}
@@ -111,70 +135,78 @@ export default function AddSpotForm() {
                         onChange={(e) => setDescription(e.target.value)}
                         placeholder='Description'
                     />
+                    {submit && Object.values(errors).length && errors.description ? <p>{errors.description}</p> : null}
                 </label>
                 <h2>Create a title for your spot</h2>
                 <h3>Catch guests' attention with a spot title that highlights what makes your place special.</h3>
                 <label>
-                    <input 
+                    <input
                         type="text"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         placeholder='Name of your spot'
                     />
+                    {submit && Object.values(errors).length && errors.name ? <p>{errors.name}</p> : null}
                 </label>
                 <h2>Set a base price for your spot</h2>
                 <h3>Catch guests' attention with a spot title that highlights what makes your place special.</h3>
                 <label>
-                    <input 
+                    <input
                         type='number'
                         value={price}
                         onChange={(e) => setPrice(e.target.value)}
                         placeholder='Price per night (USD)'
                     />
+                    {submit && Object.values(errors).length && errors.price ? <p>{errors.price}</p> : null}
                 </label>
                 <h2>Liven up your spot with photos</h2>
                 <h3>Submit a link to at least one photo to publish your spot.</h3>
-                    <label>
-                        <input 
-                            type='url'
-                            value={previewImage}
-                            onChange={(e) => setPreviewImage(e.target.value)}
-                            placeholder='Preview Image URL'
-                        />
-                    </label>
-                    <label>
-                        <input 
-                            type='url'
-                            value={spotImage1}
-                            onChange={(e) => setSpotImage1(e.target.value)}
-                            placeholder='Image URL'
-                        />
-                    </label>
-                    <label>
-                        <input 
-                            type='url'
-                            value={spotImage2}
-                            onChange={(e) => setSpotImage2(e.target.value)}
-                            placeholder='Image URL'
-                        />
-                    </label>
-                    <label>
-                        <input 
-                            type='url'
-                            value={spotImage3}
-                            onChange={(e) => setSpotImage3(e.target.value)}
-                            placeholder='Image URL'
-                        />
-                    </label>
-                    <label>
-                        <input 
-                            type='url'
-                            value={spotImage4}
-                            onChange={(e) => setSpotImage4(e.target.value)}
-                            placeholder='Image URL'
-                        />
-                    </label>
-                    <button>Create Spot</button>
+                <label>
+                    <input
+                        type='url'
+                        value={previewImage}
+                        onChange={(e) => setPreviewImage(e.target.value)}
+                        placeholder='Preview Image URL'
+                    />
+                    {submit && Object.values(errors).length && errors.previewImage ? <p>{errors.previewImage}</p> : null}
+                </label>
+                <label>
+                    <input
+                        type='url'
+                        value={spotImage1}
+                        onChange={(e) => setSpotImage1(e.target.value)}
+                        placeholder='Image URL'
+                    />
+                    {submit && Object.values(errors).length && errors.image1 ? <p>{errors.image1}</p> : null}
+                </label>
+                <label>
+                    <input
+                        type='url'
+                        value={spotImage2}
+                        onChange={(e) => setSpotImage2(e.target.value)}
+                        placeholder='Image URL'
+                    />
+                    {submit && Object.values(errors).length && errors.image2 ? <p>{errors.image2}</p> : null}
+                </label>
+                <label>
+                    <input
+                        type='url'
+                        value={spotImage3}
+                        onChange={(e) => setSpotImage3(e.target.value)}
+                        placeholder='Image URL'
+                    />
+                    {submit && Object.values(errors).length && errors.image3 ? <p>{errors.image3}</p> : null}
+                </label>
+                <label>
+                    <input
+                        type='url'
+                        value={spotImage4}
+                        onChange={(e) => setSpotImage4(e.target.value)}
+                        placeholder='Image URL'
+                    />
+                    {submit && Object.values(errors).length && errors.image3 ? <p>{errors.image3}</p> : null}
+                </label>
+                <button>Create Spot</button>
             </form>
         </div>
     )
