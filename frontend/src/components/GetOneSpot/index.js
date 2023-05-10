@@ -8,11 +8,11 @@ export default function GetOneSpot() {
     const dispatch = useDispatch()
     const spot = useSelector(state => state.spots.singleSpot)
 
-    
+
     useEffect(() => {
         dispatch(findOneSpot(id))
     }, [dispatch])
-    
+
     if (!Object.values(spot).length) return null
 
     return (
@@ -34,14 +34,21 @@ export default function GetOneSpot() {
                         <div>
                             ${spot.price} night
                         </div>
-                        <div>
+                        {spot.numReviews ? (
                             <div>
-                                <i className="fa-solid fa-star"></i>{spot.avgStarRating}
+                                <div>
+                                    <i className="fa-solid fa-star"></i>
+                                    {spot.avgStarRating}
+                                </div>
+                                <div>
+                                    {spot.numReviews} reviews
+                                </div>
                             </div>
+                        ) : (
                             <div>
-                                {spot.numReviews} reviews
+                                <i className="fa-solid fa-star"></i> New
                             </div>
-                        </div>
+                        )}
                     </div>
                     <div>
                         <button>Reserve</button>
