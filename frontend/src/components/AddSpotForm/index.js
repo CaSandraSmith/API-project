@@ -38,8 +38,8 @@ export default function AddSpotForm() {
 
         let validationErrors = {}
         if (description.length < 30) validationErrors.description = "Description needs a minimum of 30 characters"
-
         if (!previewImage) validationErrors.previewImage = "Preview image is required."
+        if (!name) validationErrors.name = "Name is required"
 
         for (let i = 0; i < images.length; i++) {
             let pics = images[i]
@@ -52,19 +52,13 @@ export default function AddSpotForm() {
             }
         }
 
-        if (Object.values(validationErrors).length) {
-            setErrors(validationErrors)
-        }
-        let newSpot
-        newSpot = await dispatch(createSpot(spot, images))
+        let newSpot = await dispatch(createSpot(spot, images, validationErrors))
 
-        //BUG: this doesn't work for new spots that have errors
-        console.log("newSpot", newSpot)
-        // if (newSpot.errors) {
-        //     return
-        // } else {
-        //     history.push(`/spots/${newSpot.id}`)
-        // }
+        if (newSpot.errors) {
+            return setErrors(newSpot.errors)
+        } else {
+            history.push(`/spots/${newSpot.id}`)
+        }
     }
 
     return (
