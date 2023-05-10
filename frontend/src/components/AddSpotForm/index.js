@@ -117,7 +117,7 @@ export default function AddSpotForm() {
                 <label>
                     Latitude
                     <input
-                        type="text"
+                        type="number"
                         value={lat}
                         onChange={(e) => setLatitude(e.target.value)}
                         placeholder='Latitude'
@@ -126,7 +126,7 @@ export default function AddSpotForm() {
                 <label>
                     Longitude
                     <input
-                        type="text"
+                        type="number"
                         value={lng}
                         onChange={(e) => setLongitude(e.target.value)}
                         placeholder='Longitude'
