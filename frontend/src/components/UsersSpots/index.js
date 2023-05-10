@@ -11,7 +11,7 @@ export default function UsersSpots({ spot }) {
     // const onClick = (spotId) => {
     //     setModalContent(<DeleteSpotModal spotId={spotId}/>)
     // }
-    console.log(spot)
+
     return (
         <div>
             <img src={spot.previewImage} alt={spot.name} />
