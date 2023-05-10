@@ -1,6 +1,8 @@
 import { useHistory } from "react-router-dom";
 import DeleteSpotModal from "../DeleteSpotModal";
 import { useModal } from '../../context/Modal';
+import EditSpotForm from "../EditSpotForm";
+import { Link } from "react-router-dom";
 
 export default function UsersSpots({ spot }) {
     const history = useHistory();
@@ -9,7 +11,7 @@ export default function UsersSpots({ spot }) {
     // const onClick = (spotId) => {
     //     setModalContent(<DeleteSpotModal spotId={spotId}/>)
     // }
-
+    console.log(spot)
     return (
         <div>
             <img src={spot.previewImage} alt={spot.name} />
@@ -30,7 +32,9 @@ export default function UsersSpots({ spot }) {
                 </div>
             </div>
             <div>
-                <button onClick={() => history.push(`/spots/${spot.id}/edit`)}>Update</button>
+                <Link to={`/spots/${spot.id}/edit`} number={1}>
+                    <button>Update</button>
+                </Link>
                 <button >Delete</button>
                 {/* <button onClick={onClick(spot.id)}>Delete</button> */}
             </div>

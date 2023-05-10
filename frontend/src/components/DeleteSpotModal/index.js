@@ -9,17 +9,17 @@ export default function DeleteSpotModal() {
   const { setModalContent, setOnModalClose, closeModal } = useModal();
 
 
-  const confirmDelete = (e) => {
-    e.preventDefault();
-    // return dispatch()
-    //   .then(closeModal)
-  };
+  // const confirmDelete = (e) => {
+  //   e.preventDefault();
+  //   return dispatch(deleteASpot(spotId))
+  //     .then(closeModal)
+  // };
 
   return (
     <>
       <h1>Confirm Delete</h1>
       <h2>Are you sure you want to remove this spot from the listings?</h2>
-      <button onClick={confirmDelete}>Yes (Delete Spot)</button>
+      <button >Yes (Delete Spot)</button>
       <button onClick={closeModal}>No (Keep Spot)</button>
     </>
   );
