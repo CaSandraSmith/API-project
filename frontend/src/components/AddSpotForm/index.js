@@ -32,12 +32,15 @@ export default function AddSpotForm() {
         if(spotImage3) images.push({preview: false, url: spotImage3});
         if(spotImage4) images.push({preview: false, url: spotImage4});
 
-        let newSpot = await dispatch(createSpot(spot, images))
-        if (newSpot.errors) {
-            console.log(newSpot)
-        } else {
-            history.push(`/spots/${newSpot.id}`)
-        }
+        const newSpot = await dispatch(createSpot(spot, images))
+        
+        //BUG: this doesn't work for new spots that have errors
+        console.log("newSpot", newSpot)
+        // if (newSpot.errors) {
+        //     return
+        // } else {
+        //     history.push(`/spots/${newSpot.id}`)
+        // }
     }
 
     return (

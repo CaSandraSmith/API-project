@@ -36,15 +36,19 @@ export const findOneSpot = (spotId) => async (dispatch) => {
 export const createSpot = (spot, images) => async (dispatch) => {
     if (!spot.lat) spot.lat = 1
     if (!spot.lng) spot.lng = 1
+
     const res = await csrfFetch('/api/spots', {
         method: 'POST',
         body: JSON.stringify(spot)
+    }).catch(async (error) => {
+        const err = await error.json();
+        return await err
     })
-    console.log(res)
+
     if (res.ok) {
         let newSpot = await res.json()
 
-        images.forEach(async(pic) => {
+        images.forEach(async (pic) => {
             await csrfFetch(`/api/spots/${newSpot.id}/images`, {
                 method: 'POST',
                 body: JSON.stringify(pic)
@@ -53,10 +57,9 @@ export const createSpot = (spot, images) => async (dispatch) => {
 
         dispatch(makeNewSpot(newSpot))
         return newSpot
-    } else {
-        let errs = await res.json()
-        return errs
     }
+
+
 }
 
 
@@ -64,21 +67,21 @@ const initialState = { allSpots: {}, singleSpot: {} };
 
 const spotReducer = (state = initialState, action) => {
     let newState
-  switch (action.type) {
-    case CREATE_SPOT:
-        newState = {...state, allSpots: {...state.allSpots, [action.spot.id]: action.spot}}
-        return newState
-    case GET_SPOTS:
-        newState = {}
-        action.spots.forEach(spot => {
-            newState[spot.id] = spot
-        });
-        return {...state, allSpots: {...newState}};
-    case GET_SPOT:
-        return {...state, singleSpot: {...action.spot}}
-    default:
-      return state;
-  }
+    switch (action.type) {
+        case CREATE_SPOT:
+            newState = { ...state, allSpots: { ...state.allSpots, [action.spot.id]: action.spot } }
+            return newState
+        case GET_SPOTS:
+            newState = {}
+            action.spots.forEach(spot => {
+                newState[spot.id] = spot
+            });
+            return { ...state, allSpots: { ...newState } };
+        case GET_SPOT:
+            return { ...state, singleSpot: { ...action.spot } }
+        default:
+            return state;
+    }
 };
 
 export default spotReducer;
