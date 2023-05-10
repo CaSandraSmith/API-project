@@ -42,7 +42,8 @@ export const createSpot = (spot, images) => async (dispatch) => {
         body: JSON.stringify(spot)
     }).catch(async (error) => {
         const err = await error.json();
-        return await err
+        console.log("err", err)
+        return err
     })
 
     if (res.ok) {
