@@ -7,10 +7,10 @@ const getReviews = (reviews) => ({
     reviews: reviews.Reviews
 })
 
-const getReviewsBySpotId = (spotId) => async (dispatch) => {
+export const getReviewsBySpotId = (spotId) => async (dispatch) => {
     const res = await csrfFetch(`/api/spots/${spotId}/reviews`)
     const reviews = await res.json()
-    dispatch(getReviews(reviews))
+    return dispatch(getReviews(reviews))
 }
 const initialState = {spot: {}, user: {}}
 

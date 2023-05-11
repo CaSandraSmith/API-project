@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { findOneSpot } from '../../store/spots';
+import IndividualSpotReviews from '../IndividualSpotReviews';
 
 export default function GetOneSpot() {
     const { id } = useParams();
@@ -54,6 +55,9 @@ export default function GetOneSpot() {
                         <button>Reserve</button>
                     </div>
                 </div>
+            </div>
+            <div>
+                <IndividualSpotReviews spot={spot}/>
             </div>
         </div>
     )

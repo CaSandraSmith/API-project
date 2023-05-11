@@ -48,7 +48,6 @@ export const loadSpots = () => async (dispatch) => {
 export const findOneSpot = (spotId) => async (dispatch) => {
     const res = await csrfFetch(`/api/spots/${spotId}`)
     const spot = await res.json();
-    console.log("spot", spot)
     dispatch(findSpot(spot))
 }
 
@@ -126,12 +125,8 @@ const spotReducer = (state = initialState, action) => {
             newState5.allSpots[action.spot.id] = action.spot;
             return newState5
         case DELETE_SPOT:
-            console.log("state" , state)
-            let newState = { ...state }
-            console.log("state before", newState)
-            console.log(action.spotId)
+            let newState = { ...state, singleSpot: {...state.singleSpot}, allSpots: {...state.allSpots}, currentUserSpots: {...state.currentUserSpots} }
             delete newState.currentUserSpots[action.spotId]
-            console.log("state after", newState)
             return newState;
         case USERS_SPOTS:
             let newState1 = {}
