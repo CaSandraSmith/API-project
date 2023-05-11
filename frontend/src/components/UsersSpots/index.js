@@ -8,7 +8,7 @@ export default function UsersSpots({ spot }) {
 
     const onClick = () => {
         setModalContent(<DeleteSpotModal spot={spot}/>);
-      };
+    };
 
     return (
         <div>
