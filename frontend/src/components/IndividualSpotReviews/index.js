@@ -23,11 +23,17 @@ export default function IndividualSpotReviews({ spot }) {
     }
     
     useEffect(() => {
+        console.log("spotId", spot.id)
         dispatch(getReviewsBySpotId(spot.id))
         setLoaded(true)
     }, [dispatch]);
 
+    console.log("loaded in open", loaded)
+    console.log("reviews in open", reviews)
+
     if (loaded) {
+        console.log("loaded", loaded)
+        console.log("reviews after loaded", reviews)
         //logged out
         if (!user) return <LoggedOut spot={spot} reviews={reviews}/>
         //logged in but can't post review for some reason

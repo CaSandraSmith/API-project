@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { findOneSpot } from '../../store/spots';
 import IndividualSpotReviews from '../IndividualSpotReviews';
 
@@ -8,14 +8,16 @@ export default function GetOneSpot() {
     const { id } = useParams();
     const dispatch = useDispatch()
     const spot = useSelector(state => state.spots.singleSpot)
+    const [loaded, setLoaded] = useState(false)
 
 
     useEffect(() => {
         dispatch(findOneSpot(id))
+        setLoaded(true)
     }, [dispatch])
 
     if (!Object.values(spot).length) return null
-
+    if (!loaded) return <h1>Loading ...</h1>
     return (
         <div>
             <div>
