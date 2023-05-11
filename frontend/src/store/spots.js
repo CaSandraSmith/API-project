@@ -33,9 +33,9 @@ const updateSpot = (spot) => ({
     spot
 })
 
-const deleteSpot = (spot) => ({
+const deleteSpot = (spotId) => ({
     type: DELETE_SPOT,
-    spot
+    spotId
 })
 
 //thunk action creators
@@ -92,7 +92,7 @@ export const deleteASpot = (spotId) => async (dispatch) => {
         method: 'DELETE'
     })
     if (res.ok) {
-        dispatch(deleteSpot)
+        dispatch(deleteSpot(spotId))
     }
 }
 
@@ -126,8 +126,12 @@ const spotReducer = (state = initialState, action) => {
             newState5.allSpots[action.spot.id] = action.spot;
             return newState5
         case DELETE_SPOT:
+            console.log("state" , state)
             let newState = { ...state }
-            delete newState[action.spot.id]
+            console.log("state before", newState)
+            console.log(action.spotId)
+            delete newState.currentUserSpots[action.spotId]
+            console.log("state after", newState)
             return newState;
         case USERS_SPOTS:
             let newState1 = {}

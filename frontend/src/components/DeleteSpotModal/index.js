@@ -9,6 +9,7 @@ export default function DeleteSpotModal({spot}) {
   const { closeModal } = useModal();
 
   const confirmDelete = (e) => {
+    e.preventDefault();
     dispatch(deleteASpot(spot.id)).then(closeModal)
   };
 

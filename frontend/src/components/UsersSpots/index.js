@@ -1,7 +1,7 @@
+import { Link } from "react-router-dom";
 import DeleteSpotModal from "../DeleteSpotModal";
 import { useModal } from '../../context/Modal';
 import EditSpotForm from "../EditSpotForm";
-import { Link } from "react-router-dom";
 
 export default function UsersSpots({ spot }) {
     const { setModalContent } = useModal();
