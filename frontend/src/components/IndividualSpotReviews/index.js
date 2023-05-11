@@ -28,42 +28,15 @@ export default function IndividualSpotReviews({ spot }) {
     }, [dispatch]);
 
     if (loaded) {
+        //logged out
         if (!user) return <LoggedOut spot={spot} reviews={reviews}/>
+        //logged in but can't post review for some reason
         if(!validateUser(reviews)) return <LoggedInCantReview spot={spot} reviews={reviews}/>
+        //logged in and there are no reviews
         if (!Object.values(reviews).length) return <LoggedInNoReviews spot={spot} />
+        //logged in, there are reviews, but they can still post
+        return <LoggedInPostReview spot={spot} reviews={reviews}/>
     } else {
         return <h1>Loading ...</h1>
     }
-
-    return (
-        <div>
-            {/* {!validateUser && <} */}
-            {/* {spot.numReviews ? (
-                <div>
-                    <div>
-                        <i className="fa-solid fa-star"></i>
-                        {formatRating(spot.avgStarRating)}
-                    </div>
-                    <div>
-                        {spot.numReviews} reviews
-                    </div>
-                    {user && validateUser(reviews) ? 
-                    <div>
-                        <button>Post Your Review</button>                         
-                    </div>
-                    : null}
-                </div>
-            ) : (
-                <div>
-                    <i className="fa-solid fa-star"></i> New
-                    {user && validateUser(reviews) ? 
-                    <div>
-                        <button>Post Your Review</button> 
-                        <h4>Be the frst to post a review!</h4>
-                    </div>
-                    : null}
-                </div>
-            )} */}
-        </div>
-    )
 }

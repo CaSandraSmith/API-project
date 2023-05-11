@@ -21,7 +21,7 @@ const reviewReducer = (state = initialState, action) => {
             action.reviews.forEach(rev => {
                 newState[rev.id] = rev
             });
-            return {...state, spot: {...newState}}
+            return {...state, user: {...state.user}, spot: {...newState}}
         default:
             return state
     }
