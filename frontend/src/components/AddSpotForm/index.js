@@ -37,22 +37,30 @@ export default function AddSpotForm() {
         if (spotImage4) images.push({ img: 4, preview: false, url: spotImage4 });
 
         let validationErrors = {}
+        if (!country) validationErrors.country = "Country is required"
+        if (!address) validationErrors.address = "Address is required"
+        if (!city) validationErrors.city = "City is required"
+        if (!state) validationErrors.state = "State is required"
         if (description.length < 30) validationErrors.description = "Description needs a minimum of 30 characters"
-        if (!previewImage) validationErrors.previewImage = "Preview image is required."
         if (!name) validationErrors.name = "Name is required"
+        if (!price) validationErrors.price = "Price is required"
+        if (!previewImage) validationErrors.previewImage = "Preview image is required."
 
         for (let i = 0; i < images.length; i++) {
             let pics = images[i]
             if (!pics.url.endsWith(".png") && !pics.url.endsWith(".jpg") && !pics.url.endsWith(".jpeg") && pics.img !== 0) {
-                validationErrors[`image${pics.img}`] = `Image URL
-                needs to end in png or jpg (or jpeg)`
+                validationErrors[`image${pics.img}`] = `Image URL must end in .png, .jpg, or .jpeg`
             } else if (!pics.url.endsWith(".png") && !pics.url.endsWith(".jpg") && !pics.url.endsWith(".jpeg") && pics.img === 0 && !validationErrors.previewImage) {
-                validationErrors.previewImage = `Image URL
-                needs to end in png or jpg (or jpeg)`
+                validationErrors.previewImage = `Image URL must end in .png, .jpg, or .jpeg`
             }
         }
 
-        let newSpot = await dispatch(createSpot(spot, images, validationErrors))
+        if (Object.values(validationErrors).length) {
+            setErrors(validationErrors)
+            return
+        }
+
+        let newSpot = await dispatch(createSpot(spot, images))
 
         if (newSpot.errors) {
             return setErrors(newSpot.errors)

@@ -52,7 +52,7 @@ export const findOneSpot = (spotId) => async (dispatch) => {
     dispatch(findSpot(spot))
 }
 
-export const createSpot = (spot, images, errors) => async (dispatch) => {
+export const createSpot = (spot, images) => async (dispatch) => {
     if (!spot.lat) spot.lat = 1
     if (!spot.lng) spot.lng = 1
 
@@ -64,7 +64,7 @@ export const createSpot = (spot, images, errors) => async (dispatch) => {
         return err
     })
 
-    if (res.ok && !Object.values(errors).length) {
+    if (res.ok) {
         let newSpot = await res.json()
 
         for (let i = 0; i < images.length; i++) {
@@ -78,7 +78,7 @@ export const createSpot = (spot, images, errors) => async (dispatch) => {
         dispatch(makeNewSpot(newSpot))
         return newSpot
     } else {
-        return { errors: { ...res.errors, ...errors } }
+        return res
     }
 }
 export const getUsersSpots = () => async (dispatch) => {
@@ -96,7 +96,7 @@ export const deleteASpot = (spotId) => async (dispatch) => {
     }
 }
 
-export const updateASpot = (spot, errors) => async (dispatch) => {
+export const updateASpot = (spot) => async (dispatch) => {
     if (!spot.lat) spot.lat = 1
     if (!spot.lng) spot.lng = 1
 
