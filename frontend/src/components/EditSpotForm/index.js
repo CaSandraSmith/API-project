@@ -25,13 +25,22 @@ export default function EditSpotForm() {
         setSubmit(true)
         setErrors({})
 
-        let spot = { id, address, city, state, country, name, description, price };
-
         let validationErrors = {}
+        if (!country) validationErrors.country = "Country is required"
+        if (!address) validationErrors.address = "Address is required"
+        if (!city) validationErrors.city = "City is required"
+        if (!state) validationErrors.state = "State is required"
         if (description.length < 30) validationErrors.description = "Description needs a minimum of 30 characters"
         if (!name) validationErrors.name = "Name is required"
+        if (!price) validationErrors.price = "Price is required"
 
-        let updatedSpot = await dispatch(updateASpot(spot, validationErrors))
+        if (Object.values(validationErrors).length) {
+            setErrors(validationErrors)
+            return
+        }
+
+        let spot = { id, address, city, state, country, name, description, price };
+        let updatedSpot = await dispatch(updateASpot(spot))
 
         if (updatedSpot.errors) {
             return setErrors(updatedSpot.errors)

@@ -108,12 +108,12 @@ export const updateASpot = (spot, errors) => async (dispatch) => {
         return err
     })
 
-    if (res.ok && !Object.values(errors).length) {
+    if (res.ok) {
         let updatedSpot = await res.json()
         dispatch(updateSpot(updatedSpot))
         return updatedSpot
     }else {
-        return { errors: { ...res.errors, ...errors } }
+        return res
     }
 }
 
@@ -124,7 +124,6 @@ const spotReducer = (state = initialState, action) => {
         case UPDATE_SPOT:
             let newState5 = {...state}
             newState5.allSpots[action.spot.id] = action.spot;
-            console.log(newState5)
             return newState5
         case DELETE_SPOT:
             let newState = { ...state }
