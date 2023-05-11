@@ -9,7 +9,7 @@ import LoggedOut from "./LoggedOut";
 export default function IndividualSpotReviews() {
     const dispatch = useDispatch();
     const [loaded, setLoaded] = useState(false);
-    const spot = useSelector(state => state.spots.singleSpot.id)
+    const spot = useSelector(state => state.spots.singleSpot)
     const reviews = useSelector(state => state.reviews.spot);
     const user = useSelector(state => state.session.user)
     
@@ -24,17 +24,11 @@ export default function IndividualSpotReviews() {
     }
     
     useEffect(() => {
-        console.log("spotId", spot.id)
         dispatch(getReviewsBySpotId(spot.id))
         setLoaded(true)
-    }, [dispatch]);
-
-    console.log("loaded in open", loaded)
-    console.log("reviews in open", reviews)
+    }, [dispatch, spot]);
 
     if (loaded) {
-        console.log("loaded", loaded)
-        console.log("reviews after loaded", reviews)
         //logged out
         if (!user) return <LoggedOut spot={spot} reviews={reviews}/>
         //logged in but can't post review for some reason

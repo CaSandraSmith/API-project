@@ -3,6 +3,19 @@ import { useState } from "react"
 export default function PostReviewModal({ spotId }) {
     const [description, setDescription] = useState("");
     const [stars, setStars] = useState("")
+
+    let checkReview = () => {
+        if (description.length < 10 || !stars) {
+            return true
+        }
+        // console
+        return false
+    }
+
+    function handleSubmit(e) {
+        e.prevemtDefault()
+    }
+
     return (
         <div>
             <h1>How was your stay?</h1>
@@ -14,7 +27,8 @@ export default function PostReviewModal({ spotId }) {
                         placeholder="Leave your review here..."
                     />
                 </label>
-                <button>Submit Your Review</button>
+
+                <button onClick={handleSubmit} disabled={true}>Submit Your Review</button>
             </form>
         </div>
     )

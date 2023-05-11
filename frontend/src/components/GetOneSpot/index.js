@@ -59,7 +59,7 @@ export default function GetOneSpot() {
                 </div>
             </div>
             <div>
-                <IndividualSpotReviews spot={spot}/>
+                <IndividualSpotReviews />
             </div>
         </div>
     )

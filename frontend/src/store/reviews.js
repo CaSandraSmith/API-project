@@ -8,10 +8,8 @@ const getReviews = (reviews) => ({
 })
 
 export const getReviewsBySpotId = (spotId) => async (dispatch) => {
-    console.log("made it")
     const res = await csrfFetch(`/api/spots/${spotId}/reviews`)
     const reviews = await res.json()
-    console.log("reviews in reducer", reviews)
     dispatch(getReviews(reviews))
 }
 const initialState = {spot: {}, user: {}}
