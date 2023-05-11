@@ -6,9 +6,10 @@ import LoggedInNoReviews from "./LoggedInNoReviews";
 import LoggedInPostReview from "./LoggedInPostReview";
 import LoggedOut from "./LoggedOut";
 
-export default function IndividualSpotReviews({ spot }) {
+export default function IndividualSpotReviews() {
     const dispatch = useDispatch();
-    const [loaded, setLoaded] = useState(false)
+    const [loaded, setLoaded] = useState(false);
+    const spot = useSelector(state => state.spots.singleSpot.id)
     const reviews = useSelector(state => state.reviews.spot);
     const user = useSelector(state => state.session.user)
     

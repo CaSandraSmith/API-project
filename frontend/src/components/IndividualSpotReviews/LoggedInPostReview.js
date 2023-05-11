@@ -1,4 +1,8 @@
-export default function LoggedInPostReview({spot, reviews}) {
+import { useModal } from "../../context/Modal"
+import PostReviewModal from "../PostReviewModal"
+
+export default function LoggedInPostReview({ spot, reviews }) {
+    const { setModalContent } = useModal();
     console.log("logged in and can post review")
     const reviewArray = Object.values(reviews)
 
@@ -18,6 +22,10 @@ export default function LoggedInPostReview({spot, reviews}) {
         return formattedmonth + " " + year
     }
 
+    const onClick = () => {
+        setModalContent(<PostReviewModal spot={spot}/>);
+    };
+
     return (
         <div>
             <div>
@@ -30,7 +38,7 @@ export default function LoggedInPostReview({spot, reviews}) {
                 </div>
             </div>
             <div>
-                <button>Post Your Review</button>
+                <button onClick={onClick}>Post Your Review</button>
             </div>
             <div>
                 {reviewArray.map((userReview) => (
