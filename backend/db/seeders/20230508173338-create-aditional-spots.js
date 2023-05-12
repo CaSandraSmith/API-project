@@ -77,7 +77,7 @@ module.exports = {
         city: 'New York',
         state: 'NY',
         country: 'USA',
-        name: "Stark Tower",
+        name: "Avengers Tower",
         description: "Skyscraper located in the heart of Midtown Manhattan.",
         price: 500
       },
