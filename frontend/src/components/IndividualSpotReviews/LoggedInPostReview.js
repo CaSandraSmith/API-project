@@ -8,12 +8,10 @@ export default function LoggedInPostReview() {
     const spot = useSelector(state => state.spots.singleSpot);
     console.log("logged in and can post review")
     const reviewArray = Object.values(reviews)
-console.log(4)
+    const sortedArray = reviewArray.sort((a,b) => b.id - a.id)
+
     let formatRating = (rating) => {
-        let num = rating.toString()
-        if (num.length === 3) return num
-        if (num.length === 1) return `${num}.0`
-        if (num.length > 3) return `${num[0]}.${num[2]}`
+        return rating.toFixed(1);
     }
 
     function formatDate(date) {
@@ -44,7 +42,7 @@ console.log(4)
                 <button onClick={onClick}>Post Your Review</button>
             </div>
             <div>
-                {reviewArray.map((userReview) => (
+                {sortedArray.map((userReview) => (
                     <div>
                         <h4>{userReview.User.firstName}</h4>
                         <h5>{formatDate(userReview.createdAt)}</h5>

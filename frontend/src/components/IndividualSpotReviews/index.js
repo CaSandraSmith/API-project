@@ -12,7 +12,7 @@ export default function IndividualSpotReviews() {
     const spot = useSelector(state => state.spots.singleSpot);
     const reviews = useSelector(state => state.reviews.spot);
     const user = useSelector(state => state.session.user)
-    
+    console.log(2)
     let validateUser = (obj) => {
         let arr = Object.values(obj);
         if (spot.ownerId === user.id) return false

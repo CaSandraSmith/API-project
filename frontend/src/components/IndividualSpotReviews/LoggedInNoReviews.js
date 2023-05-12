@@ -7,7 +7,7 @@ export default function LoggedInNoReviews({spot}) {
     console.log("logged in no reviews")
     const [loaded, setLoaded] = useState(false)
     const { setModalContent } = useModal();
-console.log(3)
+
     useEffect(() => {
         setLoaded(true)
     }, [])

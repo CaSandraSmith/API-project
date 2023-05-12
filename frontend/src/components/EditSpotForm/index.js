@@ -101,7 +101,7 @@ export default function EditSpotForm() {
                     <textarea
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
-                        placeholder='Description'
+                        placeholder='Please write at least 30 characters'
                     />
                     {submit && Object.values(errors).length && errors.description ? <p>{errors.description}</p> : null}
                 </label>
@@ -117,7 +117,7 @@ export default function EditSpotForm() {
                     {submit && Object.values(errors).length && errors.name ? <p>{errors.name}</p> : null}
                 </label>
                 <h2>Set a base price for your spot</h2>
-                <h3>Catch guests' attention with a spot title that highlights what makes your place special.</h3>
+                <h3>Competitive pricing can help your listing stand out and rank higher in search results.</h3>
                 <label>
                     <input
                         type='number'

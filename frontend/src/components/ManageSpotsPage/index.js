@@ -16,7 +16,7 @@ export default function ManageSpots() {
     
     return (
         <div>
-            <h1>Manage Your Spots</h1>
+            <h1>Manage Spots</h1>
             <button onClick={() => history.push('/spots/new')}>Create a New Spot</button>
             <div>
                 {spots.map(spot => (
