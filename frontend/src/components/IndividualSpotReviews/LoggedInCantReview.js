@@ -1,5 +1,14 @@
-export default function LoggedInCantReview({ spot, reviews }) {
+import { useSelector } from "react-redux"
+
+export default function LoggedInCantReview() {
     console.log("logged in, but can't review")
+    const user = useSelector(state => state.session.user)
+    const reviews = useSelector(state => state.reviews.spot);
+    console.log("reviews", reviews)
+    const spot = useSelector(state => state.spots.singleSpot);
+    const spotNumReviews = useSelector(state => state.spots.singleSpot.numReviews);
+    console.log("spot", spot)
+    console.log("spotNumReviews", spotNumReviews)
     const reviewArray = Object.values(reviews)
 
     let formatRating = (rating) => {
@@ -39,6 +48,7 @@ export default function LoggedInCantReview({ spot, reviews }) {
                                 <h4>{userReview.User.firstName}</h4>
                                 <h5>{formatDate(userReview.createdAt)}</h5>
                                 <p>{userReview.review}</p>
+                                {userReview.User.id === user.id ? <button>Delete</button> : null}
                             </div>
                         ))}
                     </div>

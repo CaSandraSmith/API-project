@@ -9,10 +9,9 @@ import LoggedOut from "./LoggedOut";
 export default function IndividualSpotReviews() {
     const dispatch = useDispatch();
     const [loaded, setLoaded] = useState(false);
-    const spot = useSelector(state => state.spots.singleSpot)
+    const spot = useSelector(state => state.spots.singleSpot);
     const reviews = useSelector(state => state.reviews.spot);
     const user = useSelector(state => state.session.user)
-    
     
     let validateUser = (obj) => {
         let arr = Object.values(obj);
@@ -22,6 +21,7 @@ export default function IndividualSpotReviews() {
         }
         return true
     }
+    console.log("back to index")
     
     useEffect(() => {
         dispatch(getReviewsBySpotId(spot.id))
@@ -32,7 +32,7 @@ export default function IndividualSpotReviews() {
         //logged out
         if (!user) return <LoggedOut spot={spot} reviews={reviews}/>
         //logged in but can't post review for some reason
-        if(!validateUser(reviews)) return <LoggedInCantReview spot={spot} reviews={reviews}/>
+        if(!validateUser(reviews)) return <LoggedInCantReview spot={spot} />
         //logged in and there are no reviews
         if (!Object.values(reviews).length) return <LoggedInNoReviews spot={spot} />
         //logged in, there are reviews, but they can still post

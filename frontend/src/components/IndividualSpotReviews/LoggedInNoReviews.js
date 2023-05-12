@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
-import { useDispatch } from "react-redux"
 import { useModal } from "../../context/Modal"
+import { useSelector } from "react-redux";
 import PostReviewModal from "../PostReviewModal"
 
 export default function LoggedInNoReviews({spot}) {
