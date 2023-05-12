@@ -8,13 +8,14 @@ export default function GetOneSpot() {
     const { id } = useParams();
     const dispatch = useDispatch()
     const spot = useSelector(state => state.spots.singleSpot)
+    const reviews = useSelector(state => state.reviews.spot)
+    let num = Object.values(reviews).length
     const [loaded, setLoaded] = useState(false)
-
 
     useEffect(() => {
         dispatch(findOneSpot(id))
         setLoaded(true)
-    }, [dispatch])
+    }, [dispatch, num])
 
     if (!Object.values(spot).length) return null
     if (!loaded) return <h1>Loading ...</h1>
@@ -37,14 +38,14 @@ export default function GetOneSpot() {
                         <div>
                             ${spot.price} night
                         </div>
-                        {spot.numReviews ? (
+                        {num ? (
                             <div>
                                 <div>
                                     <i className="fa-solid fa-star"></i>
                                     {spot.avgStarRating}
                                 </div>
                                 <div>
-                                    {spot.numReviews} reviews
+                                    {num} reviews
                                 </div>
                             </div>
                         ) : (
