@@ -133,46 +133,6 @@ module.exports = {
       },
       {
         ownerId: 13,
-        address: '1787 Declration Dr',
-        city: 'Alexandria',
-        state: 'VA',
-        country: 'USA',
-        name: "Gates' Mansion",
-        description: 'Laege mansion located within 30 minute driving distance from Washington, DC.',
-        price: 335
-      },
-      {
-        ownerId: 13,
-        address: '1776 Legend Blvd',
-        city: 'Washington',
-        state: 'DC',
-        country: 'USA',
-        name: "Constitutional Condo",
-        description: 'Apartment located in the heart of Washington, DC and within walking distance from the National Archives and other prominent museums.',
-        price: 264
-      },
-      {
-        ownerId: 14,
-        address: "29 Bridal Way",
-        city: 'Flushing',
-        state: 'NY',
-        country: 'USA',
-        name: "Sylvia's Suite",
-        description: 'Stlyish pad in the midst of FLussing, Queens.',
-        price: 150
-      },
-      {
-        ownerId: 14,
-        address: '2 42nd St',
-        city: 'New York',
-        state: 'NY',
-        country: 'USA',
-        name: 'Sheffield Manor',
-        description: 'Massive manor located in Manhattan, NY.',
-        price: 350
-      },
-      {
-        ownerId: 15,
         address: '48 Star Ln',
         city: 'Seattle',
         state: 'WA',
@@ -180,6 +140,16 @@ module.exports = {
         name: 'Warrior Rest',
         description: 'Best place in the city to put your feet up and relax while also being able to partake in night life.',
         price: 148
+      },
+      {
+        ownerId: 14,
+        address: '4 Forest Rd.',
+        city: 'Kalispell',
+        state: 'MT',
+        country: 'USA',
+        name: 'Forest Hideout',
+        description: 'Hide away from the world on this property. Perfectly placed in the most remote parts of Montana.',
+        price: 130
       }
     ])
   },

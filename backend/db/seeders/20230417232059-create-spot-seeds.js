@@ -32,7 +32,7 @@ module.exports = {
         lat: 24.6782,
         lng: 30.2148,
         name: 'Mocking Jay Nest',
-        description: 'Located in the heart of London.',
+        description: 'Enjoy a nature view while gazing out of our gorgeous windows.',
         price: 160
       },
       {

@@ -11,7 +11,7 @@ module.exports = {
     options.tableName = 'Users';
     return queryInterface.bulkInsert(options, [
       {
-        firstName:'Harry',
+        firstName: 'Harry',
         lastName: 'Potter',
         email: 'voldemortsucks@hogwarts.com',
         username: 'lightningHead',
@@ -74,24 +74,17 @@ module.exports = {
         hashedPassword: bcrypt.hashSync('password')
       },
       {
-        firstName: 'Ben',
-        lastName: 'Gates',
-        email: 'historybuff@declaration.org',
-        username: 'gateslegacy',
-        hashedPassword: bcrypt.hashSync('password')
-      },
-      {
-        firstName: 'Fran',
-        lastName: 'Fine',
-        email: 'thenanny@nanny.com',
-        username: 'mrsSheffield',
-        hashedPassword: bcrypt.hashSync('password')
-      },
-      {
         firstName: 'Diana',
         lastName: 'Prince',
         email: 'amazonian@warrior.org',
         username: 'wonderwoman',
+        hashedPassword: bcrypt.hashSync('password')
+      },
+      {
+        firstName: 'Nick',
+        lastName: 'Fury',
+        email: 'exDirector@inspace.org',
+        username: 'quietlyDisappearing',
         hashedPassword: bcrypt.hashSync('password')
       }
     ], {});
@@ -101,7 +94,7 @@ module.exports = {
     options.tableName = 'Users';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-      username: { [Op.in]: ['lightningHead', 'captainUSA', 'notBatman', 'timeLord', 'DarkPhoenix', 'ironman', 'spiderfan', 'privateeye', 'captaimMarvel', 'gateslegacy', 'mrsSheffield', 'wonderwoman'] }
+      username: { [Op.in]: ['lightningHead', 'captainUSA', 'notBatman', 'timeLord', 'DarkPhoenix', 'ironman', 'spiderfan', 'privateeye', 'captaimMarvel', 'wonderwoman', 'quietlyDisappearing'] }
     }, {});
   }
 };
