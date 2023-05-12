@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { getUsersSpots } from '../../store/spots';
+import { clearUserSpots } from '../../store/spots'
 import UsersSpots from "../UsersSpots";
 
 export default function ManageSpots() {
@@ -12,6 +13,7 @@ export default function ManageSpots() {
 
     useEffect(() => {
         dispatch(getUsersSpots())
+        return (() => dispatch(clearUserSpots()))
     }, [dispatch])
     
     return (

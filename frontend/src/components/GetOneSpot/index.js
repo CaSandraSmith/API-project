@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { findOneSpot } from '../../store/spots';
 import IndividualSpotReviews from '../IndividualSpotReviews';
+import { clearSingleSpot } from '../../store/spots';
 
 export default function GetOneSpot() {
     const { id } = useParams();
@@ -10,15 +11,13 @@ export default function GetOneSpot() {
     const spot = useSelector(state => state.spots.singleSpot)
     const reviews = useSelector(state => state.reviews.spot)
     let num = Object.values(reviews).length
-    const [loaded, setLoaded] = useState(false)
-    console.log(1)
     useEffect(() => {
         dispatch(findOneSpot(id))
-        setLoaded(true)
+        return (() => dispatch(clearSingleSpot()))
     }, [dispatch, num])
 
     if (!Object.values(spot).length) return null
-    if (!loaded) return <h1>Loading ...</h1>
+
     return (
         <div>
             <div>

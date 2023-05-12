@@ -6,6 +6,8 @@ const CREATE_SPOT = "spot/postSpot"
 const USERS_SPOTS = "spots/currentUser"
 const UPDATE_SPOT = "spots/updateSpot"
 const DELETE_SPOT = "spot/delete"
+const CLEAR_SPOT = "spot/clearSingleSpotState"
+const CLEAR_USER_SPOTS = "spot/clearUserSpots"
 
 //action creators
 const loadAllSpots = (spots) => ({
@@ -36,6 +38,14 @@ const updateSpot = (spot) => ({
 const deleteSpot = (spotId) => ({
     type: DELETE_SPOT,
     spotId
+})
+
+export const clearSingleSpot = () => ({
+    type: CLEAR_SPOT
+})
+
+export const clearUserSpots = () => ({
+    type: CLEAR_USER_SPOTS
 })
 
 //thunk action creators
@@ -120,6 +130,11 @@ const initialState = { allSpots: {}, singleSpot: {}, currentUserSpots: {} };
 
 const spotReducer = (state = initialState, action) => {
     switch (action.type) {
+        case CLEAR_USER_SPOTS:
+            return {...state, allSpots: {...state.allSpots}, singleSpot: {}, currentUserSpots:{}}
+        case CLEAR_SPOT:
+            let newState7 = {...state, allSpots: {...state.allSpots}, singleSpot: {}}
+            return newState7
         case UPDATE_SPOT:
             let newState5 = {...state}
             newState5.allSpots[action.spot.id] = action.spot;
