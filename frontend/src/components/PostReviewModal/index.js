@@ -1,30 +1,46 @@
 import { useState } from "react"
+import { useDispatch } from "react-redux";
+import { createReview } from "../../store/reviews";
+import { useModal } from "../../context/Modal";
 import "./PostReviewModal.css"
 
-export default function PostReviewModal({ spotId }) {
-    let [description, setDescription] = useState("");
+export default function PostReviewModal({ spot }) {
+    const dispatch = useDispatch();
+    const { closeModal } = useModal();
+    let [review, setReview] = useState("");
     let [stars, setStars] = useState(0);
     let [activeStars, setActiveStars] = useState(0);
+    const [errors, setErrors] = useState({});
 
     let checkReview = () => {
-        if (description.length < 10 || !stars) {
+        if (review.length < 10 || !stars) {
             return true
         }
         return false
     }
 
-    function handleSubmit(e) {
+    async function handleSubmit (e) {
+        setErrors({})
         e.preventDefault()
+        let reviewData = {stars, review}
+        let reviewResponse = await dispatch(createReview(reviewData, spot.id))
+
+        if (reviewResponse.errors) setErrors(reviewResponse.errors)
+        else {
+            closeModal()
+        }
     }
 
     return (
         <div>
             <h1>How was your stay?</h1>
+            {errors.review ? <h2>{errors.review}</h2> : null}
+            {errors.stars ? <h2>{errors.stars}</h2> : null}
             <form>
                 <label>
                     <textarea
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
+                        value={review}
+                        onChange={(e) => setReview(e.target.value)}
                         placeholder="Leave your review here..."
                     />
                 </label>

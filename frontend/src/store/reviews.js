@@ -1,13 +1,35 @@
 import { csrfFetch } from "./csrf";
 
 const SPOT_REVIEWS = "reviews/getSpotReviews"
+const CREATE_REVIEWS = "reviews/createNewReview"
 
 const getReviews = (reviews) => ({
     type: SPOT_REVIEWS,
     reviews: reviews.Reviews
 })
 
-// export createReview = (review)
+const postNewReview = (review) => ({
+    type: CREATE_REVIEWS,
+    review
+})
+
+export const createReview = (review, spotId) => async(dispatch) => {
+    const res = await csrfFetch(`/api/spots/${spotId}/reviews`, {
+        method: 'POST',
+        body: JSON.stringify(review)
+    }).catch(async(e) => {
+        const errs = await e.json();
+        return errs
+    });
+    console.log("hello")
+    if (res.ok) {
+        let newReview = await res.json()
+        dispatch(postNewReview)
+        return newReview
+    } else {
+        return res
+    }
+}
 
 export const getReviewsBySpotId = (spotId) => async (dispatch) => {
     const res = await csrfFetch(`/api/spots/${spotId}/reviews`)
@@ -18,6 +40,8 @@ const initialState = {spot: {}, user: {}}
 
 const reviewReducer = (state = initialState, action) => {
     switch (action.type) {
+        case CREATE_REVIEWS:
+            return {...state, spot: {...state.spot, [action.review.id]: action.review}, user: {...state.user}}
         case SPOT_REVIEWS:
             let newState = {};
             action.reviews.forEach(rev => {
