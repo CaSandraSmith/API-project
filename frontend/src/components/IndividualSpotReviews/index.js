@@ -21,7 +21,6 @@ export default function IndividualSpotReviews() {
         }
         return true
     }
-    console.log("back to index")
     
     useEffect(() => {
         dispatch(getReviewsBySpotId(spot.id))

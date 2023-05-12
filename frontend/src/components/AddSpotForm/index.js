@@ -136,7 +136,7 @@ export default function AddSpotForm() {
                     {submit && Object.values(errors).length && errors.name ? <p>{errors.name}</p> : null}
                 </label>
                 <h2>Set a base price for your spot</h2>
-                <h3>Catch guests' attention with a spot title that highlights what makes your place special.</h3>
+                <h3>Competitive pricing can help your listing stand out and rank higher in search results.</h3>
                 <label>
                     <input
                         type='number'

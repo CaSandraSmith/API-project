@@ -8,7 +8,7 @@ export default function LoggedInPostReview() {
     const spot = useSelector(state => state.spots.singleSpot);
     console.log("logged in and can post review")
     const reviewArray = Object.values(reviews)
-
+console.log(4)
     let formatRating = (rating) => {
         let num = rating.toString()
         if (num.length === 3) return num

@@ -11,7 +11,7 @@ export default function GetOneSpot() {
     const reviews = useSelector(state => state.reviews.spot)
     let num = Object.values(reviews).length
     const [loaded, setLoaded] = useState(false)
-
+    console.log(1)
     useEffect(() => {
         dispatch(findOneSpot(id))
         setLoaded(true)
