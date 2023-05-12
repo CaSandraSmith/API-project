@@ -112,16 +112,6 @@ module.exports = {
         price: 200
       },
       {
-        ownerId: 11,
-        address: '23 Landed Blvd',
-        city: 'Los Angeles',
-        state: 'CA',
-        country: 'USA',
-        name: 'Space Pad',
-        description: "Live like you're in outerspace.",
-        price: 250
-      },
-      {
         ownerId: 12,
         address: '48 Star Ln',
         city: 'Seattle',

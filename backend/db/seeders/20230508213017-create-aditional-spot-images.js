@@ -243,52 +243,102 @@ module.exports = {
       },
       {
         spotId: 12,
-        url: '',
+        url: 'https://www.completehome.com.au/wp-content/uploads/2015/07/Hgate_library_3_high_res1.jpg',
         preview: true
       },
       {
         spotId: 12,
-        url: '',
+        url: 'https://www.thenordroom.com/wp-content/uploads/2022/04/dark-blue-bedroom-niches-nordrom.jpg',
         preview: false
       },
       {
         spotId: 12,
-        url: '',
+        url: 'https://www.brownstoner.com/wp-content/uploads/2013/03/british-style-031913.jpg',
         preview: false
       },
       {
         spotId: 12,
-        url: '',
+        url: 'https://s.wsj.net/public/resources/images/OB-YX072_1hodsu_H_20130913044202.jpg',
         preview: false
       },
       {
         spotId: 12,
-        url: '',
+        url: 'https://www.period-homes.com/.image/c_fit%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_620/MTQ0NjI0ODQwMTcyMjUwNTMx/burke-residence-nyc-9.jpg',
         preview: false
       },
       {
         spotId: 13,
-        url: '',
+        url: 'https://www.bostonmagazine.com/wp-content/uploads/sites/2/2018/11/cambridge-mansion-1.jpg',
         preview: true
       },
       {
         spotId: 13,
-        url: '',
+        url: 'https://i.pinimg.com/736x/36/3d/84/363d84a29f4cd4e9b087dcb916d1001f.jpg',
         preview: false
       },
       {
         spotId: 13,
-        url: '',
+        url: 'https://www.bostondesignguide.com/sites/default/files/LLL.kitchen_0.jpg',
         preview: false
       },
       {
         spotId: 13,
-        url: '',
+        url: 'https://i.pinimg.com/550x/17/12/61/171261a4bbec3abe9045edaca28e18e6.jpg',
         preview: false
       },
       {
         spotId: 13,
-        url: '',
+        url: 'https://st.hzcdn.com/simgs/pictures/bedrooms/charming-cape-cod-renovation-knight-architects-llc-img~35412cf2009932a8_14-4523-1-bb07fff.jpg',
+        preview: false
+      },
+      {
+        spotId: 14,
+        url: 'https://cyreneseattle.com/assets/images/cache/banner_floorplans1-39e893e450d587f882bcea0c8636d689.jpg',
+        preview: true
+      },
+      {
+        spotId: 14,
+        url: 'https://images.squarespace-cdn.com/content/v1/5c4f405925bf02bc0e2e1b21/1552833246175-7XMVH2ITBTOBV79S4532/TWO_BED.jpg',
+        preview: false
+      },
+      {
+        spotId: 14,
+        url: 'https://lexingtonseattle.com/wp-content/uploads/Lexington-4-of-51-1.jpg',
+        preview: false
+      },
+      {
+        spotId: 14,
+        url: 'https://images1.apartments.com/i2/XR3X-qOU4gkCSCc536d--F-Q_sQRdH14pg72FGtxAy4/111/cyrene-seattle-wa-primary-photo.jpg',
+        preview: false
+      },
+      {
+        spotId: 14,
+        url: 'https://res.cloudinary.com/sagacity/image/upload/c_crop,h_3237,w_3750,x_0,y_1763/c_limit,dpr_auto,f_auto,fl_lossy,q_80,w_1080/NQS_MS_LENORA_View_08_Northwest_Deck_skbsyz.jpg',
+        preview: false
+      },
+      {
+        spotId: 15,
+        url: 'https://sineathconstruction.com/wp-content/uploads/2020/08/cabin-woods-view-sineath.jpg',
+        preview: true
+      },
+      {
+        spotId: 15,
+        url: 'https://cdn.onekindesign.com/wp-content/uploads/2016/12/Log-Cabin-Style-Bedrooms-01-1-Kindesign.jpg',
+        preview: false
+      },
+      {
+        spotId: 15,
+        url: 'https://www.decorilla.com/online-decorating/wp-content/uploads/2020/08/Spacious-contemporary-and-modern-cabin-interior-design-for-an-open-plan-living-and-dining-area.jpg',
+        preview: false
+      },
+      {
+        spotId: 15,
+        url: 'https://www.decorilla.com/online-decorating/wp-content/uploads/2022/02/log-cabin-living-room-interior-design-Edwards-Smith.jpg',
+        preview: false
+      },
+      {
+        spotId: 15,
+        url: 'https://www.visitmysmokies.com/wp-content/uploads/2020/09/Feature-Photo-Pearly-Gates-1.png',
         preview: false
       }
     ])
