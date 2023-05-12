@@ -165,6 +165,31 @@ module.exports = {
         spotId: 8,
         url: 'https://i.pinimg.com/736x/bd/2e/ca/bd2ecaa4de735d0839e830669090a985.jpg',
         preview: false
+      },
+      {
+        spotId: 9,
+        url: 'https://images.thedirect.com/media/photos/A1CF3288-83BD-4C93-A486-1B84FB112B04.jpg',
+        preview: true
+      },
+      {
+        spotId: 9,
+        url: 'https://cdna.artstation.com/p/assets/images/images/003/194/842/large/bin8-lee-11893829-983732274991729-5302702142491070617-o.jpg',
+        preview: false
+      },
+      {
+        spotId: 9,
+        url: 'https://tgr.com.ph/img/blogs/full/marvel-penthouse-interior-ideas-from-the-stark-tower.jpg',
+        preview: false
+      },
+      {
+        spotId: 9,
+        url: 'https://i.ytimg.com/vi/zo0J7utIULE/maxresdefault.jpg',
+        preview: false
+      },
+      {
+        spotId: 9,
+        url: 'https://static01.nyt.com/images/2014/11/13/garden/20141113-BATHROOM-slide-MAH7/20141113-BATHROOM-slide-MAH7-superJumbo.jpg',
+        preview: false
       }
     ])
   },

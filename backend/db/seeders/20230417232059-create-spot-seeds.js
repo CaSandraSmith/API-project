@@ -21,7 +21,7 @@ module.exports = {
         lng: 73.9857,
         name: 'Empire State Building',
         description: 'Very tall.',
-        price: 1500
+        price: 250
       },
       {
         ownerId: 2,
