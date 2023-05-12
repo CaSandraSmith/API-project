@@ -13,7 +13,7 @@ export default function LoggedInCantReview() {
     const sortedArray = reviewArray.sort((a,b) => b.id - a.id)
 
     let formatRating = (rating) => {
-        return rating.toFixed(1);
+        if (rating) rating.toFixed(1);
     }
 
     function formatDate(date) {
