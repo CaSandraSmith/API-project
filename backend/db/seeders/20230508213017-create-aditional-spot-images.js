@@ -191,6 +191,32 @@ module.exports = {
         url: 'https://static01.nyt.com/images/2014/11/13/garden/20141113-BATHROOM-slide-MAH7/20141113-BATHROOM-slide-MAH7-superJumbo.jpg',
         preview: false
       }
+      ,
+      {
+        spotId: 10,
+        url: 'https://static.wikia.nocookie.net/marvelcinematicuniverse/images/1/1e/Tony_Stark%27s_Mansion.png',
+        preview: true
+      },
+      {
+        spotId: 10,
+        url: 'https://assets.hgtv.ca/wp-content/uploads/2021/12/Iron-Man-house12.jpg',
+        preview: false
+      },
+      {
+        spotId: 10,
+        url: 'https://images.luxuo.com/2018/09/Tony-Starks-Actual-House-for-Sale-The-Razor-House-California-6-930x620.jpg?strip=all&lossy=1&quality=75&ssl=1',
+        preview: false
+      },
+      {
+        spotId: 10,
+        url: 'https://bosshunting.com.au/wp-content/uploads/2020/03/tony-starks-house.jpg',
+        preview: false
+      },
+      {
+        spotId: 10,
+        url: 'https://assets.hgtv.ca/wp-content/uploads/2021/12/Iron-Man-house17.jpg',
+        preview: false
+      }
     ])
   },
 
