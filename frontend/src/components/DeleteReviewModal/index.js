@@ -1,14 +1,15 @@
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
-import { deleteASpot } from "../../store/spots";
+import { reviewDeletions } from "../../store/reviews";
 
-export default function DeleteReviewModal({spot}) {
+export default function DeleteReviewModal({review}) {
+  console.log("review in modal", review)
   const dispatch = useDispatch();
   const { closeModal } = useModal();
 
   const confirmDelete = (e) => {
     e.preventDefault();
-    dispatch(deleteASpot(spot.id)).then(closeModal)
+    dispatch(reviewDeletions(review.id)).then(closeModal)
   };
 
   return (

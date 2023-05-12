@@ -30,8 +30,8 @@ export default function LoggedInCantReview() {
         return formattedmonth +" " + year
     }
 
-    const onClick = () => {
-        setModalContent(<DeleteReviewModal spot={spot}/>)
+    const onClick = (reviewToDelte) => {
+        setModalContent(<DeleteReviewModal review={reviewToDelte}/>)
     }
 
     return (
@@ -55,7 +55,7 @@ export default function LoggedInCantReview() {
                                 <h4>{userReview.User.firstName}</h4>
                                 <h5>{formatDate(userReview.createdAt)}</h5>
                                 <p>{userReview.review}</p>
-                                {userReview.User.id === user.id ? <button onClick={onClick}>Delete</button> : null}
+                                {userReview.User.id === user.id ? <button onClick={() => onClick(userReview)}>Delete</button> : null}
                             </div>
                         ))}
                     </div>
