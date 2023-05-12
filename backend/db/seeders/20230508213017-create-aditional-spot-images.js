@@ -190,8 +190,7 @@ module.exports = {
         spotId: 9,
         url: 'https://static01.nyt.com/images/2014/11/13/garden/20141113-BATHROOM-slide-MAH7/20141113-BATHROOM-slide-MAH7-superJumbo.jpg',
         preview: false
-      }
-      ,
+      },
       {
         spotId: 10,
         url: 'https://static.wikia.nocookie.net/marvelcinematicuniverse/images/1/1e/Tony_Stark%27s_Mansion.png',
@@ -215,6 +214,81 @@ module.exports = {
       {
         spotId: 10,
         url: 'https://assets.hgtv.ca/wp-content/uploads/2021/12/Iron-Man-house17.jpg',
+        preview: false
+      },
+      {
+        spotId: 11,
+        url: 'https://i.pinimg.com/originals/ac/90/16/ac9016772ab1ce51b29d07d98b7c6b6a.jpg',
+        preview: true
+      },
+      {
+        spotId: 11,
+        url: 'https://i.pinimg.com/564x/35/8a/27/358a27a1093a07745ea19b98e716674e.jpg',
+        preview: false
+      },
+      {
+        spotId: 11,
+        url: 'https://t4.ftcdn.net/jpg/02/13/98/05/360_F_213980591_7pPOKSRgKMy4nAlrhfUN2AbiQ4AD5bY2.jpg',
+        preview: false
+      },
+      {
+        spotId: 11,
+        url: 'https://imgs.6sqft.com/wp-content/uploads/2015/10/20045030/77-Perry-Street-2.jpg',
+        preview: false
+      },
+      {
+        spotId: 11,
+        url: 'https://media.istockphoto.com/id/991654342/photo/new-york-city-overhead-view-of-historic-buildings-along-59th-street-with-the-midtown-manhattan.jpg?s=612x612&w=0&k=20&c=LanWtE6UWity6KHa_wawqyliDwugS9Iom1haE7yjwYo=',
+        preview: false
+      },
+      {
+        spotId: 12,
+        url: '',
+        preview: true
+      },
+      {
+        spotId: 12,
+        url: '',
+        preview: false
+      },
+      {
+        spotId: 12,
+        url: '',
+        preview: false
+      },
+      {
+        spotId: 12,
+        url: '',
+        preview: false
+      },
+      {
+        spotId: 12,
+        url: '',
+        preview: false
+      },
+      {
+        spotId: 13,
+        url: '',
+        preview: true
+      },
+      {
+        spotId: 13,
+        url: '',
+        preview: false
+      },
+      {
+        spotId: 13,
+        url: '',
+        preview: false
+      },
+      {
+        spotId: 13,
+        url: '',
+        preview: false
+      },
+      {
+        spotId: 13,
+        url: '',
         preview: false
       }
     ])

@@ -63,16 +63,6 @@ module.exports = {
       },
       {
         ownerId: 8,
-        address: '500 Phoenix Ave.',
-        city: 'Westchester County',
-        state: 'NY',
-        country: 'USA',
-        name: 'Gray Cottage',
-        description: 'Cozy cottage in upstate NY.',
-        price: 120
-      },
-      {
-        ownerId: 9,
         address: '6 Avenger Ave',
         city: 'New York',
         state: 'NY',
@@ -82,7 +72,7 @@ module.exports = {
         price: 500
       },
       {
-        ownerId: 9,
+        ownerId: 8,
         address: '151 Beachside Lane',
         city: 'Malibu',
         state: 'CA',
@@ -92,7 +82,7 @@ module.exports = {
         price: 550
       },
       {
-        ownerId: 10,
+        ownerId: 9,
         address: '164 Mayfield St.',
         city: 'Queens',
         state: 'NY',
@@ -102,7 +92,7 @@ module.exports = {
         price: 245
       },
       {
-        ownerId: 11,
+        ownerId: 10,
         address: '221B Baker Street',
         city: 'London',
         state: 'England',
@@ -112,7 +102,7 @@ module.exports = {
         price: 299
       },
       {
-        ownerId: 12,
+        ownerId: 11,
         address: '62 Mockingbird Way',
         city: 'Boston',
         state: 'MA',
@@ -122,7 +112,7 @@ module.exports = {
         price: 200
       },
       {
-        ownerId: 12,
+        ownerId: 11,
         address: '23 Landed Blvd',
         city: 'Los Angeles',
         state: 'CA',
@@ -132,7 +122,7 @@ module.exports = {
         price: 250
       },
       {
-        ownerId: 13,
+        ownerId: 12,
         address: '48 Star Ln',
         city: 'Seattle',
         state: 'WA',
@@ -142,7 +132,7 @@ module.exports = {
         price: 148
       },
       {
-        ownerId: 14,
+        ownerId: 13,
         address: '4 Forest Rd.',
         city: 'Kalispell',
         state: 'MT',
