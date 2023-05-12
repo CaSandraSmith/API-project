@@ -1,7 +1,10 @@
 import { useSelector } from "react-redux"
+import { useModal } from '../../context/Modal';
+import DeleteReviewModal from "../DeleteReviewModal";
 
 export default function LoggedInCantReview() {
     console.log("logged in, but can't review")
+    const { setModalContent } = useModal();
     const user = useSelector(state => state.session.user)
     const reviews = useSelector(state => state.reviews.spot);
     console.log("reviews", reviews)
@@ -27,6 +30,10 @@ export default function LoggedInCantReview() {
         return formattedmonth +" " + year
     }
 
+    const onClick = () => {
+        setModalContent(<DeleteReviewModal spot={spot}/>)
+    }
+
     return (
         <div>
             {spot.numReviews ? (
@@ -48,7 +55,7 @@ export default function LoggedInCantReview() {
                                 <h4>{userReview.User.firstName}</h4>
                                 <h5>{formatDate(userReview.createdAt)}</h5>
                                 <p>{userReview.review}</p>
-                                {userReview.User.id === user.id ? <button>Delete</button> : null}
+                                {userReview.User.id === user.id ? <button onClick={onClick}>Delete</button> : null}
                             </div>
                         ))}
                     </div>
