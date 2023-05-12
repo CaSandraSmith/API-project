@@ -18,8 +18,6 @@ export default function AddSpotForm() {
     const [spotImage2, setSpotImage2] = useState("");
     const [spotImage3, setSpotImage3] = useState("");
     const [spotImage4, setSpotImage4] = useState("");
-    const [lat, setLatitude] = useState("");
-    const [lng, setLongitude] = useState("");
     const [errors, setErrors] = useState({});
     const [submit, setSubmit] = useState(false)
 
@@ -28,7 +26,7 @@ export default function AddSpotForm() {
         setSubmit(true)
         setErrors({})
 
-        let spot = { address, city, state, country, lat, lng, name, description, price };
+        let spot = { address, city, state, country, name, description, price };
         let images = [];
         if (previewImage) images.push({ img: 0, preview: true, url: previewImage })
         if (spotImage1) images.push({ img: 1, preview: false, url: spotImage1 });
@@ -71,7 +69,7 @@ export default function AddSpotForm() {
 
     return (
         <div>
-            <h1>Create a new Spot</h1>
+            <h1>Create a New Spot</h1>
             <form onSubmit={handleSubmit}>
                 <h2>Where's your place located?</h2>
                 <h3>Guests will only get your exact address once they booked a reservation.</h3>
@@ -116,35 +114,13 @@ export default function AddSpotForm() {
                         placeholder='STATE'
                     />
                 </label>
-                <label>
-                    Latitude
-                    <input
-                        type="number"
-                        value={lat}
-                        onChange={(e) => setLatitude(e.target.value)}
-                        placeholder='Latitude'
-                        max={90}
-                        min={-90}
-                    />
-                </label>
-                <label>
-                    Longitude
-                    <input
-                        type="number"
-                        value={lng}
-                        onChange={(e) => setLongitude(e.target.value)}
-                        placeholder='Longitude'
-                        max={180}
-                        min={-180}
-                    />
-                </label>
                 <h2>Describe your place to guests</h2>
-                <h3>Mention the best features of your space, any special amentities like fast wif or parking, and what you love about the neighborhood.</h3>
+                <h3>Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood</h3>
                 <label>
                     <textarea
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
-                        placeholder='Description'
+                        placeholder='Please write at least 30 characters'
                     />
                     {submit && Object.values(errors).length && errors.description ? <p>{errors.description}</p> : null}
                 </label>
