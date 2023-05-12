@@ -41,6 +41,13 @@ function SignupFormModal() {
     });
   };
 
+  const checkInputs = () => {
+    if (!email || !username || !firstName || !lastName || !password || !confirmPassword) return true;
+    if (username.length < 4) return true;
+    if (password.length < 6) return true;
+    return false
+  }
+
   return (
     <>
       <h1>Sign Up</h1>
@@ -107,7 +114,7 @@ function SignupFormModal() {
         {errors.confirmPassword && (
           <p>{errors.confirmPassword}</p>
         )}
-        <button type="submit">Sign Up</button>
+        <button type="submit" disabled={checkInputs()}>Sign Up</button>
       </form>
     </>
   );
