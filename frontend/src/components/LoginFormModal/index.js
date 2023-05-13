@@ -29,24 +29,27 @@ function LoginFormModal() {
     e.preventDefault();
     setErrors({});
     return dispatch(sessionActions.login({ credential: "demo@user.io", password: "password" }))
-      .then(closeModal)
+    .then(closeModal)
   }
-
+  
   return (
-    <>
+    <div className="login-modal-wrapper">
       <h1>Log In</h1>
-      <form onSubmit={handleSubmit}>
+      {errors.credential && (
+        <p className="credential-error">{errors.credential}</p>
+      )}
+      <form onSubmit={handleSubmit} className="login-form">
         <label>
-          Username or Email
-          <input
-            type="text"
-            value={credential}
-            onChange={(e) => setCredential(e.target.value)}
-            required
-          />
+          <div>Username or Email</div>
+            <input
+              type="text"
+              value={credential}
+              onChange={(e) => setCredential(e.target.value)}
+              required
+            />
         </label>
         <label>
-          Password
+          <div>Password</div>
           <input
             type="password"
             value={password}
@@ -54,13 +57,10 @@ function LoginFormModal() {
             required
           />
         </label>
-        {errors.credential && (
-          <p>{errors.credential}</p>
-        )}
-        <button type="submit" disabled={credential.length < 4 || password.length < 6}>Log In</button>
-        <Link onClick={onclick}>Log in as Demo User</Link>
+        <button className="login-form-button" type="submit" disabled={credential.length < 4 || password.length < 6}>Log In</button>
       </form>
-    </>
+      <Link className="demo-user-login" onClick={onclick} to='/'>Log in as Demo User</Link>
+    </div>
   );
 }
 
