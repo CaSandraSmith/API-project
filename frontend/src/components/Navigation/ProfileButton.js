@@ -45,8 +45,8 @@ function ProfileButton({ user }) {
       <div>
         {user ? <NavLink to="/spots/new" className="create-spot-link">Create a New Spot</NavLink> : null}
       </div>
-      <div className="profile-button">
-        <button onClick={openMenu}>
+      <div className="profile-button-wrapper">
+        <button className="profile-button" onClick={openMenu}>
           <i className="fa-solid fa-bars"></i>
           <i className="fas fa-user-circle" />
         </button>
