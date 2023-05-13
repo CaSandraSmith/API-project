@@ -51,34 +51,34 @@ function ProfileButton({ user }) {
           <i className="fas fa-user-circle" />
         </button>
       </div>
-      <ul className={ulClassName} ref={ulRef}>
+      <div className={ulClassName} ref={ulRef}>
         {user ? (
-          <div>
-            <li>{user.username}</li>
-            <li>Hello, {user.firstName}</li>
-            <li>{user.email}</li>
-            <li>
+          <div className="menu">
+            <div>{user.username}</div>
+            <div>Hello, {user.firstName}</div>
+            <div>{user.email}</div>
+            <div>
               <NavLink to="/spots/current">Manage Spots</NavLink>
-            </li>
-            <li>
+            </div>
+            <div>
               <button onClick={logout}>Log Out</button>
-            </li>
+            </div>
           </div>
         ) : (
-          <div>
-            <OpenModalMenuItem
-              itemText="Log In"
-              onItemClick={closeMenu}
-              modalComponent={<LoginFormModal />}
-            />
+          <div className="menu">
             <OpenModalMenuItem
               itemText="Sign Up"
               onItemClick={closeMenu}
               modalComponent={<SignupFormModal />}
             />
+            <OpenModalMenuItem
+              itemText="Log In"
+              onItemClick={closeMenu}
+              modalComponent={<LoginFormModal />}
+            />
           </div>
         )}
-      </ul>
+      </div>
     </div>
   );
 }

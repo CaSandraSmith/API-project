@@ -43,8 +43,12 @@
 
 .profile-dropdown {
     position: absolute;
-    border: 10px solid red;
-    top: 100px
+    border: 1px solid black;
+    top: 63px;
+    right: 30px;
+    background-color: white;
+    width: 120px;
+    padding: 5px 15px;
 }
 
 .options {
@@ -58,6 +62,9 @@
     text-decoration: none;
 }
 
-.profile-dropdown > div > li {
-    list-style: none;
+.menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
 }
