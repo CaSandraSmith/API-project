@@ -1,0 +1,45 @@
+.singleSpotPage * {
+    margin: 0;
+    padding: 0;
+}
+
+.getOneSpotImages {
+    display: grid;
+    width: 1000px;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-areas: 
+        "previewImage image1 image2"
+        "previewImage image3 image4";
+}
+
+.singleSpotPage > div {
+    border: 10px red solid;
+    width: 1000px;
+}
+
+.spotImage0 {
+    border:10px solid red ;
+    height: 400px;
+    width: 50%;
+    grid-area: previewImage;
+}
+
+.spotImage1 {
+    grid-area: image1;
+}
+
+.spotImage2 {
+    grid-area: image2;
+}
+.spotImage3 {
+    grid-area: image3;
+}
+
+.spotImage4 {
+    grid-area: image4;
+}
+ 
+.images:not(.spotImage0) {
+    width: fit-content;
+    height: 100%;
+}

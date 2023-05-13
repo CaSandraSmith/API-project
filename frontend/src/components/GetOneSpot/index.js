@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { findOneSpot } from '../../store/spots';
 import IndividualSpotReviews from '../IndividualSpotReviews';
 import { clearSingleSpot } from '../../store/spots';
+import "./GetOneSpot.css"
 
 export default function GetOneSpot() {
     const { id } = useParams();
@@ -19,14 +20,14 @@ export default function GetOneSpot() {
     if (!Object.values(spot).length) return null
 
     return (
-        <div>
+        <div className='singleSpotPage'>
             <div>
                 <h1>{spot.name}</h1>
                 <h2>{spot.city}, {spot.state}, {spot.country}</h2>
             </div>
-            <div>
-                {spot.SpotImages.map(image => (
-                    <img src={image.url} alt={spot.name} />
+            <div className='getOneSpotImages'>
+                {spot.SpotImages.map((image, index) => (
+                    <img src={image.url} alt={spot.name} className={`spotImage${index} images`}/>
                 ))}
             </div>
             <div>
