@@ -10,9 +10,13 @@ function Navigation({ isLoaded }) {
   return (
     <div className='navigation-bar'>
       <div>
-        <NavLink exact to="/">
-        <i className="fa-solid fa-house-user"></i>
-          CharacterBnB
+        <NavLink exact to="/" className="home-link">
+          <div>
+            <i className="fa-solid fa-house-user"></i>
+          </div>
+          <div>
+            CharacterBnB
+          </div>
         </NavLink>
       </div>
       {isLoaded && (
