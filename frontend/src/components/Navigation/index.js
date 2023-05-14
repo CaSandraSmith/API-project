@@ -15,7 +15,7 @@ function Navigation({ isLoaded }) {
             <i className="fa-solid fa-house-user"></i>
           </div>
           <div>
-            CharacterBnB
+            characterBnB
           </div>
         </NavLink>
       </div>
