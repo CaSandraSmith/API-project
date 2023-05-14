@@ -47,8 +47,10 @@
     top: 63px;
     right: 30px;
     background-color: white;
-    width: 120px;
+    min-width: 160px;
+    max-width: fit-content;
     padding: 5px 15px;
+    box-sizing: border-box;
 }
 
 .options {
@@ -67,4 +69,29 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+}
+
+.manage-spots-link {
+    text-decoration: none;
+    color: black;
+}
+
+.manage-spots-wrapper {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    width: 100%;
+}
+
+.log-out-button {
+    border-radius: 40%;
+    background-color: #999999;
+    color: white;
+    border-color: black;
+    align-self: center;
+    padding: 10px;
+    margin-top: 5px;
+}
+
+.menu.user > div{
+    padding-bottom: 5px;
 }
