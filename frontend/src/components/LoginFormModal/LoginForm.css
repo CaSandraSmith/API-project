@@ -15,11 +15,13 @@
 .login-form > label > input {
     width: 300px;
     margin: 3px 0px 10px 0px;
+    background-color: #E8F0FE;
 }
 
 .demo-user-login{
     box-sizing: border-box;
     padding: 30px 0px 20px 0px;
+    color: #00525E;
 }
 
 .login-form-button {

@@ -1,0 +1,40 @@
+.sign-up-from-wrapper {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    padding: 20px;
+    width: 350px;
+}
+
+.signup-button {
+    box-shadow: 1px 1px #999999;
+    border-color: black;
+    color: white;
+    background-color: #FF5A5F;
+    width: 100%;
+    height: 50px;
+}
+
+.signup-button:disabled {
+    background-color: white;
+    border-color: #999999;
+    color: #999999;
+}
+
+.sign-up-from > div > label > input {
+    width: 350px;
+    background-color: #E8F0FE;
+}
+
+.sign-up-from > div{
+    padding-bottom: 20px;
+}
+
+.sign-up-error-messages {
+    color: #FF5A5F;
+    align-self: flex-start;
+}
+
+.sign-up-from > div > label > div{
+    padding-top: 5px;
+}
