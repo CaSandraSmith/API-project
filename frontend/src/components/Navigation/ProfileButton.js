@@ -5,6 +5,7 @@ import OpenModalMenuItem from './OpenModalMenuItem';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import { NavLink } from "react-router-dom";
+import { clearUserSpots } from "../../store/spots";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -34,6 +35,7 @@ function ProfileButton({ user }) {
 
   const logout = (e) => {
     e.preventDefault();
+    dispatch(clearUserSpots())
     dispatch(sessionActions.logout());
     closeMenu();
   };

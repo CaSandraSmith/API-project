@@ -43,7 +43,7 @@ module.exports = {
       },
       {
         spotId: 4,
-        url: 'https://static.wikia.nocookie.net/harrypotter/images/f/fc/GrimmauldPlace_WB_F5_FrontOfGrimmualdPlace_Image_100615_Land.jpg/revision/latest?cb=20161017204708',
+        url: 'https://res.cloudinary.com/djp7wsuit/image/upload/v1684158678/latest_s3lwoj.jpg',
         preview: false
       },
       {
