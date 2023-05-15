@@ -3,6 +3,7 @@ import DeleteSpotModal from "../DeleteSpotModal";
 import { useModal } from '../../context/Modal';
 import EditSpotForm from "../EditSpotForm";
 import { useHistory } from "react-router-dom";
+import './UsersSpots.css';
 
 export default function UsersSpots({ spot }) {
     const history = useHistory()
@@ -17,29 +18,35 @@ export default function UsersSpots({ spot }) {
     }
 
     return (
-        <div>
+        <div className="individual-user-spots-page-wrapper">
             <div onClick={movePage}>
                 <img src={spot.previewImage} alt={spot.name} />
-                <div>
-                    <div>{spot.city}, {spot.state}</div>
-                    {spot.avgRating ? (
+                <div className="spot-info-wrapper">
+                    <div className="get-all-spots-location-stars">
+                        <p>{spot.city}, {spot.state}</p>
                         <div>
-                            <i className="fa-solid fa-star"></i>
-                            {spot.avgRating}
+                            <div>
+                                {spot.avgRating ? (
+                                    <p className="all-spots-bold">
+                                        <i className="fa-solid fa-star"></i>
+                                        {spot.avgRating.toFixed(1)}
+                                    </p>
+                                ) : (
+                                    <p>
+                                        <i className="fa-solid fa-star"></i> New
+                                    </p>
+                                )}
+                            </div>
                         </div>
-                    ) : (
-                        <div>
-                            <i className="fa-solid fa-star"></i> New
-                        </div>
-                    )}
+                    </div>
                     <div>
-                        ${spot.price} night
+                        <p><span className="all-spots-bold">${spot.price}</span> night</p>
                     </div>
                 </div>
             </div>
-            <div>
+            <div className="update-and-delete-buttons">
                 <Link to={`/spots/${spot.id}/edit`}>
-                    <button>Update</button>
+                    <button className="update-spot-button">Update</button>
                 </Link>
                 <button onClick={onClick}>Delete</button>
             </div>

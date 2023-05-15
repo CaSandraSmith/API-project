@@ -1,0 +1,60 @@
+.create-a-new-spot-button {
+    border-color: black;
+    color: white;
+    background-color: #999999;
+    box-shadow: 2px 2px black;
+    margin-bottom: 40px;
+    justify-self: start;
+}
+
+.manage-spots-header {
+    margin: 0;
+    padding: 0;
+    padding-bottom: 5px;
+    justify-self: start;
+}
+
+.manage-spots-page-wrapper {
+    margin: 0;
+    padding: 20px 50px;
+    box-sizing: border-box;
+    width: 100%;
+    display: grid;
+    justify-items: center;
+}
+
+.all-user-spots-wrapper {
+    display: grid;
+    column-gap: 20px;
+    row-gap: 20px;
+    padding-top: 10px;
+    flex-basis: 200px;
+    justify-items: center;
+    padding: 30px 40px;
+    width: 100%;
+}
+
+@media screen and (min-width: 980px) {
+    .all-user-spots-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+}
+
+@media screen and (max-width: 979px) {
+    .all-user-spots-wrapper {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+@media screen and (max-width: 730px) {
+    .all-user-spots-wrapper {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media screen and (max-width: 460px) {
+    .all-user-spots-wrapper {
+        grid-template-columns: 1fr ;
+    }
+}

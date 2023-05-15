@@ -156,7 +156,7 @@ export default function AddSpotForm() {
                         <p className='create-spot-form-caption'>Competitive pricing can help your listing stand out and rank higher in search results.</p>
                     </div>
                     <label className='price-input-wrapper'>
-                        <div class='price-input'>
+                        <div className='price-input'>
                             <span>$</span><input
                                 type='number'
                                 value={price}
@@ -219,7 +219,7 @@ export default function AddSpotForm() {
                         </label>
                     </div>
                     <div className='create-new-spot-button'>
-                        <button >Create Spot</button>
+                        <button>Create Spot</button>
                     </div>
                 </form>
             </div >

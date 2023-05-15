@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { getUsersSpots } from '../../store/spots';
 import { clearUserSpots } from '../../store/spots'
 import UsersSpots from "../UsersSpots";
+import './ManageSpots.css';
 
 export default function ManageSpots() {
     const history = useHistory();
@@ -17,10 +18,10 @@ export default function ManageSpots() {
     }, [dispatch])
     
     return (
-        <div>
-            <h1>Manage Spots</h1>
-            <button onClick={() => history.push('/spots/new')}>Create a New Spot</button>
-            <div>
+        <div className="manage-spots-page-wrapper">
+            <h1 className="manage-spots-header">Manage Spots</h1>
+            <button className="create-a-new-spot-button" onClick={() => history.push('/spots/new')}>Create a New Spot</button>
+            <div className="all-user-spots-wrapper">
                 {spots.map(spot => (
                     <UsersSpots spot={spot} />
                 ))}

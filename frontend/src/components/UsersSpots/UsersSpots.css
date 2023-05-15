@@ -1,0 +1,54 @@
+.individual-user-spots-page-wrapper {
+    max-width: 220px;
+    min-width: 60%;
+    height: 60%;
+    box-sizing: border-box;
+    padding-bottom: 20px;
+    width: 100%
+}
+
+.individual-user-spots-page-wrapper > div > img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+}
+
+.individual-user-spots-page-wrapper:hover {
+    cursor: pointer;
+}
+
+.get-all-spots-location-stars {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.spot-info-wrapper {
+    display: grid;
+    grid-template-rows: 30px 30px;
+    row-gap: 5px;
+    padding-bottom: 25px;
+}
+
+.all-spots-bold {
+    font-weight: bold;
+}
+
+.update-and-delete-buttons {
+    display: flex;
+    column-gap: 5px;
+}
+
+.update-and-delete-buttons > button{
+    border-color: black;
+    box-shadow: 2px 2px black;
+    color: white;
+    background-color: #999999;
+}
+
+.update-spot-button {
+    border-color: black;
+    box-shadow: 2px 2px black;
+    color: white;
+    background-color: #999999;
+}
