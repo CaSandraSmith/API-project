@@ -109,7 +109,7 @@ h2 {
     font-size: 2px;
 }
 
-.fa-solid.fa-star {
+.booking-star-rating {
     font-size: 15px;
 }
 
@@ -125,4 +125,8 @@ h3 {
 .star-rating {
     display: flex;
     align-items: center;
+}
+
+.rating-info {
+    padding-top: 10px;
 }

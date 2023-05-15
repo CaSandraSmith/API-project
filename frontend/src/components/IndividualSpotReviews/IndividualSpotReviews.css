@@ -8,11 +8,7 @@
     column-gap: 8px;
     font-size: 20px;
     padding-top: 15px;
-}
-
-.review-detail-stars {
-    padding-right: 8px;
-    font-size: 23px;
+    padding-bottom: 20px;
 }
 
 .reviewer-name {
@@ -20,14 +16,67 @@
     font-weight: 400;
 }
 
+.review-info.wrapper {
+    padding-top: 10px;
+    padding-bottom: 25px;
+}
+
 .review-info {
-    padding-top: 20px;
     display: flex;
     flex-direction: column;
     row-gap: 5px;
     flex-wrap: wrap;
+    padding-bottom: 50px;
 }
 
 .reviewer-date {
     font-weight: 300;
+}
+
+.delete-review-button {
+    width: 65px;
+    background-color: #999999;
+    color: white;
+    border-color: black;
+    box-shadow: 2px 2px black;
+}
+
+.individual-spots-reviews-wrapper {
+    margin-bottom: 15px;
+}
+
+.review-title > div{
+    display: flex;
+    align-items: center;
+}
+
+.review-numbers {
+    column-gap: 5px;
+}
+
+.post-review {
+    width: 135px;
+    height: 22px;
+    background-color: #999999;
+    color: white;
+    border-color: black;
+    box-shadow: 2px 2px black;
+}
+
+.post-review-wrapper {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.review-wrapper {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.post-review-wrapper > h4 {
+    font-weight: 300;
+    padding-top: 20px;
 }

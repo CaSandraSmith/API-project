@@ -75,7 +75,7 @@ export default function GetOneSpot() {
                             </div>
                         ) : (
                             <div className='rating-star-info-single-spot'>
-                                <i className="fa-solid fa-star"></i> New
+                                <i className="fa-solid fa-star booking-star-rating"></i> New
                             </div>
                         )}
                     </div>

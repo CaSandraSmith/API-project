@@ -8,7 +8,7 @@ export default function LoggedInPostReview() {
     const spot = useSelector(state => state.spots.singleSpot);
     console.log("logged in and can post review")
     const reviewArray = Object.values(reviews)
-    const sortedArray = reviewArray.sort((a,b) => b.id - a.id)
+    const sortedArray = reviewArray.sort((a, b) => b.id - a.id)
 
     let formatRating = (rating) => {
         if (rating) rating.toFixed(1);
@@ -24,28 +24,28 @@ export default function LoggedInPostReview() {
     }
 
     const onClick = () => {
-        setModalContent(<PostReviewModal spot={spot}/>);
+        setModalContent(<PostReviewModal spot={spot} />);
     };
 
     return (
-        <div>
+        <div className="review-wrapper">
             <h3 className="review-title">
                 <div>
-                    <i className="fa-solid fa-star"></i>
+                    <i className="fa-solid fa-star review-detail-stars"></i>
                     {formatRating(spot.avgStarRating)}
                 </div>
-                <div>
-                    {spot.numReviews} reviews
+                <div className="review-numbers">
+                    {spot.numReviews} {spot.numReviews === 1 ? <span>review</span> : <span>reviews</span>}
                 </div>
             </h3>
-            <div>
-                <button onClick={onClick}>Post Your Review</button>
+            <div className="post-review-wrapper">
+                <button className="post-review" onClick={onClick}>Post Your Review</button>
             </div>
             <div>
                 {sortedArray.map((userReview) => (
-                    <div>
-                        <h4>{userReview.User.firstName}</h4>
-                        <h5>{formatDate(userReview.createdAt)}</h5>
+                    <div className="review-info wrapper">
+                        <h4 className="reviewer-name">{userReview.User.firstName}</h4>
+                        <h5 className="reviewer-date">{formatDate(userReview.createdAt)}</h5>
                         <p>{userReview.review}</p>
                     </div>
                 ))}

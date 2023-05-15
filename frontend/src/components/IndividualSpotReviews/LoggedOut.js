@@ -24,19 +24,19 @@ export default function LoggedOut({ spot, reviews }) {
                     <div>
                         <h3 className="review-title">
                             <div>
-                                <i className="fa-solid fa-star"></i>
+                                <i className="fa-solid fa-star review-detail-stars"></i>
                                 {formatRating(spot.avgStarRating)}
                             </div>
-                            <i className="fa-solid fa-circle review-detail-stars"></i>
-                            <div>
+                            <i className="fa-solid fa-circle"></i>
+                            <div className="review-numbers">
                                 {spot.numReviews} { spot.numReviews === 1 ? <span>review</span>  : <span>reviews</span> }
                             </div>
                         </h3>
                     </div>
                     <div>
                         {reviewArray.map((userReview) => (
-                            <div className="review-info">
-                                <h4 className="reviewer-name">{userReview.User.firstName}</h4>
+                            <div className="review-info wrapper">
+                                <h4 className="reviewer-name">{userReview?.User?.firstName}</h4>
                                 <h5 className="reviewer-date">{formatDate(userReview.createdAt)}</h5>
                                 <p>{userReview.review}</p>
                             </div>
@@ -45,7 +45,7 @@ export default function LoggedOut({ spot, reviews }) {
                 </div>
             ) : (
                 <div>
-                    <h3 className="review-title"><i className="fa-solid fa-star"></i> New</h3>
+                    <h3 className="review-title"><i className="fa-solid fa-star review-detail-stars"></i> New</h3>
                 </div>
             )}
         </div>
