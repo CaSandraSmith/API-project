@@ -5,7 +5,6 @@ import './DeleteReviewModal.css'
 
 
 export default function DeleteReviewModal({review}) {
-  console.log("review in modal", review)
   const dispatch = useDispatch();
   const { closeModal } = useModal();
 

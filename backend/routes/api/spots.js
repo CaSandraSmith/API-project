@@ -157,8 +157,6 @@ router.post('/:spotId/bookings', requireAuth, checkSpotExists, async (req, res) 
     let start = new Date (newBooking.startDate.toDateString()).getTime();
     let end = new Date (newBooking.endDate.toDateString()).getTime();
 
-    // console.log(start);
-
     if (start >= end) {
         res.status(400);
         return res.json({
@@ -219,7 +217,6 @@ router.post("/:spotId/reviews", requireAuth, checkSpotExists, checkReviewInput, 
         }
     })
 
-    // console.log("userReviews", userReviews)
     if (userReviews.length) {
         res.status(500);
         return res.json({

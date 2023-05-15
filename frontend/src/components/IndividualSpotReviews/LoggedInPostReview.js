@@ -6,7 +6,6 @@ export default function LoggedInPostReview() {
     const { setModalContent } = useModal();
     const reviews = useSelector(state => state.reviews.spot);
     const spot = useSelector(state => state.spots.singleSpot);
-    console.log("logged in and can post review")
     const reviewArray = Object.values(reviews)
     const sortedArray = reviewArray.sort((a, b) => b.id - a.id)
 

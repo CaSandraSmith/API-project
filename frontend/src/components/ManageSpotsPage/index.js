@@ -16,11 +16,13 @@ export default function ManageSpots() {
         dispatch(getUsersSpots())
         return (() => dispatch(clearUserSpots()))
     }, [dispatch])
-    
+
     return (
         <div className="manage-spots-page-wrapper">
-            <h1 className="manage-spots-header">Manage Spots</h1>
-            <button className="create-a-new-spot-button" onClick={() => history.push('/spots/new')}>Create a New Spot</button>
+            <div className="manage-spots-header">
+                <h1 className="manage-spots-title">Manage Spots</h1>
+                <button className="create-a-new-spot-button" onClick={() => history.push('/spots/new')}>Create a New Spot</button>
+            </div>
             <div className="all-user-spots-wrapper">
                 {spots.map(spot => (
                     <UsersSpots spot={spot} />

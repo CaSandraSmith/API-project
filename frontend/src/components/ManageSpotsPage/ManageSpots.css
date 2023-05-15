@@ -8,9 +8,8 @@
 }
 
 .manage-spots-header {
-    margin: 0;
-    padding: 0;
-    padding-bottom: 5px;
+    padding-left: 50px;
+    display: grid;
     justify-self: start;
 }
 
@@ -19,8 +18,9 @@
     padding: 20px 50px;
     box-sizing: border-box;
     width: 100%;
-    display: grid;
-    justify-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .all-user-spots-wrapper {
@@ -31,7 +31,7 @@
     flex-basis: 200px;
     justify-items: center;
     padding: 30px 40px;
-    width: 100%;
+    width: 92%;
 }
 
 @media screen and (min-width: 980px) {
@@ -41,7 +41,7 @@
     }
 }
 
-@media screen and (max-width: 979px) {
+/* @media screen and (max-width: 979px) {
     .all-user-spots-wrapper {
         grid-template-columns: 1fr 1fr 1fr;
     }
@@ -57,4 +57,4 @@
     .all-user-spots-wrapper {
         grid-template-columns: 1fr ;
     }
-}
+} */

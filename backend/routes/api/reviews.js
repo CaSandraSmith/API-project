@@ -100,7 +100,6 @@ router.post("/:reviewId/images", requireAuth, checkReviewId,  checkReviewOwner, 
 });
 
 router.get("/current", requireAuth, async (req, res) => {
-    // console.log("req.user.id", req.user.id)
     let reviews = await Review.findAll({
         where: {
             userId: req.user.id
