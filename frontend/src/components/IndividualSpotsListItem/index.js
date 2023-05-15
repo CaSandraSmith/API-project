@@ -1,16 +1,14 @@
-import { useHistory } from "react-router-dom"
-import './IndividualSpotListItem.css'
-import { useState } from "react"
+import { useHistory } from "react-router-dom";
+import './IndividualSpotListItem.css';
 
 export default function IndividualSpotListItem({ spot }) {
-    const [currentSpot, setCurrentSpot] = useState(false)
     const history = useHistory()
 
     function movePage() {
         history.push(`/spots/${spot.id}`)
     }
     return (
-        <div onClick={movePage} className={`all-spots-page-spot-wrapper ${currentSpot}`} data-title={spot.name}>
+        <div onClick={movePage} className={`all-spots-page-spot-wrapper`} title={spot.name}>
             <img src={spot.previewImage} alt={spot.name} />
             <div className="spot-info-wrapper">
                 <div className="get-all-spots-location-stars">
