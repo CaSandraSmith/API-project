@@ -1,0 +1,31 @@
+.delete-review-modal {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    max-width: 500px;
+    padding: 20px;
+}
+
+.delete-spot-modal > h2 {
+    font-size: 20px;
+}
+
+.yes-delete-review-button {
+    width: 100%;
+    height: 50px;
+    margin-bottom: 10px;
+    border-color: black;
+    box-shadow: 2px 2px black;
+    color: white;
+    background-color: #FF5A5F;
+}
+
+.no-keep-review-button {
+    width: 100%;
+    height: 50px;
+    border-color: black;
+    box-shadow: 2px 2px black;
+    color: white;
+    background-color: #999999;
+}
