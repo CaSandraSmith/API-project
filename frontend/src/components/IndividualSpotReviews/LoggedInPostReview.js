@@ -29,7 +29,7 @@ export default function LoggedInPostReview() {
 
     return (
         <div>
-            <div>
+            <h3 className="review-title">
                 <div>
                     <i className="fa-solid fa-star"></i>
                     {formatRating(spot.avgStarRating)}
@@ -37,7 +37,7 @@ export default function LoggedInPostReview() {
                 <div>
                     {spot.numReviews} reviews
                 </div>
-            </div>
+            </h3>
             <div>
                 <button onClick={onClick}>Post Your Review</button>
             </div>

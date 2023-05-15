@@ -5,6 +5,7 @@ import LoggedInCantReview from "./LoggedInCantReview";
 import LoggedInNoReviews from "./LoggedInNoReviews";
 import LoggedInPostReview from "./LoggedInPostReview";
 import LoggedOut from "./LoggedOut";
+import './IndividualSpotReviews.css';
 
 export default function IndividualSpotReviews() {
     const dispatch = useDispatch();
@@ -37,6 +38,6 @@ export default function IndividualSpotReviews() {
         //logged in, there are reviews, but they can still post
         return <LoggedInPostReview spot={spot} reviews={reviews}/>
     } else {
-        return <h1>Loading ...</h1>
+        return <h3>Loading ...</h3>
     }
 }

@@ -3,7 +3,6 @@ import { useModal } from '../../context/Modal';
 import DeleteReviewModal from "../DeleteReviewModal";
 
 export default function LoggedInCantReview() {
-    console.log("logged in, but can't review")
     const { setModalContent } = useModal();
     const user = useSelector(state => state.session.user)
     const reviews = useSelector(state => state.reviews.spot);
@@ -34,7 +33,7 @@ export default function LoggedInCantReview() {
             {spot.numReviews ? (
                 <div>
                     <div>
-                        <h3>
+                        <h3 className="review-title">
                             <div>
                                 <i className="fa-solid fa-star"></i>
                                 {formatRating(spot.avgStarRating)}
@@ -47,7 +46,6 @@ export default function LoggedInCantReview() {
                     <div>
                         {sortedArray.map((userReview) => (
                             <div>
-                                {console.log("userReview", userReview)}
                                 <h4>{userReview?.User?.firstName}</h4>
                                 <h5>{formatDate(userReview.createdAt)}</h5>
                                 <p>{userReview.review}</p>
@@ -58,7 +56,7 @@ export default function LoggedInCantReview() {
                 </div>
             ) : (
                 <div>
-                    <i className="fa-solid fa-star"></i> New
+                    <h3 className="review-title"><i className="fa-solid fa-star review-title"></i> New</h3>
                 </div>
             )}
         </div>

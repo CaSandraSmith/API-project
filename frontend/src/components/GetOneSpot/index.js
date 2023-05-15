@@ -64,17 +64,17 @@ export default function GetOneSpot() {
                         </div>
                         {num ? (
                             <div className='rating-star-info-single-spot'>
-                                <div>
-                                    <i className="fa-solid fa-star"></i>
+                                <div className='star-rating'>
+                                    <i className="fa-solid fa-star booking-star-rating"></i>
                                     {spot?.avgStarRating?.toFixed(1)}
                                 </div>
                                 <i className="fa-solid fa-circle"></i>
                                 <div>
-                                    {num} { num === 1 ? <span>review</span>  : <span>reviews</span> }
+                                    {num} {num === 1 ? <span>review</span> : <span>reviews</span>}
                                 </div>
                             </div>
                         ) : (
-                            <div>
+                            <div className='rating-star-info-single-spot'>
                                 <i className="fa-solid fa-star"></i> New
                             </div>
                         )}

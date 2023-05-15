@@ -1,0 +1,33 @@
+.fa-solid.fa-circle {
+    font-size: 2px;
+}
+
+.review-title {
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+    font-size: 20px;
+    padding-top: 15px;
+}
+
+.review-detail-stars {
+    padding-right: 8px;
+    font-size: 23px;
+}
+
+.reviewer-name {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.review-info {
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+    flex-wrap: wrap;
+}
+
+.reviewer-date {
+    font-weight: 300;
+}

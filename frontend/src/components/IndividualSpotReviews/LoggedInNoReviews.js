@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import PostReviewModal from "../PostReviewModal"
 
 export default function LoggedInNoReviews({spot}) {
-    console.log("logged in no reviews")
     const [loaded, setLoaded] = useState(false)
     const { setModalContent } = useModal();
 
@@ -12,7 +11,7 @@ export default function LoggedInNoReviews({spot}) {
         setLoaded(true)
     }, [])
 
-    if(!loaded) return <h1>Loading ...</h1>
+    if(!loaded) return <h3>Loading ...</h3>
 
     const onClick = () => {
         setModalContent(<PostReviewModal spot={spot}/>);
@@ -21,7 +20,7 @@ export default function LoggedInNoReviews({spot}) {
     return (
         <div>
             <div>
-                <i className="fa-solid fa-star"></i> New
+                <h3 className="review-title"><i className="fa-solid fa-star review-title"></i> New</h3>
             </div>
             <div>
                 <button onClick={onClick}>Post Your Review</button>
