@@ -1,0 +1,157 @@
+.create-spots-form-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 60px;
+}
+
+.create-spots-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 55%;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.create-spots-form > form {
+    display: flex;
+    flex-direction: column;
+}
+
+.create-spot-form-section > p {
+    padding: 0;
+    margin: 0;
+}
+
+.create-spots-form > form > h1 {
+    font-size: 28px;
+}
+
+.create-spot-form-heading {
+    font-size: 24px;
+    padding-bottom: 15px;
+}
+
+.create-spot-form-caption {
+    font-size: 18px;
+}
+
+.create-spot-form-section {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    padding-bottom: 15px;
+    padding-top: 20px;
+}
+
+.city-state-inputs {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    border-bottom: 2px solid black;
+}
+
+.create-spots-form > form > label > input {
+    width: 100%;
+    height: 20px;
+}
+
+.city-input-box-wrapper > input{
+    width: 94%;
+    height: 20px;
+}
+
+.city-input-box-wrapper > span{
+    padding: 0px 2px;
+    font-weight: bold;
+}
+
+.city-input-box-wrapper {
+    display: flex;
+    width: 100%;
+}
+
+.state-input > input {
+    width: 100%;
+    height: 20px;
+}
+
+.city-state-inputs {
+    padding-bottom: 10px;
+}
+
+.city-state-inputs > label > div {
+    padding-bottom: 2px;
+}
+
+.description-text-area > textarea {
+    width: 100%;
+    height: 100px;
+}
+
+.description-text-area, .name-input-box {
+    display: grid;
+}
+
+.description-text-area > span, .name-input-box > span{
+    padding: 5px 0px;
+}
+
+.description-text-area, .name-input-box {
+    border-bottom: 2px solid black;
+}
+
+.price-input {
+    display: flex;
+}
+
+.price-input > input{
+    width: 96%;
+}
+
+.price-input-wrapper {
+    display: grid;
+    row-gap: 5px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid black;
+}
+
+.create-spot-error-messages {
+    color: #FF5A5F;
+}
+
+.error-message-on-top {
+    display: flex;
+    column-gap: 10px;
+}
+
+.input-error-wrapper {
+    display: grid;
+    grid-template-rows: 25px 25px;
+    padding-bottom: 5px;
+}
+
+.upload-photos {
+    display: grid;
+    width: 100%;
+    row-gap: 5px;
+    border-bottom: 2px solid black;
+}
+
+.upload-photos > label > input {
+    width: 100%;
+}
+
+.create-new-spot-button > button {
+    margin-top: 20px;
+    position: absolute;
+    left: 45%;
+    right: 45%;
+    border-color: black;
+    color: white;
+    background-color: #FF5A5F;
+    box-shadow: 2px 2px black;
+}

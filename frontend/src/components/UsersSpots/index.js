@@ -29,7 +29,7 @@ export default function UsersSpots({ spot }) {
                                 {spot.avgRating ? (
                                     <p className="all-spots-bold">
                                         <i className="fa-solid fa-star"></i>
-                                        {spot.avgRating.toFixed(1)}
+                                        {spot?.avgRating?.toFixed(1)}
                                     </p>
                                 ) : (
                                     <p>
