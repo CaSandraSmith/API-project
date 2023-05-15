@@ -1,12 +1,14 @@
 .singleSpotPage * {
     margin: 0;
     padding: 0;
+    /* border: 1px solid red; */
 }
 
 .singleSpotPage {
     display: flex;
     flex-direction: column;
     padding: 20px 50px;
+    box-sizing: border-box;
 }
 
 h1 {
@@ -22,7 +24,6 @@ h2 {
     display: flex;
     flex-direction: column;
     row-gap: 20px;
-    padding-bottom: 20px;
 }
 
 .getOneSpotImages {
@@ -30,6 +31,7 @@ h2 {
     width: 100%;
     height: 20%;
     column-gap: 5px;
+    padding: 15px 0px;
 }
 
 .getOneSpotImages > div{
@@ -54,3 +56,67 @@ h2 {
     height: 49%;
     object-fit: cover;
 }
+
+.individual-spot-info {
+    display: flex;
+    box-sizing: border-box;
+    width: 99%;
+    justify-content: space-between;
+    padding-bottom: 10px;
+}
+
+.host-info {
+    width: 70%;
+}
+
+.booking-info-wrapper {
+    display: flex;
+    width: 30%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid black;
+    border-radius: 10px;
+    padding: 20px;
+    row-gap: 10px;
+}
+
+.booking-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.rating-star-info-single-spot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 7px;
+}
+
+.reserve-button {
+    width: 100%;
+    height: 35px;
+    border-color: black;
+    background-color: #FF5A5F;
+    color: white;
+    box-shadow: 3px 3px black;
+}
+
+.fa-solid.fa-circle {
+    font-size: 2px;
+}
+
+.fa-solid.fa-star {
+    font-size: 15px;
+}
+
+h3 {
+    font-weight: 500;
+}
+
+.host {
+    padding-bottom: 8px;
+}
+

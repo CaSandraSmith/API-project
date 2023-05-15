@@ -52,38 +52,37 @@ export default function GetOneSpot() {
                     }
                 </div>
             </div>
-            <div>
-                <div>
-                    <h3>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h3>
+            <div className='individual-spot-info'>
+                <div className='host-info'>
+                    <h3 className='host'>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h3>
                     <p>{spot.description}</p>
-                    <div>
+                </div>
+                <div className='booking-info-wrapper'>
+                    <div className='booking-info'>
                         <div>
-                            <div>
-                                ${spot.price} night
+                            ${spot.price} night
+                        </div>
+                        {num ? (
+                            <div className='rating-star-info-single-spot'>
+                                <div>
+                                    <i className="fa-solid fa-star"></i>
+                                    {spot?.avgStarRating?.toFixed(1)}
+                                </div>
+                                <i className="fa-solid fa-circle"></i>
+                                <div>
+                                    {num} { num === 1 ? <span>review</span>  : <span>reviews</span> }
+                                </div>
                             </div>
-                            {num ? (
-                                <div>
-                                    <div>
-                                        <i className="fa-solid fa-star"></i>
-                                        {spot.avgStarRating}
-                                    </div>
-                                    <div>
-                                        {num} reviews
-                                    </div>
-                                </div>
-                            ) : (
-                                <div>
-                                    <i className="fa-solid fa-star"></i> New
-                                </div>
-                            )}
-                        </div>
-                        <div>
-                            <button>Reserve</button>
-                        </div>
+                        ) : (
+                            <div>
+                                <i className="fa-solid fa-star"></i> New
+                            </div>
+                        )}
                     </div>
+                    <button className='reserve-button' onClick={() => window.alert("Feature coming soon")}>Reserve</button>
                 </div>
             </div>
-            <div>
+            <div className='rating-info'>
                 <IndividualSpotReviews />
             </div>
         </div>
