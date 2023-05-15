@@ -101,6 +101,7 @@
 }
 
 .description-text-area, .name-input-box {
+    padding-bottom: 10px;
     border-bottom: 2px solid black;
 }
 
@@ -115,7 +116,7 @@
 .price-input-wrapper {
     display: grid;
     row-gap: 5px;
-    padding-bottom: 5px;
+    padding-bottom: 10px;
     border-bottom: 2px solid black;
 }
 
@@ -138,6 +139,7 @@
     display: grid;
     width: 100%;
     row-gap: 5px;
+    padding-bottom: 10px;
     border-bottom: 2px solid black;
 }
 
