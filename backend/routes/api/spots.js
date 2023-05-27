@@ -351,6 +351,16 @@ router.get('/current', requireAuth, async (req, res) => {
     res.json({Spots: userSpots})
 });
 
+router.get("/:spotId/images", checkSpotExists, async (req, res) => {
+    let spotImages = await SpotImage.findAll({
+        where: {
+            spotId: req.params.spotId
+        }
+    })
+
+    res.json(spotImages)
+})
+
 router.get("/:spotId", async (req, res) => {
     let currentSpot = await Spot.findByPk(req.params.spotId, {
         include: [
