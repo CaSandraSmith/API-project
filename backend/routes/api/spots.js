@@ -355,10 +355,11 @@ router.get("/:spotId/images", checkSpotExists, async (req, res) => {
     let spotImages = await SpotImage.findAll({
         where: {
             spotId: req.params.spotId
-        }
+        },
+        attributes: ['id', 'url', 'preview']
     })
 
-    res.json(spotImages)
+    res.json({"Spot Images": spotImages})
 })
 
 router.get("/:spotId", async (req, res) => {
