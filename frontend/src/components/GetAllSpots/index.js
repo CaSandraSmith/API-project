@@ -16,7 +16,7 @@ export default function GetAllSpots() {
     return (
         <div className='allSpotsWrapper'>
             {allSpots.map((spot) => (
-                <IndividualSpotsListItem spot={spot} key={spot.id}/>
+                <IndividualSpotsListItem spot={spot} key={spot.id} />
             ))}
         </div>
     )

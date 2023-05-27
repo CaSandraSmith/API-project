@@ -12,13 +12,13 @@ export default function IndividualSpotListItem({ spot }) {
             <img src={spot.previewImage} alt={spot.name} />
             <div className="spot-info-wrapper">
                 <div className="get-all-spots-location-stars">
-                    <p>
+                    <p className="all-spots-page-bold">
                         {spot.city}, {spot.state}
                     </p>
                     <div>
                         <div>
                             {spot.avgRating ?
-                                <p className="all-spots-bold">
+                                <p>
                                     <i className="fa-solid fa-star"></i> {spot.avgRating.toFixed(1)}
                                 </p> :
                                 <p>
@@ -29,7 +29,7 @@ export default function IndividualSpotListItem({ spot }) {
                     </div>
                 </div>
                 <div>
-                    <p><span className="all-spots-bold">${spot.price}</span> night</p>
+                    <p><span className="all-spots-page-bold">${spot.price}</span> night</p>
                 </div>
             </div>
         </div>

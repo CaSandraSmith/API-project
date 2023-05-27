@@ -1,16 +1,19 @@
 .all-spots-page-spot-wrapper {
-    max-width: 280px;
+    max-width: 300px;
     min-width: 150px;
-    height: 60%;
+    max-height: 400px;
+    min-height: 200px;
     box-sizing: border-box;
     padding-bottom: 20px;
-    width: 100%
+    width: 100%;
+    /* border: 2px solid purple; */
 }
 
 .all-spots-page-spot-wrapper > img {
     width: 100%;
     aspect-ratio: 1/1;
     object-fit: cover;
+    border-radius: 10px;
 }
 
 .all-spots-page-spot-wrapper:hover {
@@ -34,6 +37,6 @@ p {
     font-size: 16px;
 }
 
-.all-spots-bold {
-    font-weight: bold;
+.all-spots-page-bold {
+    font-weight: 500;
 }
