@@ -6,7 +6,6 @@
     box-sizing: border-box;
     padding-bottom: 20px;
     width: 100%;
-    /* border: 2px solid purple; */
 }
 
 .all-spots-page-spot-wrapper > img {
@@ -20,17 +19,27 @@
     cursor: pointer;
 }
 
-.get-all-spots-location-stars {
+.get-all-spots-location-price {
     display: flex;
     justify-content: space-between;
-
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 80%;
 }
 
-.spot-info-wrapper {
-    display: grid;
-    grid-template-rows: 30px 30px;
-    row-gap: 5px;
-    padding-bottom: 25px;
+.all-spots-location{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.all-spot-info-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.all-spots-stars{
+    display: flex;
+    width: 20%;
 }
 
 p {
