@@ -10,7 +10,7 @@
     padding: 0px 40px;
     box-sizing: border-box;
     align-items: center;
-    border-bottom: 2px solid #CCCCCC;
+    border-bottom: 1px solid #dddddd;
     position: sticky;
     top: 0px;
     background-color: white;
@@ -31,29 +31,51 @@
 
 .profile-button {
     background-color: white;
-    border: 2px solid black;
+    border: 1px solid #dddddd;
     border-radius: 30px;
     box-sizing: border-box;
+    width: 75px;
     padding: 7px;
     display: flex;
     column-gap: 5px;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
-.profile-button > *{
-    font-size: 20px;
+.profile-button:hover, .profile-button.menu-open {
+    box-shadow: 0px 3px #dddddd;
+}
+
+.profile-dropdown > * {
+    font-size: 15px;
+}
+
+
+.profile-button > .fa-solid.fa-bars{
     color: black;
+    font-size: 16px;
+}
+
+.profile-button > .fas.fa-user-circle{
+    color: #717171;
+    font-size: 28px;
 }
 
 .profile-dropdown {
     position: absolute;
-    border: 1px solid black;
+    border: 1px solid #dddddd;
     top: 63px;
-    right: 30px;
+    right: 40px;
     background-color: white;
-    min-width: 160px;
+    min-width: 200px;
     max-width: fit-content;
     padding: 5px 15px;
     box-sizing: border-box;
+    border-radius: 20px;
+}
+
+.profile-dropdown:hover {
+    cursor: pointer;
 }
 
 .options {
@@ -72,6 +94,8 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+    row-gap: 10px;
+    padding: 5px;
 }
 
 .manage-spots-link {

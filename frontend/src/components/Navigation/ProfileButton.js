@@ -41,6 +41,7 @@ function ProfileButton({ user }) {
   };
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
+  const profileButtonClassName = "profile-button" + (showMenu ? " menu-open" : "")
 
   return (
     <div className="options">
@@ -48,7 +49,7 @@ function ProfileButton({ user }) {
         {user ? <NavLink to="/spots/new" className="create-spot-link">Create a New Spot</NavLink> : null}
       </div>
       <div className="profile-button-wrapper">
-        <button className="profile-button" onClick={openMenu}>
+        <button className={profileButtonClassName} onClick={openMenu}>
           <i className="fa-solid fa-bars"></i>
           <i className="fas fa-user-circle" />
         </button>
@@ -61,20 +62,19 @@ function ProfileButton({ user }) {
             <div className="manage-spots-wrapper">
               <NavLink to="/spots/current" className="manage-spots-link">Manage Spots</NavLink>
             </div>
-            <div className="underline"></div>
             <button className="log-out-button" onClick={logout}>Log Out</button>
           </div>
         ) : (
           <div className="menu">
             <OpenModalMenuItem
-              itemText="Log In"
-              onItemClick={closeMenu}
-              modalComponent={<LoginFormModal />}
-            />
-            <OpenModalMenuItem
               itemText="Sign Up"
               onItemClick={closeMenu}
               modalComponent={<SignupFormModal />}
+            />
+            <OpenModalMenuItem
+              itemText="Log In"
+              onItemClick={closeMenu}
+              modalComponent={<LoginFormModal />}
             />
           </div>
         )}
