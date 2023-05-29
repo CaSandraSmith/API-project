@@ -19,14 +19,18 @@ export default function GetOneSpot() {
 
     if (!Object.values(spot).length) return null
 
+    let testClick = () => {
+        console.log("hello")
+    }
+
     return (
         <div className='singleSpotPage'>
             <div className='single-spot-name-location'>
                 <h1>{spot.name}</h1>
                 <h2>{spot.city}, {spot.state}, {spot.country}</h2>
             </div>
-            <div className='getOneSpotImages'>
-                <div>
+            <div className='getOneSpotImages' onClick={testClick}>
+                <div className='preview-image-wrapper'>
                     <img src={spot.SpotImages[0].url} alt={spot.SpotImages[0].name} className='preview-image images' />
                 </div>
                 <div className='optional-images'>
@@ -51,6 +55,14 @@ export default function GetOneSpot() {
                         <img src='https://res.cloudinary.com/djp7wsuit/image/upload/v1684114076/Untitled_design_ducrv0.png' alt='image-not-found' className='spotImage4 images' />
                     }
                 </div>
+                <button className='view-single-spot-photos-button'>
+                    <div className='view-single-spot-photos-icons'>
+                        <i className="fa-solid fa-ellipsis-vertical"></i>
+                        <i className="fa-solid fa-ellipsis-vertical"></i>
+                        <i className="fa-solid fa-ellipsis-vertical"></i>
+                    </div>
+                    <p className='view-single-spot-photos-text'>Show all photos</p>
+                </button>
             </div>
             <div className='individual-spot-info'>
                 <div className='host-info'>
