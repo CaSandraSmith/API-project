@@ -9,6 +9,9 @@ import "./GetOneSpot.css"
 export default function GetOneSpot() {
     const { id } = useParams();
     const dispatch = useDispatch()
+    const [startDate, setStartDate] = useState("")
+    const [endDate, setEndDate] = useState("")
+
     const spot = useSelector(state => state.spots.singleSpot)
     const reviews = useSelector(state => state.reviews.spot)
     let num = Object.values(reviews).length
@@ -21,6 +24,10 @@ export default function GetOneSpot() {
 
     let testClick = () => {
         console.log("hello")
+    }
+
+    let makeReservation = (e) => {
+        e.preventDefault()
     }
 
     return (
@@ -91,7 +98,27 @@ export default function GetOneSpot() {
                             </div>
                         )}
                     </div>
-                    <button className='reserve-button' onClick={() => window.alert("Feature coming soon")}>Reserve</button>
+                    <div>
+                        <form>
+                            <label>
+                                CHECK-IN:
+                                <input
+                                    type='date'
+                                    value={startDate}
+                                    onChange={(e) => setStartDate(e.target.value)}
+                                />
+                            </label>
+                            <label>
+                                CHECKOUT:
+                                <input
+                                    type='date'
+                                    value={endDate}
+                                    onChange={(e) => setEndDate(e.target.value)}
+                                />
+                            </label>
+                            <button className='reserve-button' onClick={makeReservation}>Reserve</button>
+                        </form>
+                    </div>
                 </div>
             </div>
             <div className='rating-info'>
