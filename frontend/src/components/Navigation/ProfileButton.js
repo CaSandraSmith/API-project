@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from 'react-redux';
+import { useHistory } from "react-router-dom";
 import * as sessionActions from '../../store/session';
 import OpenModalMenuItem from './OpenModalMenuItem';
 import LoginFormModal from '../LoginFormModal';
@@ -9,6 +10,7 @@ import { clearUserSpots } from "../../store/spots";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
+  const history = useHistory()
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
 
@@ -59,6 +61,7 @@ function ProfileButton({ user }) {
           <div className="menu user">
             <div>Hello, {user.firstName}</div>
             <div>{user.email}</div>
+            <div onClick={() => history.push("/myBookings")}>My Bookings</div>
             <div className="manage-spots-wrapper">
               <NavLink to="/spots/current" className="manage-spots-link">Manage Spots</NavLink>
             </div>
