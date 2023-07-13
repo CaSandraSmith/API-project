@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf";
 
 const CREATE_BOOKING = "bookings/create"
 const GET_CURRENT_USER_BOOKINGS = "bookings/currentUser"
+const GET_SPOT_BOOKINGS = "bookings/spot"
 
 const createNewBooking = (booking) => ({
     type: CREATE_BOOKING,
@@ -10,6 +11,11 @@ const createNewBooking = (booking) => ({
 
 const allCurrentUserBookings = (bookings) => ({
     type: GET_CURRENT_USER_BOOKINGS,
+    bookings: bookings.Bookings
+})
+
+const getSpotBookings = (bookings) => ({
+    type: GET_SPOT_BOOKINGS,
     bookings: bookings.Bookings
 })
 
@@ -44,13 +50,37 @@ export const getCurrentUserBookings = () => async(dispatch) => {
     } else {
         return res
     }
+}
 
+export const getSpotsBookings = (spotId) => async(dispatch) => {
+    let res = await csrfFetch(`/api/spots/${spotId}/bookings`).catch(async (errs) => {
+        const err = await errs.json();
+        return err
+    })
+    
+    if (res.ok) {
+        let bookings = await res.json()
+        dispatch(getSpotBookings(bookings))
+        return bookings
+    } else {
+        return res
+    }
 }
 
 const initialState = {user: {}, spot: {}}
 
 const bookingsReducer = (state = initialState, action) => {
     switch (action.type) {
+        case GET_SPOT_BOOKINGS:
+            let spotBookings = {}
+            for (let booking in action.bookings) {
+                spotBookings[booking.id] = booking
+            }
+            return {
+                ...state,
+                user: {...state.bookings},
+                spot: {...spotBookings}
+            }
         case GET_CURRENT_USER_BOOKINGS:
             let userBookings = {}
             for (let booking in action.bookings) {
