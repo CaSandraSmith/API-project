@@ -3,6 +3,8 @@ import { csrfFetch } from "./csrf";
 const CREATE_BOOKING = "bookings/create"
 const GET_CURRENT_USER_BOOKINGS = "bookings/currentUser"
 const GET_SPOT_BOOKINGS = "bookings/spot"
+const EDIT_BOOKING = "bookings/edit"
+const DELETE_BOOKING = "bookings/edit"
 
 const createNewBooking = (booking) => ({
     type: CREATE_BOOKING,
@@ -19,15 +21,20 @@ const getSpotBookings = (bookings) => ({
     bookings: bookings.Bookings
 })
 
+const editUserBooking = (booking) => ({
+    type: EDIT_BOOKING,
+    booking
+})
+
 export const createBooking = (spotId, booking) => async (dispatch) => {
-    let res = await csrfFetch(`/api/spots/${spotId}/bookings`,  {
+    let res = await csrfFetch(`/api/spots/${spotId}/bookings`, {
         method: 'POST',
         body: JSON.stringify(booking)
     }).catch(async (errs) => {
         const err = await errs.json();
         return err
     })
-    
+
     if (res.ok) {
         let newBooking = await res.json()
         dispatch(createNewBooking(newBooking))
@@ -37,12 +44,12 @@ export const createBooking = (spotId, booking) => async (dispatch) => {
     }
 }
 
-export const getCurrentUserBookings = () => async(dispatch) => {
+export const getCurrentUserBookings = () => async (dispatch) => {
     let res = await csrfFetch("/api/bookings/current").catch(async (errs) => {
         const err = await errs.json();
         return err
     })
-    
+
     if (res.ok) {
         let bookings = await res.json()
         dispatch(allCurrentUserBookings(bookings))
@@ -52,12 +59,12 @@ export const getCurrentUserBookings = () => async(dispatch) => {
     }
 }
 
-export const getSpotsBookings = (spotId) => async(dispatch) => {
+export const getSpotsBookings = (spotId) => async (dispatch) => {
     let res = await csrfFetch(`/api/spots/${spotId}/bookings`).catch(async (errs) => {
         const err = await errs.json();
         return err
     })
-    
+
     if (res.ok) {
         let bookings = await res.json()
         dispatch(getSpotBookings(bookings))
@@ -67,10 +74,39 @@ export const getSpotsBookings = (spotId) => async(dispatch) => {
     }
 }
 
-const initialState = {user: {}, spot: {}}
+export const editBooking = (bookingId, booking) => async (dispatch) => {
+    let res = await csrfFetch(`/api/bookings/${bookingId}`, {
+        method: 'PUT',
+        body: JSON.stringify(booking)
+    }).catch(async (errs) => {
+        const err = await errs.json();
+        return err
+    })
+
+    if (res.ok) {
+        let editedBooking = await res.json()
+        dispatch(editUserBooking(editedBooking))
+        return editedBooking
+    } else {
+        return res
+    }
+}
+
+const initialState = { user: {}, spot: {} }
 
 const bookingsReducer = (state = initialState, action) => {
     switch (action.type) {
+        case EDIT_BOOKING:
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    [action.booking.id]: action.booking
+                },
+                spot: {
+                    ...state.spot
+                }
+            }
         case GET_SPOT_BOOKINGS:
             let spotBookings = {}
             for (let booking in action.bookings) {
@@ -78,8 +114,8 @@ const bookingsReducer = (state = initialState, action) => {
             }
             return {
                 ...state,
-                user: {...state.bookings},
-                spot: {...spotBookings}
+                user: { ...state.bookings },
+                spot: { ...spotBookings }
             }
         case GET_CURRENT_USER_BOOKINGS:
             let userBookings = {}
@@ -88,16 +124,18 @@ const bookingsReducer = (state = initialState, action) => {
             }
             return {
                 ...state,
-                user: {...userBookings},
-                spot: {...state.spot}
+                user: { ...userBookings },
+                spot: { ...state.spot }
             }
         case CREATE_BOOKING:
-            return {...state, 
+            return {
+                ...state,
                 user: {
-                        ...state.user,
-                        [action.booking.id]: action.booking
+                    ...state.user,
+                    [action.booking.id]: action.booking
                 },
-                spot: {...state.spot,
+                spot: {
+                    ...state.spot,
                     [action.booking.id]: action.booking
                 }
             }
