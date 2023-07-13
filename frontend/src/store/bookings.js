@@ -26,6 +26,11 @@ const editUserBooking = (booking) => ({
     booking
 })
 
+const deleteUserBooking = (bookingId) => ({
+    type: DELETE_BOOKING,
+    bookingId
+})
+
 export const createBooking = (spotId, booking) => async (dispatch) => {
     let res = await csrfFetch(`/api/spots/${spotId}/bookings`, {
         method: 'POST',
@@ -92,10 +97,35 @@ export const editBooking = (bookingId, booking) => async (dispatch) => {
     }
 }
 
+export const deleteBooking = (bookingId) => async(dispatch) => {
+    let res = await csrfFetch(`/api/bookings/${bookingId}`, {
+        method: 'DELETE'
+    }).catch(async (errs) => {
+        const err = await errs.json();
+        return err
+    })
+
+    if (res.ok) {
+        let message = await res.json()
+        dispatch(deleteUserBooking(bookingId))
+        return message
+    } else {
+        return res
+    }
+}
+
 const initialState = { user: {}, spot: {} }
 
 const bookingsReducer = (state = initialState, action) => {
     switch (action.type) {
+        case DELETE_BOOKING:
+            let newState = {
+                ...state,
+                user: { ...state.user },
+                spot: { ...state.spot }
+            }
+            delete newState[action.bookingId]
+            return newState
         case EDIT_BOOKING:
             return {
                 ...state,
