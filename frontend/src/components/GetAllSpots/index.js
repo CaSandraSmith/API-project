@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { loadSpots } from '../../store/spots';
-import IndividualSpotsListItem from '../IndividualSpotsListItem';
+import IndividualSpotsListItem from './IndividualSpotsListItem';
 import './GetAllSpots.css'
 
 export default function GetAllSpots() {
