@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { findOneSpot } from '../../store/spots';
-import IndividualSpotReviews from '../IndividualSpotReviews';
+import IndividualSpotReviews from './IndividualSpotReviews';
 import { clearSingleSpot } from '../../store/spots';
 import "./GetOneSpot.css"
 

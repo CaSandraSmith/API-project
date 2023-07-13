@@ -1,6 +1,6 @@
-import { useModal } from "../../context/Modal"
+import { useModal } from "../../../context/Modal"
 import { useSelector } from "react-redux"
-import PostReviewModal from "../PostReviewModal"
+import PostReviewModal from "../../PostReviewModal"
 
 export default function LoggedInPostReview() {
     const { setModalContent } = useModal();

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getReviewsBySpotId } from "../../store/reviews";
+import { getReviewsBySpotId } from "../../../store/reviews";
 import { useDispatch, useSelector } from "react-redux";
 import LoggedInCantReview from "./LoggedInCantReview";
 import LoggedInNoReviews from "./LoggedInNoReviews";

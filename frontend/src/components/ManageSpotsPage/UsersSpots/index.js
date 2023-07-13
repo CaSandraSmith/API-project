@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import DeleteSpotModal from "../DeleteSpotModal";
-import { useModal } from '../../context/Modal';
-import EditSpotForm from "../EditSpotForm";
+import DeleteSpotModal from "../../DeleteSpotModal";
+import { useModal } from '../../../context/Modal';
+import EditSpotForm from "../../EditSpotForm";
 import { useHistory } from "react-router-dom";
 import './UsersSpots.css';
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
-import { useModal } from "../../context/Modal"
+import { useModal } from "../../../context/Modal"
 import { useSelector } from "react-redux";
-import PostReviewModal from "../PostReviewModal"
+import PostReviewModal from "../../PostReviewModal"
 
 export default function LoggedInNoReviews({ spot }) {
     const [loaded, setLoaded] = useState(false)

@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux"
-import { useModal } from '../../context/Modal';
-import DeleteReviewModal from "../DeleteReviewModal";
+import { useModal } from '../../../context/Modal';
+import DeleteReviewModal from "../../DeleteReviewModal";
 
 export default function LoggedInCantReview() {
     const { setModalContent } = useModal();
