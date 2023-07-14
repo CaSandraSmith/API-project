@@ -2,8 +2,10 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { findOneSpot } from '../../store/spots';
-import IndividualSpotReviews from './IndividualSpotReviews';
 import { clearSingleSpot } from '../../store/spots';
+import { useModal } from '../../context/Modal';
+import IndividualSpotReviews from './IndividualSpotReviews';
+import SignupFormModal from '../SignupFormModal';
 import "./GetOneSpot.css"
 
 export default function GetOneSpot() {
@@ -11,10 +13,13 @@ export default function GetOneSpot() {
     const dispatch = useDispatch()
     const [startDate, setStartDate] = useState("")
     const [endDate, setEndDate] = useState("")
+    const { setModalContent } = useModal()
 
     const spot = useSelector(state => state.spots.singleSpot)
     const reviews = useSelector(state => state.reviews.spot)
     let num = Object.values(reviews).length
+    const user = useSelector(state => state.session.user)
+
     useEffect(() => {
         dispatch(findOneSpot(id))
         return (() => dispatch(clearSingleSpot()))
@@ -28,6 +33,9 @@ export default function GetOneSpot() {
 
     let makeReservation = (e) => {
         e.preventDefault()
+
+        if (!user) setModalContent(<SignupFormModal />)
+        
     }
 
     return (
@@ -116,7 +124,7 @@ export default function GetOneSpot() {
                                     onChange={(e) => setEndDate(e.target.value)}
                                 />
                             </label>
-                            <button className='reserve-button' onClick={makeReservation}>Reserve</button>
+                            <button className='reserve-button' onClick={makeReservation} disabled={user.id === spot.ownerId}>Reserve</button>
                         </form>
                     </div>
                 </div>

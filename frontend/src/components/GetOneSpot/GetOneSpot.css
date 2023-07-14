@@ -163,3 +163,8 @@ h3 {
 .rating-info {
     padding-top: 10px;
 }
+
+.reserve-button:disabled {
+    background-color: #999999;
+    cursor: not-allowed;
+}
