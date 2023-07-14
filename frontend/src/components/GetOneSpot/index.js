@@ -1,9 +1,9 @@
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
-import { findOneSpot } from '../../store/spots';
-import { clearSingleSpot } from '../../store/spots';
 import { useModal } from '../../context/Modal';
+import { findOneSpot, clearSingleSpot } from '../../store/spots';
+import { createBooking } from '../../store/bookings'; 
 import IndividualSpotReviews from './IndividualSpotReviews';
 import SignupFormModal from '../SignupFormModal';
 import "./GetOneSpot.css"
@@ -13,6 +13,7 @@ export default function GetOneSpot() {
     const dispatch = useDispatch()
     const [startDate, setStartDate] = useState("")
     const [endDate, setEndDate] = useState("")
+    const [errors, setErrors] = useState({})
     const { setModalContent } = useModal()
 
     const spot = useSelector(state => state.spots.singleSpot)
@@ -31,11 +32,28 @@ export default function GetOneSpot() {
         console.log("hello")
     }
 
-    let makeReservation = (e) => {
+    let makeReservation = async(e) => {
         e.preventDefault()
-
-        if (!user) setModalContent(<SignupFormModal />)
+        if (!user) return setModalContent(<SignupFormModal />)
         
+        let valErrors = {}
+        if (!startDate) {
+            valErrors.startDate = "Must select start date."
+        }
+        if (!endDate) {
+            valErrors.startDate = "Must select start date."
+        }
+        if (new Date(startDate).getTime() > new Date(endDate).getTime()) {
+            valErrors.dates = "Start Date must come before end date."
+        }
+
+        if (Object.values(valErrors).length) {
+            setErrors(valErrors)
+            return
+        }
+        let booking = {startDate, endDate}
+
+        let newBooking = await dispatch(createBooking(spot.id, booking))
     }
 
     return (
@@ -124,7 +142,7 @@ export default function GetOneSpot() {
                                     onChange={(e) => setEndDate(e.target.value)}
                                 />
                             </label>
-                            <button className='reserve-button' onClick={makeReservation} disabled={user.id === spot.ownerId}>Reserve</button>
+                            <button className='reserve-button' onClick={makeReservation} disabled={user ? user.id === spot.ownerId : false}>Reserve</button>
                         </form>
                     </div>
                 </div>

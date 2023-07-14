@@ -132,6 +132,42 @@ const checkReviewInput = [
     handleValidationErrors
 ]
 
+let formatBooking = async (newBooking) => {
+    let formattedBooking = await Booking.findByPk(newBooking.id, {
+        include: {
+            model: Spot,
+            attributes: [
+                "id", "ownerId", "address", "city", "state", "country", "lat", "lng", "name", "price"
+            ],
+            include: {
+                model: User,
+                as: "Owner",
+                attributes: ["firstName", "lastName"]
+            }
+        }
+    })
+
+    formattedBooking = formattedBooking.toJSON()
+
+    let previewImageUrl = await SpotImage.findOne({
+        where: {
+            spotId: formattedBooking.Spot.id,
+            preview: true
+        },
+        attributes: ['url']
+    });
+
+
+    if (previewImageUrl) {
+        formattedBooking.Spot.previewImage = previewImageUrl.url
+    } else {
+        formattedBooking.Spot.previewImage = null
+    }
+
+    return formattedBooking
+}
+
+
 router.post('/:spotId/bookings', requireAuth, checkSpotExists, async (req, res) => {
     let spotId = req.params.spotId;
     let userId = req.user.id
@@ -204,7 +240,9 @@ router.post('/:spotId/bookings', requireAuth, checkSpotExists, async (req, res) 
 
     await newBooking.save()
 
-    res.json(newBooking)
+    let formatedBooking = await formatBooking(newBooking)
+
+    res.json(formatedBooking)
 });
 
 router.post("/:spotId/reviews", requireAuth, checkSpotExists, checkReviewInput, async (req, res) => {
@@ -292,7 +330,6 @@ let formatSpots = function (spots) {
 
     return spotsCopy
 }
-
 
 router.get("/:spotId/bookings", requireAuth, checkSpotExists , async (req, res) => {
     let spotId = req.params.spotId
