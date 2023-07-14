@@ -139,7 +139,7 @@ const bookingsReducer = (state = initialState, action) => {
             }
         case GET_SPOT_BOOKINGS:
             let spotBookings = {}
-            for (let booking in action.bookings) {
+            for (let booking of action.bookings) {
                 spotBookings[booking.id] = booking
             }
             return {
@@ -149,7 +149,7 @@ const bookingsReducer = (state = initialState, action) => {
             }
         case GET_CURRENT_USER_BOOKINGS:
             let userBookings = {}
-            for (let booking in action.bookings) {
+            for (let booking of action.bookings) {
                 userBookings[booking.id] = booking
             }
             return {

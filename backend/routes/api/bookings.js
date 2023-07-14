@@ -146,7 +146,12 @@ router.get("/current", requireAuth, async (req, res) => {
             model: Spot,
             attributes: [
                 "id", "ownerId", "address", "city", "state", "country", "lat", "lng", "name", "price"
-            ]
+            ],
+            include: {
+                model: User,
+                as: "Owner",
+                attributes: ["firstName", "lastName"]
+            }
         }
     });
 

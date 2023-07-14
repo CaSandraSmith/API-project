@@ -61,7 +61,7 @@ function ProfileButton({ user }) {
           <div className="menu user">
             <div>Hello, {user.firstName}</div>
             <div>{user.email}</div>
-            <div onClick={() => history.push("/myBookings")}>My Bookings</div>
+            <div onClick={() => history.push("/myBookings")}>Trips</div>
             <div className="manage-spots-wrapper">
               <NavLink to="/spots/current" className="manage-spots-link">Manage Spots</NavLink>
             </div>
