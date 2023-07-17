@@ -140,7 +140,6 @@ const bookingsReducer = (state = initialState, action) => {
         case GET_SPOT_BOOKINGS:
             let spotBookings = {}
             for (let booking of action.bookings) {
-                console.log("bookingggg in reducer", booking)
                 spotBookings[booking.id] = booking
             }
             return {

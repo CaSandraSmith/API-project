@@ -101,7 +101,6 @@ export default function GetOneSpot() {
     let disabledDays = () => {
         let days = [{ before: new Date() }]
         for (let booking of Object.values(spotBookings)) {
-            console.log("bookings", booking)
             days.push(new Date(booking.startDate))
 
             let startTime = new Date(booking.startDate).getTime()
@@ -116,7 +115,6 @@ export default function GetOneSpot() {
         return days
     }
 
-    console.log("disabled", disabledDays())
     return (
         <div className='singleSpotPage'>
             <div className='single-spot-name-location'>
@@ -185,13 +183,13 @@ export default function GetOneSpot() {
                             </div>
                         )}
                     </div>
-                    <div>
-                        <div onClick={() => setCalendarOpen(true)}>
-                            <p>CHECK-IN:</p>
+                    <div className='booking-input-wrapper'>
+                        <div className='booking-input-captions-wrapper' onClick={() => setCalendarOpen(true)}>
+                            <p>CHECK-IN</p>
                             <p>{startDate ? startDate : "Add date"}</p>
                         </div>
-                        <div onClick={() => setCalendarOpen(true)}>
-                            <p>CHECKOUT:</p>
+                        <div className='booking-input-captions-wrapper' onClick={() => setCalendarOpen(true)}>
+                            <p>CHECKOUT</p>
                             <p>{endDate ? endDate : "Add date"}</p>
                         </div>
                         {calenderOpen &&
@@ -224,24 +222,6 @@ export default function GetOneSpot() {
                                 </div>
                             </div>
                         }
-                        {/* <form>
-                            <label>
-                                <input
-                                    type='date'
-                                    value={startDate}
-                                    onChange={(e) => setStartDate(e.target.value)}
-                                />
-                            </label>
-                            <label>
-                                CHECKOUT:
-                                <input
-                                    type='date'
-                                    value={endDate}
-                                    onChange={(e) => setEndDate(e.target.value)}
-                                />
-                            </label>
-                            <button className='reserve-button' onClick={makeReservation} disabled={user ? user.id === spot.ownerId : false}>Reserve</button>
-                        </form> */}
 
                     </div>
                 </div>
