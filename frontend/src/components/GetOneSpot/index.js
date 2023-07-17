@@ -243,27 +243,27 @@ export default function GetOneSpot() {
                         {calenderOpen &&
                             <div className='booking-calender-wrapper'>
                                 {/* <i onClick={handleRangeClick} class="fa-solid fa-x"></i> */}
-                                <div>
+                                <div className='booking-calender-caption-wrapper'>
                                     <div>
-                                        <p>{startDate && endDate ? `${differenceInCalendarDays(new Date(endDate), new Date(startDate))} nights` : "Select Dates"}</p>
-                                        <p>{startDate && endDate ?
+                                        <p className='booking-calender-caption'>{startDate && endDate ? `${differenceInCalendarDays(new Date(endDate), new Date(startDate))} nights` : "Select Dates"}</p>
+                                        <p className='booking-calender-dates'>{startDate && endDate ?
                                             `${months[startRes.getMonth()]} ${startRes.getDate()}, ${startRes.getFullYear()} 
                                         - 
                                         ${months[endRes.getMonth()]} ${endRes.getDate()}, ${endRes.getFullYear()}`
                                             : "Add your travel dates for exact pricing"}</p>
                                     </div>
-                                    <div>
-                                        <div>
-                                            <p>CHECK-IN:</p>
+                                    <div className='calendar-input-wrapper'>
+                                        <div className='calendar-input-captions-wrapper'>
+                                            <p>CHECK-IN</p>
                                             <p>{startDate ? `${startRes.getMonth() + 1}/${startRes.getDate()}/${startRes.getFullYear()}` : "Add date"}</p>
                                         </div>
-                                        <div>
-                                            <p>CHECKOUT:</p>
+                                        <div className='calendar-input-captions-wrapper'>
+                                            <p>CHECKOUT</p>
                                             <p>{endDate ? `${endRes.getMonth() + 1}/${endRes.getDate()}/${endRes.getFullYear()}` : "Add date"}</p>
                                         </div>
                                     </div>
                                 </div>
-                                <div>
+                                <div className='booking-calendar-wrapper'>
                                     <DayPicker
                                         mode="range"
                                         selected={selectedRange}

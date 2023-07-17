@@ -59,11 +59,11 @@ h2 {
 }
 
 .images:hover {
-    filter:brightness(80%);
+    filter: brightness(80%);
     cursor: pointer;
 }
 
-.optional-images > .images {
+.optional-images>.images {
     width: 100%;
     height: 170px;
     object-fit: cover;
@@ -97,7 +97,6 @@ h2 {
     border-bottom: 2px solid black;
 }
 
-
 .host-info {
     width: 100%;
 }
@@ -112,6 +111,7 @@ h2 {
     border-radius: 10px;
     padding: 20px;
     row-gap: 10px;
+    position: relative;
 }
 
 .booking-info {
@@ -169,37 +169,140 @@ h3 {
     cursor: not-allowed;
 }
 
-.booking-input-wrapper {
+.booking-input-wrapper, .calendar-input-wrapper {
     display: grid;
     width: 100%;
     grid-template-columns: 1fr 1fr;
     justify-items: start;
     border: 1px solid #b0b0b0;
     border-radius: 15px;
-    position: relative;
 }
 
-.booking-input-captions-wrapper {
+.calendar-input-wrapper {
+    height: 60px;
+}
+
+
+.booking-input-captions-wrapper, .calendar-input-captions-wrapper {
     width: 100%;
     padding: 10px;
 }
 
-.booking-input-captions-wrapper:nth-child(1) {
+.calendar-input-captions-wrapper {
+    height: fit-content;
+}
+
+.booking-input-captions-wrapper:nth-child(1), .calendar-input-captions-wrapper:nth-child(1) {
     border-right: 1px solid #b0b0b0;
 }
 
-.booking-input-captions-wrapper > p:nth-child(1) {
+.booking-input-captions-wrapper>p:nth-child(1) {
     font-size: 12px;
     font-weight: 600;
 }
 
-.booking-input-captions-wrapper > p:nth-child(2) {
+.booking-input-captions-wrapper>p:nth-child(2) {
     font-size: 15px;
+}
+
+.calendar-input-captions-wrapper > p{
+    font-size: 12px;
+    width: 100%;
+}
+
+.calendar-input-captions-wrapper > p:nth-child(1) {
+    font-weight: 600;
 }
 
 .booking-calender-wrapper {
     position: absolute;
     background-color: white;
     width: 600px;
+    right: -10px;
+    padding: 15px;
+    border: 1px solid #b0b0b0;
+    border-radius: 15px;
+}
+
+.rdp-months {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 20px;
+}
+
+.rdp-month.rdp-caption_start, .rdp-month.rdp-caption_end {
+    position: relative;
+}
+
+.rdp-caption {
+    display: flex;
+    justify-content: center;
+}
+
+.rdp-month.rdp-caption_start>.rdp-caption {
+    flex-direction: row-reverse;
+}
+
+.rdp-nav {
+    position: absolute;
+}
+
+.rdp-nav > button {
+    background-color: transparent;
+    padding: 5px;
+    border-color: transparent;
+    border-radius: 50%;
+}
+
+.rdp-nav > button:hover {
+    background-color: #f7f7f7;
+}
+
+.rdp-month.rdp-caption_start > .rdp-caption > .rdp-nav {
+    left: 0;
+}
+
+.rdp-month.rdp-caption_end > .rdp-caption > .rdp-nav {
+    background-color: transparent;
     right: 0;
+}
+
+.booking-calender-caption-wrapper {
+    display: grid;
+    grid-template-columns: 255px 1fr;
+    column-gap: 10px;
+}
+
+.booking-calender-caption {
+    font-size: 23px;
+    font-weight: 500;
+}
+
+.booking-calender-dates {
+    font-weight: 400;
+    font-size: 15px;
+    color: #8f8f8f;
+}
+
+.booking-calendar-wrapper {
+    margin-top: 30px;
+}
+
+.rdp-table {
+    width: 100%;
+}
+
+.rdp-head_cell {
+    font-weight: 400;
+    font-size: 13px;
+    color: #737373;
+}
+
+.rdp-cell > button {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.rdp-cell > button:disabled {
+    text-decoration: line-through;
 }
