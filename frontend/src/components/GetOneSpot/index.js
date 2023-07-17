@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { format, isAfter, isBefore, isValid, parse, startOfMonth, differenceInCalendarDays } from 'date-fns';
+import { DateRange, DayPicker, SelectRangeEventHandler } from 'react-day-picker';
+
 import { useModal } from '../../context/Modal';
 import { findOneSpot, clearSingleSpot } from '../../store/spots';
-import { createBooking } from '../../store/bookings'; 
+import { createBooking, getSpotsBookings } from '../../store/bookings';
 import IndividualSpotReviews from './IndividualSpotReviews';
 import SignupFormModal from '../SignupFormModal';
 import "./GetOneSpot.css"
@@ -13,6 +16,8 @@ export default function GetOneSpot() {
     const dispatch = useDispatch()
     const [startDate, setStartDate] = useState("")
     const [endDate, setEndDate] = useState("")
+    const [selectedRange, setSelectedRange] = useState()
+    const [calenderOpen, setCalendarOpen] = useState(false)
     const [errors, setErrors] = useState({})
     const { setModalContent } = useModal()
 
@@ -23,19 +28,51 @@ export default function GetOneSpot() {
 
     useEffect(() => {
         dispatch(findOneSpot(id))
+        dispatch(getSpotsBookings(id))
         return (() => dispatch(clearSingleSpot()))
     }, [dispatch, num])
 
+    useEffect(() => {
+        if (!selectedRange) {
+            setStartDate("")
+            setEndDate("")
+            return
+        }
+
+        if (selectedRange && selectedRange.from && selectedRange.to) {
+            if (new Date(startDate) < selectedRange.to && new Date(endDate) > selectedRange.to ) {
+                setStartDate(selectedRange.to.toString())
+                setSelectedRange({from: new Date(selectedRange.to), to: new Date(endDate)})
+            } else {
+                setEndDate(selectedRange.to.toString())
+            }
+        } else {
+            if (selectedRange?.from) {
+                setStartDate(selectedRange.from.toString())
+            } else {
+                setStartDate("")
+            }
+    
+            if (selectedRange?.to) {
+                setEndDate(selectedRange.to.toString())
+            } else {
+                setEndDate("")
+            }
+        }
+
+    }, [selectedRange])
+
+    const spotBookings = useSelector(state => state.bookings.spot)
     if (!Object.values(spot).length) return null
 
     let testClick = () => {
         console.log("hello")
     }
 
-    let makeReservation = async(e) => {
+    let makeReservation = async (e) => {
         e.preventDefault()
         if (!user) return setModalContent(<SignupFormModal />)
-        
+
         let valErrors = {}
         if (!startDate) {
             valErrors.startDate = "Must select start date."
@@ -51,10 +88,17 @@ export default function GetOneSpot() {
             setErrors(valErrors)
             return
         }
-        let booking = {startDate, endDate}
+        let booking = { startDate, endDate }
 
         let newBooking = await dispatch(createBooking(spot.id, booking))
     }
+
+    let hidePrevMonths = (day) => {
+        let today = new Date()
+        return differenceInCalendarDays(day, startOfMonth(today)) < 0
+    }
+
+    console.log("selescte", selectedRange)
 
     return (
         <div className='singleSpotPage'>
@@ -125,9 +169,33 @@ export default function GetOneSpot() {
                         )}
                     </div>
                     <div>
-                        <form>
+                        <div onClick={() => setCalendarOpen(true)}>
+                            <p>CHECK-IN:</p>
+                            <p>{startDate ? startDate : "Add date"}</p>
+                        </div>
+                        <div onClick={() => setCalendarOpen(true)}>
+                            <p>CHECKOUT:</p>
+                            <p>{endDate ? endDate : "Add date"}</p>
+                        </div>
+                        {calenderOpen &&
+                            <div>
+                                {/* <i onClick={handleRangeClick} class="fa-solid fa-x"></i> */}
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <DayPicker
+                                        mode="range"
+                                        selected={selectedRange}
+                                        onSelect={setSelectedRange}
+                                        hidden={hidePrevMonths}
+                                    />
+                                </div>
+                            </div>
+                        }
+                        {/* <form>
                             <label>
-                                CHECK-IN:
                                 <input
                                     type='date'
                                     value={startDate}
@@ -143,7 +211,8 @@ export default function GetOneSpot() {
                                 />
                             </label>
                             <button className='reserve-button' onClick={makeReservation} disabled={user ? user.id === spot.ownerId : false}>Reserve</button>
-                        </form>
+                        </form> */}
+
                     </div>
                 </div>
             </div>
