@@ -39,7 +39,7 @@ export default function GetOneSpot() {
             return
         }
 
-        if (selectedRange && selectedRange.from && selectedRange.to) {
+        if (selectedRange && selectedRange.from !== undefined && selectedRange.to !== undefined) {
             let disabledDates = disabledDays()
             let includesDisable = false
 
@@ -57,9 +57,10 @@ export default function GetOneSpot() {
                 }
             }
             if (includesDisable) {
-                setSelectedRange({ from: new Date(selectedRange.to), to: undefined })
-                setStartDate(selectedRange.to.toString())
+                setSelectedRange({ from: new Date(selectedRange.from), to: undefined })
+                setStartDate(selectedRange.from.toString())
                 setEndDate("")
+                return
             }
             if (new Date(startDate) < selectedRange.to && new Date(endDate) > selectedRange.to) {
                 setStartDate(selectedRange.to.toString())
@@ -161,7 +162,11 @@ export default function GetOneSpot() {
         endRes = new Date(endDate)
     }
 
-    console.log("newwww", selectedRange)
+    let handleClearClick = () => {
+        setSelectedRange({ from: undefined, to: undefined })
+        setStartDate("")
+        setEndDate("")
+    }
 
     return (
         <div className='singleSpotPage'>
@@ -273,6 +278,10 @@ export default function GetOneSpot() {
                                         fromMonth={new Date()}
                                         numberOfMonths={2}
                                     />
+                                </div>
+                                <div>
+                                    <p onClick={handleClearClick}>Clear Dates</p>
+                                    <button onClick={() => setCalendarOpen(false)}>Close</button>
                                 </div>
                             </div>
                         }
