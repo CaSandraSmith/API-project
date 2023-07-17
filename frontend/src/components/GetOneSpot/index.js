@@ -40,9 +40,9 @@ export default function GetOneSpot() {
         }
 
         if (selectedRange && selectedRange.from && selectedRange.to) {
-            if (new Date(startDate) < selectedRange.to && new Date(endDate) > selectedRange.to ) {
+            if (new Date(startDate) < selectedRange.to && new Date(endDate) > selectedRange.to) {
                 setStartDate(selectedRange.to.toString())
-                setSelectedRange({from: new Date(selectedRange.to), to: new Date(endDate)})
+                setSelectedRange({ from: new Date(selectedRange.to), to: new Date(endDate) })
             } else {
                 setEndDate(selectedRange.to.toString())
             }
@@ -52,7 +52,7 @@ export default function GetOneSpot() {
             } else {
                 setStartDate("")
             }
-    
+
             if (selectedRange?.to) {
                 setEndDate(selectedRange.to.toString())
             } else {
@@ -98,8 +98,25 @@ export default function GetOneSpot() {
         return differenceInCalendarDays(day, startOfMonth(today)) < 0
     }
 
-    console.log("selescte", selectedRange)
+    let disabledDays = () => {
+        let days = [{ before: new Date() }]
+        for (let booking of Object.values(spotBookings)) {
+            console.log("bookings", booking)
+            days.push(new Date(booking.startDate))
 
+            let startTime = new Date(booking.startDate).getTime()
+            let endTime = new Date(booking.endDate).getTime()
+
+            while (startTime + 86400000 < endTime) {
+                days.push(new Date(startTime + 86400000))
+                startTime = startTime + 86400000
+            }
+            days.push(new Date(booking.endDate))
+        }
+        return days
+    }
+
+    console.log("disabled", disabledDays())
     return (
         <div className='singleSpotPage'>
             <div className='single-spot-name-location'>
@@ -181,8 +198,20 @@ export default function GetOneSpot() {
                             <div>
                                 {/* <i onClick={handleRangeClick} class="fa-solid fa-x"></i> */}
                                 <div>
-                                    <div></div>
-                                    <div></div>
+                                    {/* <div>
+                                        <p>{startDate && endDate ? `${differenceInCalendarDays(new Date(endDate), new Date(startDate))} nights` : "Select Dates"}</p>
+                                        <p>{startDate && endDate ? "" : "Add your travel dates for exact pricing"}</p>
+                                    </div>
+                                    <div>
+                                        <div>
+                                            <p>CHECK-IN:</p>
+                                            <p>{startDate ? startDate : "Add date"}</p>
+                                        </div>
+                                        <div>
+                                            <p>CHECKOUT:</p>
+                                            <p>{endDate ? endDate : "Add date"}</p>
+                                        </div>
+                                    </div> */}
                                 </div>
                                 <div>
                                     <DayPicker
@@ -190,6 +219,7 @@ export default function GetOneSpot() {
                                         selected={selectedRange}
                                         onSelect={setSelectedRange}
                                         hidden={hidePrevMonths}
+                                        disabled={disabledDays()}
                                     />
                                 </div>
                             </div>
