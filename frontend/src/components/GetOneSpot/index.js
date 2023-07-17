@@ -279,7 +279,7 @@ export default function GetOneSpot() {
                                         numberOfMonths={2}
                                     />
                                 </div>
-                                <div>
+                                <div className='booking-calender-footer-wrapper'>
                                     <p onClick={handleClearClick}>Clear Dates</p>
                                     <button onClick={() => setCalendarOpen(false)}>Close</button>
                                 </div>

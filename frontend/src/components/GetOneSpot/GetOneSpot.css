@@ -324,5 +324,31 @@ h3 {
     height: 40px;
     background-color: #f7f7f7;
 }
-/* .rdp-cell > .rdp-day_range_middle {
-} */
+
+.booking-calender-footer-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    column-gap: 10px;
+}
+
+.booking-calender-footer-wrapper > p {
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.booking-calender-footer-wrapper > p:hover {
+    background-color: #f7f7f7;
+    border-radius: 10px;
+}
+
+.booking-calender-footer-wrapper > button {
+    background-color: black;
+    color: white;
+    width: 60px;
+    border-radius: 10px;
+    border-color: transparent;
+}
