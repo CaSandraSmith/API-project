@@ -1,26 +1,27 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { format, isAfter, isBefore, isValid, parse, startOfMonth, differenceInCalendarDays } from 'date-fns';
-import { DateRange, DayPicker, SelectRangeEventHandler } from 'react-day-picker';
-
+import { useHistory } from 'react-router-dom';
+import { startOfMonth, differenceInCalendarDays } from 'date-fns';
+import { DayPicker } from 'react-day-picker';
 import { useModal } from '../../context/Modal';
 import { findOneSpot, clearSingleSpot } from '../../store/spots';
 import { createBooking, getSpotsBookings } from '../../store/bookings';
 import IndividualSpotReviews from './IndividualSpotReviews';
 import SignupFormModal from '../SignupFormModal';
+import BookOwnSpotError from './BookOwnSpotError';
 import "./GetOneSpot.css"
 
 export default function GetOneSpot() {
     const { id } = useParams();
     const dispatch = useDispatch()
+    const history = useHistory()
     const [startDate, setStartDate] = useState("")
     const [endDate, setEndDate] = useState("")
     const [selectedRange, setSelectedRange] = useState()
     const [calenderOpen, setCalendarOpen] = useState(false)
     const [errors, setErrors] = useState({})
     const { setModalContent } = useModal()
-
     const spot = useSelector(state => state.spots.singleSpot)
     const reviews = useSelector(state => state.reviews.spot)
     let num = Object.values(reviews).length
@@ -95,6 +96,8 @@ export default function GetOneSpot() {
         e.preventDefault()
         if (!user) return setModalContent(<SignupFormModal />)
 
+        if (spot.Owner.id === user.id) return setModalContent(<BookOwnSpotError />)
+
         let valErrors = {}
         if (!startDate) {
             valErrors.startDate = "Must select start date."
@@ -113,6 +116,11 @@ export default function GetOneSpot() {
         let booking = { startDate, endDate }
 
         let newBooking = await dispatch(createBooking(spot.id, booking))
+        if (newBooking.errors) {
+            setErrors(newBooking)
+        } else {
+            history.push("/myBookings")
+        }
     }
 
     let hidePrevMonths = (day) => {
@@ -204,14 +212,14 @@ export default function GetOneSpot() {
                         <img src='https://res.cloudinary.com/djp7wsuit/image/upload/v1684114076/Untitled_design_ducrv0.png' alt='image-not-found' className='spotImage4 images' />
                     }
                 </div>
-                <button className='view-single-spot-photos-button'>
+                {/* <button className='view-single-spot-photos-button'>
                     <div className='view-single-spot-photos-icons'>
                         <i className="fa-solid fa-ellipsis-vertical"></i>
                         <i className="fa-solid fa-ellipsis-vertical"></i>
                         <i className="fa-solid fa-ellipsis-vertical"></i>
                     </div>
                     <p className='view-single-spot-photos-text'>Show all photos</p>
-                </button>
+                </button> */}
             </div>
             <div className='individual-spot-info'>
                 <div className='host-info'>
@@ -254,7 +262,9 @@ export default function GetOneSpot() {
                         <div>
                             {startDate && endDate ?
                                 <div className='booking-info-preview-wrapper'>
-                                    <button className='booking-input-button'>Reserve</button>
+                                    {Object.values(errors).length ? Object.values(errors).map(error => (<p>{error}</p>)) : null}
+                                    <button
+                                    onClick={makeReservation} className='booking-input-button'>Reserve</button>
                                     <p>You won't be charged yet</p>
                                     <div>
                                         <p>
