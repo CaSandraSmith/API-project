@@ -40,6 +40,27 @@ export default function GetOneSpot() {
         }
 
         if (selectedRange && selectedRange.from && selectedRange.to) {
+            let disabledDates = disabledDays()
+            let includesDisable = false
+
+            for (let day of disabledDates) {
+                if (day instanceof Date) {
+                    let startTime = new Date(selectedRange.from).getTime()
+                    let endTime = new Date(selectedRange.to).getTime()
+                    while (startTime < endTime) {
+                        let checkedDate = new Date(startTime)
+                        if (day.getDate() === checkedDate.getDate() && day.getMonth() === checkedDate.getMonth() && day.getFullYear() === checkedDate.getFullYear()) {
+                            includesDisable = true
+                        }
+                        startTime = startTime + 86400000
+                    }
+                }
+            }
+            if (includesDisable) {
+                setSelectedRange({ from: new Date(selectedRange.to), to: undefined })
+                setStartDate(selectedRange.to.toString())
+                setEndDate("")
+            }
             if (new Date(startDate) < selectedRange.to && new Date(endDate) > selectedRange.to) {
                 setStartDate(selectedRange.to.toString())
                 setSelectedRange({ from: new Date(selectedRange.to), to: new Date(endDate) })
@@ -115,6 +136,33 @@ export default function GetOneSpot() {
         return days
     }
 
+    let months = {
+        0: "Jan",
+        1: "Feb",
+        2: "March",
+        3: "April",
+        4: "May",
+        5: "June",
+        6: "July",
+        7: "Aug",
+        8: "Sept",
+        9: "Oct",
+        10: "Nov",
+        11: "Dec"
+    }
+
+    let startRes
+    let endRes
+
+    if (startDate) {
+        startRes = new Date(startDate)
+    }
+    if (endDate) {
+        endRes = new Date(endDate)
+    }
+
+    console.log("newwww", selectedRange)
+
     return (
         <div className='singleSpotPage'>
             <div className='single-spot-name-location'>
@@ -186,30 +234,34 @@ export default function GetOneSpot() {
                     <div className='booking-input-wrapper'>
                         <div className='booking-input-captions-wrapper' onClick={() => setCalendarOpen(true)}>
                             <p>CHECK-IN</p>
-                            <p>{startDate ? startDate : "Add date"}</p>
+                            <p>{startDate ? `${startRes.getMonth() + 1}/${startRes.getDate()}/${startRes.getFullYear()}` : "Add date"}</p>
                         </div>
                         <div className='booking-input-captions-wrapper' onClick={() => setCalendarOpen(true)}>
                             <p>CHECKOUT</p>
-                            <p>{endDate ? endDate : "Add date"}</p>
+                            <p>{endDate ? `${endRes.getMonth() + 1}/${endRes.getDate()}/${endRes.getFullYear()}` : "Add date"}</p>
                         </div>
                         {calenderOpen &&
-                            <div>
+                            <div className='booking-calender-wrapper'>
                                 {/* <i onClick={handleRangeClick} class="fa-solid fa-x"></i> */}
                                 <div>
-                                    {/* <div>
+                                    <div>
                                         <p>{startDate && endDate ? `${differenceInCalendarDays(new Date(endDate), new Date(startDate))} nights` : "Select Dates"}</p>
-                                        <p>{startDate && endDate ? "" : "Add your travel dates for exact pricing"}</p>
+                                        <p>{startDate && endDate ?
+                                            `${months[startRes.getMonth()]} ${startRes.getDate()}, ${startRes.getFullYear()} 
+                                        - 
+                                        ${months[endRes.getMonth()]} ${endRes.getDate()}, ${endRes.getFullYear()}`
+                                            : "Add your travel dates for exact pricing"}</p>
                                     </div>
                                     <div>
                                         <div>
                                             <p>CHECK-IN:</p>
-                                            <p>{startDate ? startDate : "Add date"}</p>
+                                            <p>{startDate ? `${startRes.getMonth() + 1}/${startRes.getDate()}/${startRes.getFullYear()}` : "Add date"}</p>
                                         </div>
                                         <div>
                                             <p>CHECKOUT:</p>
-                                            <p>{endDate ? endDate : "Add date"}</p>
+                                            <p>{endDate ? `${endRes.getMonth() + 1}/${endRes.getDate()}/${endRes.getFullYear()}` : "Add date"}</p>
                                         </div>
-                                    </div> */}
+                                    </div>
                                 </div>
                                 <div>
                                     <DayPicker

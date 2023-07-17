@@ -176,6 +176,7 @@ h3 {
     justify-items: start;
     border: 1px solid #b0b0b0;
     border-radius: 15px;
+    position: relative;
 }
 
 .booking-input-captions-wrapper {
@@ -194,4 +195,9 @@ h3 {
 
 .booking-input-captions-wrapper > p:nth-child(2) {
     font-size: 15px;
+}
+
+.booking-calender-wrapper {
+    position: absolute;
+    background-color: white;
 }
