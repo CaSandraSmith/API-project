@@ -200,4 +200,6 @@ h3 {
 .booking-calender-wrapper {
     position: absolute;
     background-color: white;
+    width: 600px;
+    right: 0;
 }

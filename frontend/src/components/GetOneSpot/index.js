@@ -270,6 +270,8 @@ export default function GetOneSpot() {
                                         onSelect={setSelectedRange}
                                         hidden={hidePrevMonths}
                                         disabled={disabledDays()}
+                                        fromMonth={new Date()}
+                                        numberOfMonths={2}
                                     />
                                 </div>
                             </div>
