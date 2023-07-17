@@ -168,6 +168,10 @@ export default function GetOneSpot() {
         setEndDate("")
     }
 
+    let calculateNetCost = () => {
+        return spot.price * differenceInCalendarDays(new Date(endDate), new Date(startDate))
+    }
+
     return (
         <div className='singleSpotPage'>
             <div className='single-spot-name-location'>
@@ -236,18 +240,47 @@ export default function GetOneSpot() {
                             </div>
                         )}
                     </div>
-                    <div className='booking-input-wrapper'>
-                        <div className='booking-input-captions-wrapper' onClick={() => setCalendarOpen(true)}>
-                            <p>CHECK-IN</p>
-                            <p>{startDate ? `${startRes.getMonth() + 1}/${startRes.getDate()}/${startRes.getFullYear()}` : "Add date"}</p>
+                    <div className='booking-input-wrapper-wrapper'>
+                        <div onClick={() => setCalendarOpen(true)} className='booking-input-wrapper'>
+                            <div className='booking-input-captions-wrapper'>
+                                <p>CHECK-IN</p>
+                                <p>{startDate ? `${startRes.getMonth() + 1}/${startRes.getDate()}/${startRes.getFullYear()}` : "Add date"}</p>
+                            </div>
+                            <div className='booking-input-captions-wrapper'>
+                                <p>CHECKOUT</p>
+                                <p>{endDate ? `${endRes.getMonth() + 1}/${endRes.getDate()}/${endRes.getFullYear()}` : "Add date"}</p>
+                            </div>
                         </div>
-                        <div className='booking-input-captions-wrapper' onClick={() => setCalendarOpen(true)}>
-                            <p>CHECKOUT</p>
-                            <p>{endDate ? `${endRes.getMonth() + 1}/${endRes.getDate()}/${endRes.getFullYear()}` : "Add date"}</p>
+                        <div>
+                            {startDate && endDate ?
+                                <div>
+                                    <button>Reserve</button>
+                                    <p>You won't be charged yet</p>
+                                    <div>
+                                        <p>
+                                        ${spot.price} X {differenceInCalendarDays(new Date(endDate), new Date(startDate))} nights
+                                        </p>
+                                        <p>
+                                            ${calculateNetCost()}
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <p>Characterbnb Service Fee</p>
+                                        <p>
+                                            ${Math.floor(.13 * (calculateNetCost()))}
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <p>Total before taxes</p>
+                                        <p>${Math.floor(.13 * (calculateNetCost())) + ( calculateNetCost())}</p>
+                                    </div>
+                                </div>
+                                :
+                                <button onClick={() => setCalendarOpen(true)}>Check Availability</button>
+                            }
                         </div>
                         {calenderOpen &&
                             <div className='booking-calender-wrapper'>
-                                {/* <i onClick={handleRangeClick} class="fa-solid fa-x"></i> */}
                                 <div className='booking-calender-caption-wrapper'>
                                     <div>
                                         <p className='booking-calender-caption'>{startDate && endDate ? `${differenceInCalendarDays(new Date(endDate), new Date(startDate))} nights` : "Select Dates"}</p>
