@@ -253,8 +253,8 @@ export default function GetOneSpot() {
                         </div>
                         <div>
                             {startDate && endDate ?
-                                <div>
-                                    <button>Reserve</button>
+                                <div className='booking-info-preview-wrapper'>
+                                    <button className='booking-input-button'>Reserve</button>
                                     <p>You won't be charged yet</p>
                                     <div>
                                         <p>
@@ -264,7 +264,7 @@ export default function GetOneSpot() {
                                             ${calculateNetCost()}
                                         </p>
                                     </div>
-                                    <div>
+                                    <div className='booking-service-fee'>
                                         <p>Characterbnb Service Fee</p>
                                         <p>
                                             ${Math.floor(.13 * (calculateNetCost()))}
@@ -276,7 +276,7 @@ export default function GetOneSpot() {
                                     </div>
                                 </div>
                                 :
-                                <button onClick={() => setCalendarOpen(true)}>Check Availability</button>
+                                <button className='booking-input-button' onClick={() => setCalendarOpen(true)}>Check Availability</button>
                             }
                         </div>
                         {calenderOpen &&
@@ -310,6 +310,7 @@ export default function GetOneSpot() {
                                         disabled={disabledDays()}
                                         fromMonth={new Date()}
                                         numberOfMonths={2}
+                                        min={2}
                                     />
                                 </div>
                                 <div className='booking-calender-footer-wrapper'>

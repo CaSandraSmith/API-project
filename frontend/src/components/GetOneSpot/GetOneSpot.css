@@ -107,7 +107,7 @@ h2 {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 3px solid black;
+    border: 1px solid #b0b0b0;
     border-radius: 10px;
     padding: 20px;
     row-gap: 10px;
@@ -355,4 +355,37 @@ h3 {
     width: 60px;
     border-radius: 10px;
     border-color: transparent;
+}
+
+.booking-input-button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #dd1062;
+    font-weight: 800;
+    border-color: transparent;
+    color: white;
+    border-radius: 10px;
+}
+
+.booking-info-preview-wrapper {
+    display: grid;
+    row-gap: 10px;
+    justify-items: center;
+    width: 100%;
+}
+
+.booking-info-preview-wrapper > p {
+    font-size: 14px;
+}
+
+.booking-info-preview-wrapper > div {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.booking-service-fee {
+    border-bottom: 1px solid #b0b0b0;
+    padding-bottom: 10px;
 }
