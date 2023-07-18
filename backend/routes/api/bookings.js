@@ -24,7 +24,7 @@ let checkBookingExists = async (req, res, next) => {
     next()
 }
 
-router.delete('/:bookingId', checkBookingExists, async (req, res)=> {
+router.delete('/:bookingId', checkBookingExists, async (req, res) => {
     let currentUSer = req.user.id
     let booking = await Booking.findByPk(req.params.bookingId);
     let spot = await Spot.findByPk(booking.spotId)
@@ -121,7 +121,7 @@ router.put("/:bookingId", requireAuth, checkBookingExists, async (req, res) => {
             errors.errors.push("Start date conflicts with an existing booking")
             errors.errors.push("End date conflicts with an existing booking")
         }
-        
+
         if (errors.errors.length) {
             res.status(403);
             return res.json(errors)
@@ -136,6 +136,49 @@ router.put("/:bookingId", requireAuth, checkBookingExists, async (req, res) => {
 
     res.json(booking)
 })
+
+router.get("/:bookingId", requireAuth, checkBookingExists, async (req, res) => {
+    let booking = await Booking.findByPk(req.params.bookingId, {
+        include: {
+            model: Spot,
+            attributes: [
+                "id", "ownerId", "address", "city", "state", "country", "lat", "lng", "name", "price"
+            ],
+            include: {
+                model: User,
+                as: "Owner",
+                attributes: ["firstName", "lastName"]
+            }
+        }
+    });
+
+    if (booking.userId !== req.user.id) {
+        res.status(403);
+        return res.json({
+            "message": "Forbidden"
+        })
+    };
+
+
+    let previewImageUrl = await SpotImage.findOne({
+        where: {
+            spotId: booking.Spot.id,
+            preview: true
+        },
+        attributes: ['url']
+    });
+
+    booking = booking.toJSON()
+
+    if (previewImageUrl) {
+        booking.Spot.previewImage = previewImageUrl.url
+    } else {
+        booking.Spot.previewImage = null
+    }
+
+    res.json(booking)
+})
+
 
 router.get("/current", requireAuth, async (req, res) => {
     let bookings = await Booking.findAll({

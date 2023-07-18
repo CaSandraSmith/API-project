@@ -5,6 +5,7 @@ const GET_CURRENT_USER_BOOKINGS = "bookings/currentUser"
 const GET_SPOT_BOOKINGS = "bookings/spot"
 const EDIT_BOOKING = "bookings/edit"
 const DELETE_BOOKING = "bookings/edit"
+const GET_BOOKING = "bookings/getOne"
 
 const createNewBooking = (booking) => ({
     type: CREATE_BOOKING,
@@ -29,6 +30,11 @@ const editUserBooking = (booking) => ({
 const deleteUserBooking = (bookingId) => ({
     type: DELETE_BOOKING,
     bookingId
+})
+
+const getBooking = (booking) => ({
+    type: GET_BOOKING,
+    booking
 })
 
 export const createBooking = (spotId, booking) => async (dispatch) => {
@@ -114,7 +120,7 @@ export const deleteBooking = (bookingId) => async(dispatch) => {
     }
 }
 
-const initialState = { user: {}, spot: {} }
+const initialState = { user: {}, spot: {}, singleBooking: {} }
 
 const bookingsReducer = (state = initialState, action) => {
     switch (action.type) {
