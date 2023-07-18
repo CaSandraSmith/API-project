@@ -78,3 +78,7 @@ You can access the live version of this app here:
 https://characterbnb.onrender.com/
 
 It can also be be launch locally by acessing both the frontend and backend folders, running npm install in both folders, and then running npm start in the backend folder before running that same command in the frontend folder.
+
+## Contact Me
+[LinkedIn](https://www.linkedin.com/in/casandra-smith/)
+[WellFound](https://wellfound.com/u/ca-sandra-smith)
