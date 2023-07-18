@@ -4,7 +4,7 @@ const CREATE_BOOKING = "bookings/create"
 const GET_CURRENT_USER_BOOKINGS = "bookings/currentUser"
 const GET_SPOT_BOOKINGS = "bookings/spot"
 const EDIT_BOOKING = "bookings/edit"
-const DELETE_BOOKING = "bookings/edit"
+const DELETE_BOOKING = "bookings/delete"
 const GET_BOOKING = "bookings/getOne"
 
 const createNewBooking = (booking) => ({
@@ -163,7 +163,7 @@ const bookingsReducer = (state = initialState, action) => {
                     [action.booking.id]: action.booking
                 },
                 spot: {
-                    ...action.booking
+                    ...state.spot
                 },
                 singleBooking : {...state.singleBooking, ...action.booking}
             }

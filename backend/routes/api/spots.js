@@ -132,7 +132,7 @@ const checkReviewInput = [
     handleValidationErrors
 ]
 
-let formatBooking = async (newBooking) => {
+const formatBooking = async (newBooking) => {
     let formattedBooking = await Booking.findByPk(newBooking.id, {
         include: {
             model: Spot,
@@ -189,7 +189,6 @@ router.post('/:spotId/bookings', requireAuth, checkSpotExists, async (req, res) 
         endDate
     })
 
-    //this gives me a day earlier than it should
     let start = new Date (newBooking.startDate.toDateString()).getTime();
     let end = new Date (newBooking.endDate.toDateString()).getTime();
 

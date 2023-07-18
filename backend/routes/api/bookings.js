@@ -24,6 +24,41 @@ let checkBookingExists = async (req, res, next) => {
     next()
 }
 
+const formatBooking = async (newBooking) => {
+    let formattedBooking = await Booking.findByPk(newBooking.id, {
+        include: {
+            model: Spot,
+            attributes: [
+                "id", "ownerId", "address", "city", "state", "country", "lat", "lng", "name", "price"
+            ],
+            include: {
+                model: User,
+                as: "Owner",
+                attributes: ["firstName", "lastName"]
+            }
+        }
+    })
+
+    formattedBooking = formattedBooking.toJSON()
+
+    let previewImageUrl = await SpotImage.findOne({
+        where: {
+            spotId: formattedBooking.Spot.id,
+            preview: true
+        },
+        attributes: ['url']
+    });
+
+
+    if (previewImageUrl) {
+        formattedBooking.Spot.previewImage = previewImageUrl.url
+    } else {
+        formattedBooking.Spot.previewImage = null
+    }
+
+    return formattedBooking
+}
+
 router.delete('/:bookingId', checkBookingExists, async (req, res) => {
     let currentUSer = req.user.id
     let booking = await Booking.findByPk(req.params.bookingId);
@@ -65,7 +100,6 @@ router.put("/:bookingId", requireAuth, checkBookingExists, async (req, res) => {
 
     let { startDate, endDate } = req.body
 
-    //this gives me a day earlier than it should
     let start = new Date(booking.startDate.toDateString()).getTime();
     let end = new Date(booking.endDate.toDateString()).getTime();
 
@@ -134,7 +168,9 @@ router.put("/:bookingId", requireAuth, checkBookingExists, async (req, res) => {
 
     await booking.save()
 
-    res.json(booking)
+    let formattedBooking = await formatBooking(booking)
+
+    res.json(formattedBooking)
 })
 
 router.get("/current", requireAuth, async (req, res) => {

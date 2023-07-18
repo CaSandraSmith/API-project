@@ -67,6 +67,7 @@ export default function GetOneSpot() {
                 setStartDate(selectedRange.to.toString())
                 setSelectedRange({ from: new Date(selectedRange.to), to: new Date(endDate) })
             } else {
+                setStartDate(selectedRange.from.toString())
                 setEndDate(selectedRange.to.toString())
             }
         } else {

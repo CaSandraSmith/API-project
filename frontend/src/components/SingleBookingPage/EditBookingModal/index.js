@@ -54,6 +54,7 @@ export default function EditBookingModal() {
                 setStartDate(selectedRange.to.toString())
                 setSelectedRange({ from: new Date(selectedRange.to), to: new Date(endDate) })
             } else {
+                setStartDate(selectedRange.from.toString())
                 setEndDate(selectedRange.to.toString())
             }
         } else {
@@ -152,8 +153,6 @@ export default function EditBookingModal() {
         endRes = new Date(endDate)
     }
 
-    console.log("selected", selectedRange)
-
     return (
         <div className="edit-booking-modal-wrapper">
             {Object.values(errors).length ? Object.values(errors).map(error => (<p>{error}</p>)) : null}
@@ -191,7 +190,7 @@ export default function EditBookingModal() {
             <div className='booking-calender-footer-wrapper'>
                 <p onClick={handleClearClick}>Clear Dates</p>
                 <button onClick={closeModal}>Cancel</button>
-                <button>Change reservation</button>
+                <button disabled={!startDate || !endDate} onClick={editReservation}>Change reservation</button>
             </div>
         </div>
     )
