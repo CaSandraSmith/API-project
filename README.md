@@ -1,13 +1,6 @@
-<!--!!START SILENT -->
+
+
 # characterBnB
-<!--!!END -->
-<!--!!ADD -->
-<!-- # `<name of application here>` -->
-<!--!!END_ADD -->
-
-
-
-## characterBnB
 
 ## Introduction
 
