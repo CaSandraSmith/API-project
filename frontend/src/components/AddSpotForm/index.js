@@ -37,11 +37,23 @@ export default function AddSpotForm() {
 
         let validationErrors = {}
         if (!country) validationErrors.country = "Country is required"
+        if (country.length > 255) validationErrors.country = "Country has maximum of 255 characters"
+
         if (!address) validationErrors.address = "Address is required"
+        if (address.length > 255) validationErrors.address = "Address has maximum of 255 characters"
+
         if (!city) validationErrors.city = "City is required"
+        if (city.length > 255) validationErrors.city = "City has maximum of 255 characters"
+
         if (!state) validationErrors.state = "State is required"
+        if (state.length > 255) validationErrors.state = "State has maximum of 255 characters"
+
         if (description.length < 30) validationErrors.description = "Description needs a minimum of 30 characters"
+        if (description.length > 255) validationErrors.description = "Description has maximum of 255 characters"
+
         if (!name) validationErrors.name = "Name is required"
+        if (name.length > 255) validationErrors.name = "Name has maximum of 255 characters"
+        
         if (!price) validationErrors.price = "Price is required"
         if (!previewImage) validationErrors.previewImage = "Preview image is required."
 
