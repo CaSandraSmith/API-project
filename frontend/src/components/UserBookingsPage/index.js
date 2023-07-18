@@ -20,7 +20,7 @@ export default function UserBookingsPage() {
 
     if (bookingsArr.length) {
         let today = new Date()
-        upcomingTrips = bookingsArr.filter(trip => new Date(trip.startDate).getTime() > today.getTime())
+        upcomingTrips = bookingsArr.filter(trip => new Date(trip.startDate).getTime() > today.getTime()).sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime())
         pastTrips = bookingsArr.filter(trip => new Date(trip.endDate).getTime() < today.getTime())
         currentTrips = bookingsArr.filter(trip => new Date(trip.startDate).getTime() < today.getTime() && new Date(trip.endDate).getTime() > today.getTime())
     }
