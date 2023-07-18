@@ -72,7 +72,7 @@ export default function SingleBookingPage() {
         return Math.floor(0.13 * nightly) + nightly
     }
 
-    if (!Object.values(booking).length) return <p>Loading</p>
+    if (!Object.values(booking).length) return
 
     return (
         <div className="single-booking-page-wrapper">
