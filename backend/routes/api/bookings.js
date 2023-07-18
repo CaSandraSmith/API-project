@@ -137,49 +137,6 @@ router.put("/:bookingId", requireAuth, checkBookingExists, async (req, res) => {
     res.json(booking)
 })
 
-router.get("/:bookingId", requireAuth, checkBookingExists, async (req, res) => {
-    let booking = await Booking.findByPk(req.params.bookingId, {
-        include: {
-            model: Spot,
-            attributes: [
-                "id", "ownerId", "address", "city", "state", "country", "lat", "lng", "name", "price"
-            ],
-            include: {
-                model: User,
-                as: "Owner",
-                attributes: ["firstName", "lastName"]
-            }
-        }
-    });
-
-    if (booking.userId !== req.user.id) {
-        res.status(403);
-        return res.json({
-            "message": "Forbidden"
-        })
-    };
-
-
-    let previewImageUrl = await SpotImage.findOne({
-        where: {
-            spotId: booking.Spot.id,
-            preview: true
-        },
-        attributes: ['url']
-    });
-
-    booking = booking.toJSON()
-
-    if (previewImageUrl) {
-        booking.Spot.previewImage = previewImageUrl.url
-    } else {
-        booking.Spot.previewImage = null
-    }
-
-    res.json(booking)
-})
-
-
 router.get("/current", requireAuth, async (req, res) => {
     let bookings = await Booking.findAll({
         where: {
@@ -221,6 +178,40 @@ router.get("/current", requireAuth, async (req, res) => {
     }
 
     res.json({ Bookings: formatedBookings })
+})
+
+router.get("/:bookingId", requireAuth, checkBookingExists, async (req, res) => {
+    let booking = await Booking.findByPk(req.params.bookingId, {
+        include: {
+            model: Spot,
+            attributes: [
+                "id", "ownerId", "address", "city", "state", "country", "lat", "lng", "name", "price"
+            ],
+            include: {
+                model: User,
+                as: "Owner",
+                attributes: ["firstName", "lastName"]
+            }
+        }
+    });
+
+    let previewImageUrl = await SpotImage.findOne({
+        where: {
+            spotId: booking.Spot.id,
+            preview: true
+        },
+        attributes: ['url']
+    });
+
+    booking = booking.toJSON()
+
+    if (previewImageUrl) {
+        booking.Spot.previewImage = previewImageUrl.url
+    } else {
+        booking.Spot.previewImage = null
+    }
+
+    res.json(booking)
 })
 
 module.exports = router;
