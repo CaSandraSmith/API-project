@@ -51,7 +51,7 @@ function SignupFormModal() {
   return (
     <div className="sign-up-from-wrapper">
       <h2>Sign Up</h2>
-      <div className="sign-up-error-messages">
+      {Object.values(errors).length ? <div className="sign-up-error-messages">
         {errors.email && <p>{errors.email}</p>}
         {errors.username && <p>{errors.username}</p>}
         {errors.lastName && <p>{errors.lastName}</p>}
@@ -60,7 +60,7 @@ function SignupFormModal() {
         {errors.confirmPassword && (
           <p>{errors.confirmPassword}</p>
         )}
-      </div>
+      </div> : null}
       <form className="sign-up-from" onSubmit={handleSubmit}>
         <div>
           <label>

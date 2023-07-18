@@ -3,7 +3,7 @@
     justify-items: center;
     align-items: center;
     padding: 20px;
-    width: 350px;
+    height: 450px;
 }
 
 .signup-button {
@@ -37,4 +37,10 @@
 
 .sign-up-from > div > label > div{
     padding-top: 5px;
+}
+
+.sign-up-from {
+    overflow-y: scroll;
+    display: grid;
+    height: 100%;
 }
