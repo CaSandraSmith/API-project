@@ -10,6 +10,7 @@ import ManageSpots from "./components/ManageSpotsPage";
 import EditSpotForm from "./components/EditSpotForm";
 import UserBookingsPage from "./components/UserBookingsPage"
 import SingleBookingPage from "./components/SingleBookingPage";
+import PageNotFound from "./components/PageNotFound";
 
 function App() {
   const dispatch = useDispatch();
@@ -43,6 +44,9 @@ function App() {
           </Route>
           <Route exact path="/">
             <GetAllSpots />
+          </Route>
+          <Route>
+            <PageNotFound />
           </Route>
         </Switch>
       }

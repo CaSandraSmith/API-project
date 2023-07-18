@@ -1,0 +1,22 @@
+.page-not-found-wrapper {
+    width: 100%;
+    display: grid;
+    justify-items: center;
+    margin-top: 200px;
+    row-gap: 20px;
+}
+
+.page-not-found-wrapper > h1 {
+    text-align: center;
+}
+
+.page-not-found-wrapper > button {
+    text-align: center;
+    padding: 10px;
+    font-size: 15px;
+    background-color: #ff5d5f;
+    border-radius: 20px;
+    border-color: transparent;
+    color: white;
+    font-weight: 500;
+}
