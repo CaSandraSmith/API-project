@@ -77,7 +77,16 @@ The technologies used on this project include:
 You can access the live version of this app here: 
 https://characterbnb.onrender.com/
 
-It can also be be launch locally by acessing both the frontend and backend folders, running npm install in both folders, and then running npm start in the backend folder before running that same command in the frontend folder.
+It can also be be launch locally by
+
+1. acessing backend folders
+   * npm install
+   * npx dotenv sequelize db:migrate
+   * npx dotenv sequelize db:seed:all
+   * npm start
+2. accessing frontend folder
+   * npm install
+   * npm start
 
 ## Contact Me
 [LinkedIn](https://www.linkedin.com/in/casandra-smith/)
