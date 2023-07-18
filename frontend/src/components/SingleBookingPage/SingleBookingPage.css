@@ -1,0 +1,81 @@
+.single-booking-page-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    height: calc(100vh - 70px);
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.single-booking-image-wrapper {
+    position: relative;
+}
+
+.single-booking-image-caption {
+    top: 10px;
+    left: 10px;
+    position: absolute;
+}
+
+.single-booking-image-caption > h2 {
+    color: white;
+}
+
+.single-booking-image-caption > i {
+    background-color: white;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.single-booking-image-wrapper > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.single-booking-info {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: #ebebeb;
+}
+
+.single-booking-info > div {
+    margin-bottom: 20px;
+    background-color: white;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.single-booking-dates-wrapper {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 15px;
+}
+
+.single-booking-dates > p:nth-child(1) {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.single-booking-dates > p:nth-child(2) {
+    font-weight: 600;
+}
+
+.single-reservation-details-wrapper {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    width: 100%;
+}
+
+.single-reservation-details-section {
+    border-bottom: 1px solid #b0b0b0;
+}

@@ -71,9 +71,10 @@ export default function SingleBookingPage() {
     if (!Object.values(booking).length) return <p>Loading</p>
 
     return (
-        <div>
-            <div>
-                <div>
+        <div className="single-booking-page-wrapper">
+            <div className="single-booking-image-wrapper">
+                <div className="single-booking-image-caption">
+                    <i onClick={() => history.goBack()} className="fa-solid fa-arrow-left"></i>
                     <h2>
                         {today < new Date(booking.startDate) ?
                             `You're all set for ${booking.Spot.city}`
@@ -87,33 +88,35 @@ export default function SingleBookingPage() {
                     alt={`Spot, ${booking.Spot.name}, preview image`}
                 />
             </div>
-            <div>
-                <div>
-                    <div>
+            <div className="single-booking-info">
+                <div className="single-booking-dates-wrapper">
+                    <div className="single-booking-dates">
                         <p>Check-in</p>
                         <p>{formatDay(booking.startDate)}</p>
                     </div>
-                    <div>
+                    <div className="single-booking-dates">
                         <p>Checkout</p>
                         <p>{formatDay(booking.endDate)}</p>
                     </div>
                 </div>
-                <div>
-                    <h3>Reservation details</h3>
+                <div className="single-reservation-details-wrapper">
                     <div>
+                        <h3>Reservation details</h3>
+                    </div>
+                    <div className="single-reservation-details-section">
                         <h4>Confirmation code</h4>
                         <p>{makeConfirmationCode()}</p>
                     </div>
                     {today < new Date(booking.startDate) ?
                         <>
-                            <div>
+                            <div className="single-reservation-details-section">
                                 <div>
                                     <i className="fa-solid fa-pencil"></i>
                                     <p>Change reservation</p>
                                 </div>
                                 <i className="fa-solid fa-chevron-right"></i>
                             </div>
-                            <div>
+                            <div className="single-reservation-details-section">
                                 <div>
                                     <i className="fa-solid fa-ban"></i>
                                     <p>Cancel reservation</p>
@@ -124,15 +127,14 @@ export default function SingleBookingPage() {
                         :
                         null
                     }
+                </div>
+                <div className="single-booking-host">
+                    <h3>Hosted by {booking.Spot.Owner.firstName}</h3>
+                </div>
+                <div>
+                    <h3>Payment details</h3>
                     <div>
-                        <h4>Hosted by {booking.Spot.Owner.firstName}</h4>
-                    </div>
-                    <div>
-                        <h4>Payment details</h4>
-                        <div>
-                            <p>Total cost</p>
-                            <p>${calculateNetCost()} USD</p>
-                        </div>
+                        <p>Total cost: ${calculateNetCost()} USD</p>
                     </div>
                 </div>
             </div>
