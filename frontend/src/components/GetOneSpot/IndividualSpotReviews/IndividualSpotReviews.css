@@ -19,6 +19,11 @@
 .review-info.wrapper {
     padding-top: 10px;
     padding-bottom: 25px;
+    overflow: hidden;
+}
+
+.review-info.wrapper  > p {
+    word-break: break-all;
 }
 
 .review-info {

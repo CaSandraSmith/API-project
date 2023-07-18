@@ -20,8 +20,17 @@ export default function PostReviewModal({ spot }) {
     }
 
     async function handleSubmit(e) {
-        setErrors({})
         e.preventDefault()
+        setErrors({})
+
+        let valErrors = {}
+        if (review.length > 255) valErrors.review = "Review has maximum of 255 characters"
+
+        if (Object.values(valErrors).length) {
+            setErrors(valErrors)
+            return
+        }
+
         let reviewData = { stars, review }
         let reviewResponse = await dispatch(createReview(reviewData, spot.id))
 
