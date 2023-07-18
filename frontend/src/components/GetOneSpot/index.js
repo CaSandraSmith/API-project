@@ -120,7 +120,7 @@ export default function GetOneSpot() {
         if (newBooking.errors) {
             setErrors(newBooking)
         } else {
-            history.push("/myBookings")
+            history.push(`/trips/${newBooking.id}`)
         }
     }
 
