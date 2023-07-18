@@ -3,11 +3,15 @@ import { useDispatch, useSelector } from "react-redux"
 import { useHistory, useParams } from "react-router-dom"
 import { differenceInCalendarDays } from 'date-fns';
 import { getSingleBooking } from "../../store/bookings"
+import { useModal } from "../../context/Modal";
+import EditBookingModal from "./EditBookingModal";
+import CancelBookingModal from "./CancelBookingModal";
 import "./SingleBookingPage.css"
 
 export default function SingleBookingPage() {
     const history = useHistory()
     const dispatch = useDispatch()
+    const { setModalContent } = useModal()
     const { id } = useParams()
 
     useEffect(() => {
@@ -109,14 +113,14 @@ export default function SingleBookingPage() {
                     </div>
                     {today < new Date(booking.startDate) ?
                         <>
-                            <div className="single-reservation-details-section change-booking-wrapper">
+                            <div onClick={() => setModalContent(<EditBookingModal />)} className="single-reservation-details-section change-booking-wrapper">
                                 <div>
                                     <i className="fa-solid fa-pencil"></i>
                                     <p>Change reservation</p>
                                 </div>
                                 <i className="fa-solid fa-chevron-right"></i>
                             </div>
-                            <div className="single-reservation-details-section change-booking-wrapper">
+                            <div onClick={() => setModalContent(<CancelBookingModal />)} className="single-reservation-details-section change-booking-wrapper">
                                 <div>
                                     <i className="fa-solid fa-ban"></i>
                                     <p>Cancel reservation</p>
