@@ -9,7 +9,9 @@ export default function IndividualSpotListItem({ spot }) {
     }
     return (
         <div onClick={movePage} className={`all-spots-page-spot-wrapper`} title={spot.name}>
-            <img src={spot.previewImage} alt={spot.name} />
+            <img 
+            className="all-spots-image" 
+            src={spot.previewImage} alt={spot.name} />
             <div className="all-spot-info-wrapper">
                 <div className="get-all-spots-location-price">
                     <div>
