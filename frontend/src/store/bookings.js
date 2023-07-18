@@ -120,17 +120,40 @@ export const deleteBooking = (bookingId) => async(dispatch) => {
     }
 }
 
+export const getSingleBooking = (bookingId) => async(dispatch) => {
+    let res = await csrfFetch(`/api/bookings/${bookingId}`).catch(async (errs) => {
+        const err = await errs.json();
+        return err
+    })
+
+    if (res.ok) {
+        let booking = await res.json()
+        dispatch(getBooking(booking))
+        return booking
+    } else {
+        return res
+    }
+}
+
 const initialState = { user: {}, spot: {}, singleBooking: {} }
 
 const bookingsReducer = (state = initialState, action) => {
     switch (action.type) {
+        case GET_BOOKING:
+            return {
+                ...state,
+                user: { ...state.user },
+                spot: { ...state.spot },
+                singleBooking : {...action.booking}
+            }
         case DELETE_BOOKING:
             let newState = {
                 ...state,
                 user: { ...state.user },
-                spot: { ...state.spot }
+                spot: { ...state.spot },
+                singleBooking : {}
             }
-            delete newState[action.bookingId]
+            delete newState.spot[action.bookingId]
             return newState
         case EDIT_BOOKING:
             return {
@@ -141,7 +164,8 @@ const bookingsReducer = (state = initialState, action) => {
                 },
                 spot: {
                     ...state.spot
-                }
+                },
+                singleBooking : {...state.singleBooking, ...action.booking}
             }
         case GET_SPOT_BOOKINGS:
             let spotBookings = {}
@@ -151,7 +175,8 @@ const bookingsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 user: { ...state.bookings },
-                spot: { ...spotBookings }
+                spot: { ...spotBookings },
+                singleBooking: {}
             }
         case GET_CURRENT_USER_BOOKINGS:
             let userBookings = {}
@@ -161,7 +186,8 @@ const bookingsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 user: { ...userBookings },
-                spot: { ...state.spot }
+                spot: { ...state.spot },
+                singleBooking: {}
             }
         case CREATE_BOOKING:
             return {
@@ -173,7 +199,8 @@ const bookingsReducer = (state = initialState, action) => {
                 spot: {
                     ...state.spot,
                     [action.booking.id]: action.booking
-                }
+                },
+                singleBooking: {}
             }
         default:
             return state
