@@ -74,37 +74,35 @@ export default function UserBookingsPage() {
     }
 
     return (
-        <div>
+        <div className="trip-page-wrapper">
             <h1>Trips</h1>
             {bookingsArr.length ?
-                <div>
+                <div className="all-bookings-wrapper">
                     {currentTrips.length ?
                         <div>
                             <h3>Your current stays</h3>
-                            <div>
+                            <div className="full-details-section-trips-wrapper">
                                 {currentTrips.map(trip => (
-                                    <div>
-                                        <div>
-                                            <div>
+                                    <div className="full-details-trips-wrapper">
+                                        <div className="full-details-trips-info-wrapper">
+                                            <div className="full-details-trips-owner-city">
                                                 <h3>{trip.Spot.city}</h3>
                                                 <p>Hosted by {trip.Spot.Owner.firstName}</p>
                                             </div>
-                                            <div>
-                                                <div>
-                                                    <p>{formatDates(trip.startDate, trip.endDate, "current/upcoming")}</p>
-                                                </div>
-                                                <div>
-                                                    <p>{trip.Spot.address}</p>
-                                                    <p>{trip.Spot.city}, {trip.Spot.state}</p>
-                                                    <p>{trip.Spot.country}</p>
-                                                </div>
+                                            <div className="full-details-trips-dates">
+                                                <p>{formatDates(trip.startDate, trip.endDate, "current/upcoming")}</p>
+                                            </div>
+                                            <div className="full-details-trips-owner-address">
+                                                <p>{trip.Spot.address}</p>
+                                                <p>{trip.Spot.city}, {trip.Spot.state}</p>
+                                                <p>{trip.Spot.country}</p>
                                             </div>
                                         </div>
                                         <div>
                                             <img
                                                 src={trip.Spot.previewImage}
                                                 alt={`Spot ${trip.Spot.name} preivew image`}
-                                                className="temp-image-class"
+                                                className="full-trip-image"
                                             />
                                         </div>
                                     </div>
@@ -113,42 +111,44 @@ export default function UserBookingsPage() {
                             </div>
                         </div>
                         : null}
-                    <h2>Upcoming reservations</h2>
-                    {upcomingTrips.length ?
-                        upcomingTrips.map(trip => (
-                            <div>
-                                <div>
-                                    <div>
-                                        <h3>{trip.Spot.city}</h3>
-                                        <p>Hosted by {trip.Spot.Owner.firstName}</p>
-                                    </div>
-                                    <div>
-                                        <div>
-                                            <p>{formatDates(trip.startDate, trip.endDate, "current/upcoming")}</p>
+                    <div>
+                        <h3>Upcoming reservations</h3>
+                        <div className="full-details-section-trips-wrapper">
+                            {upcomingTrips.length ?
+                                upcomingTrips.map(trip => (
+                                    <div className="full-details-trips-wrapper">
+                                        <div className="full-details-trips-info-wrapper">
+                                            <div className="full-details-trips-owner-city">
+                                                <h3>{trip.Spot.city}</h3>
+                                                <p>Hosted by {trip.Spot.Owner.firstName}</p>
+                                            </div>
+                                            <div className="full-details-trips-dates">
+                                                <p>{formatDates(trip.startDate, trip.endDate, "current/upcoming")}</p>
+                                            </div>
+                                            <div className="full-details-trips-owner-address">
+                                                <p>{trip.Spot.address}</p>
+                                                <p>{trip.Spot.city}, {trip.Spot.state}</p>
+                                                <p>{trip.Spot.country}</p>
+                                            </div>
                                         </div>
                                         <div>
-                                            <p>{trip.Spot.address}</p>
-                                            <p>{trip.Spot.city}, {trip.Spot.state}</p>
-                                            <p>{trip.Spot.country}</p>
+                                            <img
+                                                src={trip.Spot.previewImage}
+                                                alt={`Spot ${trip.Spot.name} preivew image`}
+                                                className="full-trip-image"
+                                            />
                                         </div>
                                     </div>
-                                </div>
+                                ))
+                                :
                                 <div>
-                                    <img
-                                        src={trip.Spot.previewImage}
-                                        alt={`Spot ${trip.Spot.name} preivew image`}
-                                        className="temp-image-class"
-                                    />
+                                    <h2>No future trips booked...yet!</h2>
+                                    <h3>Time to dust off your bags and start planning your next adventure</h3>
+                                    <button onClick={() => history.push("/")}>Start searching</button>
                                 </div>
-                            </div>
-                        ))
-                        :
-                        <div>
-                            <h2>No future trips booked...yet!</h2>
-                            <h3>Time to dust off your bags and start planning your next adventure</h3>
-                            <button onClick={() => history.push("/")}>Start searching</button>
+                            }
                         </div>
-                    }
+                    </div>
                     {pastTrips.length ?
                         <div>
                             <h3>Where you’ve been</h3>
