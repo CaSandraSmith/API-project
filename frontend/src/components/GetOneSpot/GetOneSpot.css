@@ -352,7 +352,7 @@ h3 {
 .booking-calender-footer-wrapper > button {
     background-color: black;
     color: white;
-    width: 60px;
+    min-width: 60px;
     border-radius: 10px;
     border-color: transparent;
 }

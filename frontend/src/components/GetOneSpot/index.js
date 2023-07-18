@@ -294,7 +294,7 @@ export default function GetOneSpot() {
                             <div className='booking-calender-wrapper'>
                                 <div className='booking-calender-caption-wrapper'>
                                     <div>
-                                        <p className='booking-calender-caption'>{startDate && endDate ? `${differenceInCalendarDays(new Date(endDate), new Date(startDate))} nights` : "Select Dates"}</p>
+                                        <p className='booking-calender-caption'>{startDate && endDate ? `${differenceInCalendarDays(new Date(endDate), new Date(startDate))} ${differenceInCalendarDays(new Date(endDate), new Date(startDate)) === 1 ? "night" : "nights"}` : "Select Dates"}</p>
                                         <p className='booking-calender-dates'>{startDate && endDate ?
                                             `${months[startRes.getMonth()]} ${startRes.getDate()}, ${startRes.getFullYear()} 
                                         - 

@@ -158,7 +158,7 @@ export default function EditBookingModal() {
             {Object.values(errors).length ? Object.values(errors).map(error => (<p>{error}</p>)) : null}
             <div className='booking-calender-caption-wrapper'>
                 <div>
-                    <p className='booking-calender-caption'>{startDate && endDate ? `${differenceInCalendarDays(new Date(endDate), new Date(startDate))} nights` : "Select Dates"}</p>
+                    <p className='booking-calender-caption'>{startDate && endDate ? `${differenceInCalendarDays(new Date(endDate), new Date(startDate))} ${differenceInCalendarDays(new Date(endDate), new Date(startDate)) === 1 ? "night" : "nights"}` : "Select Dates"}</p>
                     <p className='booking-calender-dates'>{startDate && endDate ?
                         `${months[startRes.getMonth()]} ${startRes.getDate()}, ${startRes.getFullYear()} 
                 - 
@@ -190,7 +190,7 @@ export default function EditBookingModal() {
             <div className='booking-calender-footer-wrapper'>
                 <p onClick={handleClearClick}>Clear Dates</p>
                 <button onClick={closeModal}>Cancel</button>
-                <button disabled={!startDate || !endDate} onClick={editReservation}>Change reservation</button>
+                <button id="edit-booking-button" disabled={!startDate || !endDate} onClick={editReservation}>Change reservation</button>
             </div>
         </div>
     )

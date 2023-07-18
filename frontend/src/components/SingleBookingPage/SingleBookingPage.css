@@ -98,3 +98,11 @@
     box-sizing: border-box;
     padding: 15px;
 }
+
+#edit-booking-button {
+    background-color: #FF5A5F;
+    color: white;
+    min-width: 60px;
+    border-radius: 10px;
+    border-color: transparent;
+}
