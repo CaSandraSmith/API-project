@@ -109,14 +109,14 @@ export default function SingleBookingPage() {
                     </div>
                     {today < new Date(booking.startDate) ?
                         <>
-                            <div className="single-reservation-details-section">
+                            <div className="single-reservation-details-section change-booking-wrapper">
                                 <div>
                                     <i className="fa-solid fa-pencil"></i>
                                     <p>Change reservation</p>
                                 </div>
                                 <i className="fa-solid fa-chevron-right"></i>
                             </div>
-                            <div className="single-reservation-details-section">
+                            <div className="single-reservation-details-section change-booking-wrapper">
                                 <div>
                                     <i className="fa-solid fa-ban"></i>
                                     <p>Cancel reservation</p>

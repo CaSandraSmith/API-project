@@ -78,4 +78,18 @@
 
 .single-reservation-details-section {
     border-bottom: 1px solid #b0b0b0;
+    padding-bottom: 10px;
+}
+
+.change-booking-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.change-booking-wrapper  > div {
+    display: flex;
+    column-gap: 10px;
+    align-items: center;
 }
