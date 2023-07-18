@@ -9,7 +9,7 @@ import AddSpotForm from "./components/AddSpotForm";
 import ManageSpots from "./components/ManageSpotsPage";
 import EditSpotForm from "./components/EditSpotForm";
 import UserBookingsPage from "./components/UserBookingsPage"
-
+import SingleBookingPage from "./components/SingleBookingPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,6 +25,9 @@ function App() {
         <Switch>
           <Route path="/myBookings">
             <UserBookingsPage />
+          </Route>
+          <Route path="/trips/:id">
+            <SingleBookingPage />
           </Route>
           <Route path="/spots/:id/edit">
             <EditSpotForm />

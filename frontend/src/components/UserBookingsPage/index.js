@@ -83,7 +83,7 @@ export default function UserBookingsPage() {
                             <h3>Your current stays</h3>
                             <div className="full-details-section-trips-wrapper">
                                 {currentTrips.map(trip => (
-                                    <div className="full-details-trips-wrapper">
+                                    <div onClick={() => history.push(`/trips/${trip.id}`)} className="full-details-trips-wrapper">
                                         <div className="full-details-trips-info-wrapper">
                                             <div className="full-details-trips-owner-city">
                                                 <h3>{trip.Spot.city}</h3>
@@ -116,7 +116,7 @@ export default function UserBookingsPage() {
                         <div className="full-details-section-trips-wrapper">
                             {upcomingTrips.length ?
                                 upcomingTrips.map(trip => (
-                                    <div className="full-details-trips-wrapper">
+                                    <div onClick={() => history.push(`/trips/${trip.id}`)} className="full-details-trips-wrapper">
                                         <div className="full-details-trips-info-wrapper">
                                             <div className="full-details-trips-owner-city">
                                                 <h3>{trip.Spot.city}</h3>
@@ -154,7 +154,7 @@ export default function UserBookingsPage() {
                             <h3>Where you’ve been</h3>
                             <div className="partial-trip-section-wrapper">
                                 {pastTrips.map(trip => (
-                                    <div className="partial-trip-wrappper">
+                                    <div onClick={() => history.push(`/trips/${trip.id}`)} className="partial-trip-wrappper">
                                         <div>
                                             <img
                                                 src={trip.Spot.previewImage}
