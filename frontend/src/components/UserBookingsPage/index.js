@@ -21,7 +21,7 @@ export default function UserBookingsPage() {
     if (bookingsArr.length) {
         let today = new Date()
         upcomingTrips = bookingsArr.filter(trip => new Date(trip.startDate).getTime() > today.getTime()).sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime())
-        pastTrips = bookingsArr.filter(trip => new Date(trip.endDate).getTime() < today.getTime())
+        pastTrips = bookingsArr.filter(trip => new Date(trip.endDate).getTime() < today.getTime()).sort((a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime())
         currentTrips = bookingsArr.filter(trip => new Date(trip.startDate).getTime() < today.getTime() && new Date(trip.endDate).getTime() > today.getTime())
     }
 
@@ -152,18 +152,19 @@ export default function UserBookingsPage() {
                     {pastTrips.length ?
                         <div>
                             <h3>Where you’ve been</h3>
-                            <div>
+                            <div className="partial-trip-section-wrapper">
                                 {pastTrips.map(trip => (
-                                    <div>
+                                    <div className="partial-trip-wrappper">
                                         <div>
                                             <img
                                                 src={trip.Spot.previewImage}
                                                 alt={`Spot ${trip.Spot.name} preivew image`}
-                                                className="temp-image-class"
+                                                className="partial-trip-image"
                                             />
                                         </div>
-                                        <div>
+                                        <div className="partial-trip-info">
                                             <p>{trip.Spot.city}</p>
+                                            <p>Hosted by {trip.Spot.Owner.firstName}</p>
                                             <p>{formatDates(trip.startDate, trip.endDate, "past")}</p>
                                         </div>
                                     </div>

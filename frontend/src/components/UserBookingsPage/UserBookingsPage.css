@@ -77,3 +77,26 @@
     object-fit: cover;
     border-radius: 0 20px 20px 0;
 }
+
+.partial-trip-section-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 20px;
+}
+
+.partial-trip-wrappper {
+    display: flex;
+    height: 80px;
+    column-gap: 10px;
+}
+
+.partial-trip-image {
+    height: 100%;
+    aspect-ratio: 1 /1;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.partial-trip-info > p:nth-child(1) {
+    font-weight: 600;
+}
