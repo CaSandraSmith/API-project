@@ -48,7 +48,10 @@ export default function UsersSpots({ spot }) {
                 <Link to={`/spots/${spot.id}/edit`}>
                     <button className="update-spot-button">Update</button>
                 </Link>
+                <div>
+
                 <button onClick={onClick}>Delete</button>
+                </div>
             </div>
         </div>
     )
