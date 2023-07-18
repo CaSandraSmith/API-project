@@ -40,6 +40,7 @@ function ProfileButton({ user }) {
     dispatch(clearUserSpots())
     dispatch(sessionActions.logout());
     closeMenu();
+    history.push("/")
   };
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
