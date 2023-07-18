@@ -26,7 +26,7 @@ The technologies used on this project include:
 
 ### Home
 
-https://github.com/CaSandraSmith/characterBnB/assets/123069069/bde2a81e-6557-4396-b3d5-1bd60813f8bf
+![ezgif com-video-to-gif (6)](https://github.com/CaSandraSmith/characterBnB/assets/123069069/a77eb0dd-53ce-4052-b926-aff8953fabf0)
 
 ### Spots
 
