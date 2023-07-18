@@ -18,10 +18,10 @@ export default function CancelBookingModal() {
     }
 
     return  (
-        <div>
+        <div className="cancel-booking-modal">
             <h3>Are you sure you want to cancel this booking?</h3>
             <h3>This action can't be undone.</h3>
-            <div>
+            <div className="cancel-booking-buttons">
                 <button onClick={deleteClick} >Cancel Booking</button>
                 <button onClick={closeModal}>Keep Booking</button>
             </div>

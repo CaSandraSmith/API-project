@@ -1,0 +1,28 @@
+.cancel-booking-modal {
+    width: 400px;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.cancel-booking-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    column-gap: 15px;
+}
+
+.cancel-booking-buttons > button {
+    border-color: transparent;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+.cancel-booking-buttons > button:nth-child(1) {
+    background-color: black;
+    color: white;
+}
+
+.cancel-booking-buttons > button:nth-child(2) {
+    background-color: transparent;
+}
