@@ -26,6 +26,11 @@
     column-gap: 10px;
 }
 
+.about-links {
+    text-decoration: none;
+    color: #ff5d5f;
+}
+
 .profile-button-wrapper {
     position: relative;
 }
