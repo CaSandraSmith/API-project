@@ -8,7 +8,13 @@ Welcome to characterBnb! This is a functional clone of airbnb with features like
 
 Checkout [Characterbnb](https://github.com/CaSandraSmith/characterBnB/assets/123069069/079ea00b-850c-43b9-92e7-2f8591d1bdac)!
 
-### Technologies used on Project
+### Index
+
+[Feature List](https://github.com/CaSandraSmith/characterBnB/wiki/Feature-Documentation) |
+[Database Scheme](https://github.com/CaSandraSmith/characterBnB/wiki/Database-Schema-Design) |
+[API Documentation](https://github.com/CaSandraSmith/characterBnB/wiki/API-Routes-Documentation)
+
+### Technologies Used
 
 The technologies used on this project include: 
 
