@@ -15,7 +15,7 @@ Checkout [Characterbnb](https://github.com/CaSandraSmith/characterBnB/assets/123
 [API Documentation](https://github.com/CaSandraSmith/characterBnB/wiki/API-Routes-Documentation)
 
 ## Table of Contents
-[Technologies Used](#technologies-used) | [Live App Images](#live-app) | [Features List](#features) | [Launching App](#launching-app) | [Future Goals](#future-implementation-goals) | [Contact Info](#contact-me)
+[Technologies Used](#technologies-used) | [Live App Images](#live-app) | [Features List](#features) | [Future Goals](#future-implementation-goals)  | [Launching App](#launching-app) | [Contact Info](#contact-me)
 
 ### Technologies Used
 
