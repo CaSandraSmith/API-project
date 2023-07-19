@@ -14,6 +14,9 @@ Checkout [Characterbnb](https://github.com/CaSandraSmith/characterBnB/assets/123
 [Database Scheme](https://github.com/CaSandraSmith/characterBnB/wiki/Database-Schema-Design) |
 [API Documentation](https://github.com/CaSandraSmith/characterBnB/wiki/API-Routes-Documentation)
 
+## Table of Contents
+[Technologies Used](#technologies-used) | [Live App Images](#live-app) | [Features List](#features) | [Future Goals](#future-implementation-goals) | [Contact Info](#contact-me)
+
 ### Technologies Used
 
 The technologies used on this project include: 
@@ -30,7 +33,7 @@ The technologies used on this project include:
  <img src="https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white" alt="sqlite logo" />
 </div>
 
-## App
+## Live App
 
 ### Home
 
