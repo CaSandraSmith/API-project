@@ -19,7 +19,7 @@ Checkout [Characterbnb](https://github.com/CaSandraSmith/characterBnB/assets/123
 
 ### Technologies Used
 
-The technologies used on this project include: 
+The technologies used on this project include: JavaScript, Express, HTML, CSS, React, Redux, and PostgreSQL, and Sequelize.
 
 <div>
  <img src="https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E" alt="javascript logo" />
